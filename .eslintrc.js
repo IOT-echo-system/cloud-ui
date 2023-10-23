@@ -133,17 +133,9 @@ module.exports = {
       }
     },
     {
-      files: ['./src/common/components/Editor/tools.ts'],
+      files: ['./src/store/actions/*.ts'],
       rules: {
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/ban-ts-comment': 'off'
-      }
-    },
-    {
-      files: ['./src/config/index.ts'],
-      rules: {
-        'no-process-env': 'off'
+        '@typescript-eslint/explicit-module-boundary-types': 'off'
       }
     }
   ]

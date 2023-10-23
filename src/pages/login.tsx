@@ -28,7 +28,7 @@ const Login: NextPage = () => {
   }
 
   return (
-    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+    <FormContainer onSubmit={handleSubmit(onSubmit)} className={site.theme}>
       <Stack spacing={2}>
         <Typography variant={'h5'}>{site.title} Login</Typography>
         {error && (
@@ -64,12 +64,19 @@ export default Login
 
 const FormContainer = styled('form')(({theme}) => ({
   margin: theme.spacing(4, 'auto'),
-  background: theme.palette.common.white,
+  background: theme.palette.background.paper,
   padding: theme.spacing(4),
-  boxShadow: theme.shadows[2],
+  boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),
   width: theme.spacing(60),
   '&>*': {
     margin: theme.spacing(1.5)
+  },
+  '&.light': {
+    border: `1px solid ${theme.palette.grey[300]}`
+  },
+  '&.dark': {
+    color: theme.palette.common.white,
+    border: `1px solid ${theme.palette.grey[700]}`
   }
 }))
