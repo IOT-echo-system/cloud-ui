@@ -5,15 +5,5 @@
   "semi": false,
   "singleQuote": true,
   "arrowParens": "avoid",
-  "bracketSpacing": false,
-  "overrides": [
-    {
-      "files": [
-        "*.html"
-      ],
-      "options": {
-        "singleQuote": false
-      }
-    }
-  ]
+  "bracketSpacing": false
 }

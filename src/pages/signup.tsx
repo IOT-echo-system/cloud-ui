@@ -2,23 +2,20 @@ import type {NextPage} from 'next'
 import type {ChangeEvent} from 'react'
 import React, {useState} from 'react'
 import {Stack, TextField, Typography} from '@mui/material'
-import {useDispatch, useForm, useSelector} from '@/hooks'
-import {AuthFormContainer} from '@/modules/login/AuthFormContainer'
-import WebClient from 'web-client-starter/lib'
-import {Config} from '@/config'
-import {useRouter} from 'next/router'
-import type {ServerError} from '@/typing/error'
-import {setStorage, StorageKeys} from '@/utils/storage'
-import type {User} from '@/typing/user'
-import {setUser} from '@/store/actions/user'
+import {useForm, useSelector} from '@/hooks'
 import {Button} from '@/components'
+import WebClient from 'web-client-starter/lib'
+import {useRouter} from 'next/router'
+import {Config} from '@/config'
+import type {ServerError} from '@/typing/error'
+import { AuthFormContainer } from '@/modules/login/AuthFormContainer'
 
-const Login: NextPage = () => {
+const SignUp: NextPage = () => {
   const site = useSelector(state => state.site)
   const router = useRouter()
-  const dispatch = useDispatch()
   const [error, setError] = useState('')
-  const {values, onChange, handleSubmit} = useForm({email: '', password: ''})
+  const [confPassword, setConfPassword] = useState('')
+  const {values, onChange, handleSubmit} = useForm({name: '', email: '', password: ''})
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,57 +25,76 @@ const Login: NextPage = () => {
 
   const onSubmit = () => {
     setError('')
-    WebClient.post<{authToken: string; user: User}>({
+    WebClient.post({
       baseUrl: Config.BACKEND_BASE_URL,
-      path: Config.LOGIN_PATH,
+      path: Config.SIGN_UP_PATH,
       body: values
     })
-      .then(({authToken, user}) => {
-        setStorage(StorageKeys.AUTH, {token: authToken})
-        dispatch(setUser(user))
-        return router.push(Config.HOME_PAGE_PATH)
-      })
+      .then(() => router.push('/login'))
       .catch((error: ServerError) => {
         setError(error.errorMessage)
       })
   }
 
+  const handleConfPassword = (event: ChangeEvent<HTMLInputElement>): void => {
+    setConfPassword(event.target.value)
+  }
+
+  const errorOnPassword = confPassword.length !== 0 && values.password !== confPassword
+
   return (
     <AuthFormContainer onSubmit={handleSubmit(onSubmit)} className={site.theme}>
       <Stack spacing={2}>
-        <Typography variant={'h5'}>{site.title} Login</Typography>
+        <Typography variant={'h5'}>{site.title} Sign up</Typography>
         {error && (
           <Typography variant={'body1'} color={'error'}>
             {error}
           </Typography>
         )}
         <TextField
+          value={values.name}
+          onChange={handleChange('name')}
+          label='Name'
+          variant='outlined'
+          required
+        />
+        <TextField
           type={'email'}
           value={values.email}
           onChange={handleChange('email')}
-          label="Email"
-          variant="outlined"
+          label='Email'
+          variant='outlined'
           required
         />
         <TextField
           type={'password'}
           value={values.password}
           onChange={handleChange('password')}
-          label="Password"
-          variant="outlined"
+          label='Password'
+          variant='outlined'
           required
+        />
+        <TextField
+          type={'password'}
+          value={confPassword}
+          onChange={handleConfPassword}
+          label='Confirm Password'
+          variant='outlined'
+          required
+          error={errorOnPassword}
+          helperText={errorOnPassword ? 'password and confirm password should match.' : ''}
         />
         <Button
           type={'submit'}
           variant={'contained'}
           size={'large'}
-          disabled={Boolean(!values.email || values.password.length < 6)}
+          disabled={values.password.length < 6 || values.password !== confPassword}
         >
-          Login
+          Sign up
         </Button>
       </Stack>
     </AuthFormContainer>
   )
 }
 
-export default Login
+export default SignUp

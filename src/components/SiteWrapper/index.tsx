@@ -1,16 +1,13 @@
 import type {PropsWithChildren} from 'react'
-import React, {useEffect} from 'react'
-import type {SiteStateType} from '@/store/reducers/site'
-import {updateSite} from '@/store/actions/site'
-import {useDispatch} from '@/hooks'
+import React from 'react'
 
 const SiteWrapper: React.FC<PropsWithChildren> = ({children}) => {
-  const site: SiteStateType = {title: 'Cloud'}
-  const dispatch = useDispatch()
+  // const site: SiteStateType = {title: 'Cloud'}
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(updateSite(site))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(updateSite(site))
+  // }, [])
 
   return <>{children}</>
 }
