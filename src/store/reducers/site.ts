@@ -7,11 +7,12 @@ export const SiteAction = {
 
 export type SiteStateType = {
   theme: 'light' | 'dark'
-  title: string, subtitle?: string
+  title: string
+  subtitle?: string
 }
 export const initSiteState: SiteStateType = {
   subtitle: '',
-  theme: 'dark',
+  theme: 'light',
   title: 'Cloud'
 }
 

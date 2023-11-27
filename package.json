@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "prettier:check": "prettier src --check",
+    "prettier:fix": "prettier src --write",
+    "eslint:fix": "eslint . --fix",
+    "eslint:check": "eslint .",
+    "lint:fix": "npm run prettier:fix && npm run eslint:fix",
+    "lint:check": "npm run prettier:check && npm run eslint:check",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "docker:push": "npm run lint:check && npm run test:coverage && sh build.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

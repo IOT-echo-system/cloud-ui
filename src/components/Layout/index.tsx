@@ -1,19 +1,12 @@
 import type {PropsWithChildren} from 'react'
 import React from 'react'
-import {Button, Stack, styled} from '@mui/material'
-import {useDispatch, useSelector} from '@/hooks'
-import {updateTheme} from '@/store/actions/site'
+import {Stack, styled} from '@mui/material'
+import {useSelector} from '@/hooks'
 
 const Layout: React.FC<PropsWithChildren> = ({children}) => {
-  const dispatch = useDispatch()
   const {theme} = useSelector(state => state.site)
-  const handleUpdateTheme = () => {
-    dispatch(updateTheme(theme === 'dark' ? 'light' : 'dark'))
-  }
-  return <Container className={theme}>
-    <Button variant={'contained'} onClick={handleUpdateTheme}>Change Theme</Button>
-    {children}
-  </Container>
+
+  return <Container className={theme}>{children}</Container>
 }
 
 export default Layout
