@@ -1,6 +1,5 @@
 #!/bin/bash
-#tag=$(curl https://hub.docker.com/v2/repositories/shiviraj/cloud-ui/tags | jq -r '.results | sort_by(.last_updated) | last(.[]).name')
-tag=0.0.0
+tag=$(curl https://hub.docker.com/v2/repositories/shiviraj/cloud-ui/tags | jq -r '.results | sort_by(.last_updated) | last(.[]).name')
 echo current tag: $tag
 majorTag=$(echo $tag | cut -d '.' -f 1-2 )
 minorTag=$(echo $tag | cut -d '.' -f 3)
