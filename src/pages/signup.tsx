@@ -8,7 +8,7 @@ import WebClient from 'web-client-starter/lib'
 import {useRouter} from 'next/router'
 import {Config} from '@/config'
 import type {ServerError} from '@/typing/error'
-import { AuthFormContainer } from '@/modules/login/AuthFormContainer'
+import {AuthFormContainer} from '@/modules/login/AuthFormContainer'
 
 const SignUp: NextPage = () => {
   const site = useSelector(state => state.site)
@@ -51,35 +51,29 @@ const SignUp: NextPage = () => {
             {error}
           </Typography>
         )}
-        <TextField
-          value={values.name}
-          onChange={handleChange('name')}
-          label='Name'
-          variant='outlined'
-          required
-        />
+        <TextField value={values.name} onChange={handleChange('name')} label="Name" variant="outlined" required />
         <TextField
           type={'email'}
           value={values.email}
           onChange={handleChange('email')}
-          label='Email'
-          variant='outlined'
+          label="Email"
+          variant="outlined"
           required
         />
         <TextField
           type={'password'}
           value={values.password}
           onChange={handleChange('password')}
-          label='Password'
-          variant='outlined'
+          label="Password"
+          variant="outlined"
           required
         />
         <TextField
           type={'password'}
           value={confPassword}
           onChange={handleConfPassword}
-          label='Confirm Password'
-          variant='outlined'
+          label="Confirm Password"
+          variant="outlined"
           required
           error={errorOnPassword}
           helperText={errorOnPassword ? 'password and confirm password should match.' : ''}

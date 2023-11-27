@@ -8,14 +8,16 @@ import CustomThemeProvider from '@/theme/CustomThemeProvider'
 const App: React.FC<AppProps> = ({Component, pageProps}) => {
   const router = useRouter()
 
-  return <StoreProvider>
-    <SiteWrapper>
-      <CustomThemeProvider>
-        <Layout>
-          <Component {...pageProps} key={router.asPath} />
-        </Layout>
-      </CustomThemeProvider>
-    </SiteWrapper>
-  </StoreProvider>
+  return (
+    <StoreProvider>
+      <SiteWrapper>
+        <CustomThemeProvider>
+          <Layout>
+            <Component {...pageProps} key={router.asPath} />
+          </Layout>
+        </CustomThemeProvider>
+      </SiteWrapper>
+    </StoreProvider>
+  )
 }
 export default App

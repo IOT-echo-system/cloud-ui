@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout component test should match with the snapshot 1`] = `
+<div>
+  <div
+    class="MuiStack-root light css-1gfrmn8-MuiStack-root"
+  />
+</div>
+`;

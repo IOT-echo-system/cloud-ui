@@ -1,7 +1,7 @@
 const UNDEFINED = 'undefined'
 
 export enum StorageKeys {
-  AUTH= 'AUTH'
+  AUTH = 'AUTH'
 }
 export const setStorage = <T extends Record<string, unknown>>(key: StorageKeys, value: T): T => {
   if (typeof window !== UNDEFINED) {

@@ -7,9 +7,7 @@ import light from './light'
 
 const CustomThemeProvider: React.FC<PropsWithChildren> = ({children}) => {
   const site = useSelector(state => state.site)
-  return <ThemeProvider theme={site.theme === 'dark' ? dark : light}>
-    {children}
-  </ThemeProvider>
+  return <ThemeProvider theme={site.theme === 'dark' ? dark : light}>{children}</ThemeProvider>
 }
 
 export default CustomThemeProvider

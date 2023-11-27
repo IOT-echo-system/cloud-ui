@@ -11,11 +11,7 @@ const StoreProvider: React.FC<PropsWithChildren> = ({children}) => {
 
   const store = useMemo(() => ({state, dispatch}), [state])
 
-  return (
-    <GlobalContext.Provider value={store}>
-      {children}
-    </GlobalContext.Provider>
-  )
+  return <GlobalContext.Provider value={store}>{children}</GlobalContext.Provider>
 }
 
 export default StoreProvider

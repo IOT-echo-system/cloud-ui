@@ -1,11 +1,11 @@
 import type {Dispatch} from 'react'
-import { useContext} from 'react'
+import {useContext} from 'react'
 import {GlobalContext} from '@/store/configureStore'
 import type {TRootActions, TRootState} from '@/typing/store'
 
 type TypedUseSelectorHook = <U>(cb: (state: TRootState) => U) => U
 
-export const useSelector: TypedUseSelectorHook = (cb) => {
+export const useSelector: TypedUseSelectorHook = cb => {
   const {state} = useContext(GlobalContext)
   return cb(state)
 }

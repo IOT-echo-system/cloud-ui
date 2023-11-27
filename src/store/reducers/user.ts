@@ -6,7 +6,8 @@ export const UserAction = {
 } as const
 
 export const initUserState: User = {
-  email: '', name: ''
+  email: '',
+  name: ''
 }
 
 const userReducer = (state: User, action: TRootActions): User => {
