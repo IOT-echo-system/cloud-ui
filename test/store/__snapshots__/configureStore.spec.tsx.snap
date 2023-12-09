@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Configure Store Test should give the initial State 1`] = `<div />`;
+
+exports[`Configure Store Test should match with the snapshot 1`] = `
+<div>
+  <div />
+</div>
+`;
+
+exports[`Configure Store Test should update State on dispatch call 1`] = `<div />`;

@@ -11,7 +11,6 @@ export type SiteStateType = {
   subtitle?: string
 }
 export const initSiteState: SiteStateType = {
-  subtitle: '',
   theme: 'light',
   title: 'Cloud'
 }

@@ -3,15 +3,14 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:@next/next/recommended',
+    'plugin:@next/next/recommended'
   ],
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: "./tsconfig.json",
+    project: './tsconfig.json'
   },
   root: true,
-  ignorePatterns: ['**/*.js'],
   env: {
     commonjs: true,
     es6: true,
@@ -129,13 +128,8 @@ module.exports = {
       rules: {
         'max-len': 'warn',
         '@typescript-eslint/no-magic-numbers': 'off',
-        'max-statements': 'off'
-      }
-    },
-    {
-      files: ['./src/store/actions/*.ts'],
-      rules: {
-        '@typescript-eslint/explicit-module-boundary-types': 'off'
+        'max-statements': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off'
       }
     }
   ]

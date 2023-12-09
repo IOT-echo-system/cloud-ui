@@ -1,8 +1,8 @@
-import type {TRootActions, TRootReducer, TRootState} from '@/typing/store'
 import * as siteActions from './actions/site'
 import * as userActions from './actions/user'
 import siteReducer, {initSiteState} from './reducers/site'
-import userReducer, {initUserState} from '@/store/reducers/user'
+import type {TRootActions, TRootReducer, TRootState} from '@/typing/store'
+import userReducer, {initUserState} from './reducers/user'
 
 const combineReducers = <S = TRootState>(reducers: {[K in keyof S]: TRootReducer<S[K]>}): TRootReducer<S> => {
   return (state: S, action: TRootActions): S => {

@@ -1,4 +1,7 @@
 import type {NextPage} from 'next'
+import {Stack} from '@mui/material'
 
-const Home: NextPage = () => <>Home Page</>
-export default Home
+const HomePage: NextPage = () => {
+  return <Stack>Home Page</Stack>
+}
+export default HomePage

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom Theme Provider Test should match with the snapshot for light theme 1`] = `<div />`;

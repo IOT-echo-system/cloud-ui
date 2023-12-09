@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home page test should match with the snapshot 1`] = `
+<div>
+  <div
+    class="MuiStack-root css-nen11g-MuiStack-root"
+  >
+    Home Page
+  </div>
+</div>
+`;
