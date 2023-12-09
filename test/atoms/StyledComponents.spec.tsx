@@ -1,5 +1,6 @@
+import {Button} from '@mui/material'
 import {render} from '@testing-library/react'
-import {Button, CenteredContainer, FormContainer} from '@/atoms/StyledComponents'
+import {CenteredContainer, FormContainer} from '../../src/atoms'
 
 describe('Styled component test', () => {
   it('should match with the snapshot for Button', () => {

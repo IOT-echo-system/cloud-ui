@@ -1,6 +1,7 @@
 import {act, renderHook} from '@testing-library/react'
-import useForm from '@/hooks/useForm'
+
 import type {FormEvent} from 'react'
+import {useForm} from '../../src/hooks'
 
 describe('useForm hook test', () => {
   it('should get initial values', () => {

@@ -1,4 +1,4 @@
-import type {TRootActions} from '@/typing/store'
+import type {TRootActions} from '../../typing/store'
 
 export const SiteAction = {
   SITE_UPDATE_STATE: 'SITE_UPDATE_STATE',

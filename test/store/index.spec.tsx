@@ -1,5 +1,5 @@
-import {rootActions, rootState} from '@/store'
-import {initSiteState} from '@/store/reducers/site'
+import {initSiteState} from '../../src/store/reducers/site'
+import {rootActions, rootState} from '../../src/store'
 
 describe('Store Test', () => {
   beforeEach(jest.resetAllMocks)

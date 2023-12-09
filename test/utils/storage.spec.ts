@@ -1,4 +1,4 @@
-import {clearStorage, getStorage, setStorage, StorageKeys} from '@/utils/storage'
+import {clearStorage, getStorage, setStorage, StorageKeys} from '../../src/utils/storage'
 
 describe('Storage Test', () => {
   it('should set storage', () => {

@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from 'react'
 import React from 'react'
 import {ThemeProvider} from '@mui/system'
-// import {useSelector} from '@/hooks'
+//
 // import dark from './dark'
 import light from './light'
 

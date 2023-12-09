@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from '@testing-library/react'
-import CustomThemeProvider from '@/theme/CustomThemeProvider'
+import CustomThemeProvider from '../../src/theme/CustomThemeProvider'
 
 jest.mock('../../src/hooks/useStore')
 describe('Custom Theme Provider Test', () => {

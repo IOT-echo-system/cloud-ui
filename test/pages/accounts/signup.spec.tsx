@@ -1,5 +1,5 @@
 import {render} from '@testing-library/react'
-import SignUpPage from '@/pages/accounts/signup'
+import SignUpPage from '../../../src/pages/accounts/signup'
 
 jest.mock('../../../src/templates/accounts')
 jest.mock('../../../src/templates/accounts/signup/SignUp')

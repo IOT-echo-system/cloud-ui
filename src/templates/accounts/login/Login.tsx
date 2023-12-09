@@ -1,7 +1,7 @@
 import {useLogin} from './useLogin'
 import React from 'react'
-import {Form} from '@/molecules/Form'
-import {CenteredContainer} from '@/atoms'
+import {CenteredContainer} from '../../../atoms'
+import {Form} from '../../../molecules/Form'
 
 export const LogIn: React.FC = () => {
   const {handleSubmit, error, inputFields} = useLogin()

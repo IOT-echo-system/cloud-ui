@@ -1,9 +1,10 @@
 import {act, renderHook} from '@testing-library/react'
 import * as NextRouter from 'next/router'
-import AuthService from '@/services/authService'
+
 import type {Router} from 'next/router'
 import type {ChangeEvent, FormEvent} from 'react'
-import {useSignUp} from '@/templates/accounts/signup/useSignUp'
+import {useSignUp} from '../../../../src/templates/accounts/signup/useSignUp'
+import AuthService from '../../../../src/services/authService'
 
 describe('Use SignUp Hook Test', () => {
   const mockRouter = {} as unknown as Router

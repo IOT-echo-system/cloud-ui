@@ -1,10 +1,11 @@
 import type {Dispatch} from 'react'
 import React, {useContext} from 'react'
 import {act, render} from '@testing-library/react'
-import StoreProvider, {GlobalContext} from '@/store/configureStore'
-import type {TRootActions, TRootState} from '@/typing/store'
-import {rootState} from '@/store'
+
 import {siteBuilder} from '../builders/stateBuilder'
+import StoreProvider, {GlobalContext} from '../../src/store/configureStore'
+import {rootState} from '../../src/store'
+import type {TRootActions, TRootState} from '../../src/typing/store'
 
 describe('Configure Store Test', () => {
   beforeEach(jest.resetAllMocks)

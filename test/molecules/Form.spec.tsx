@@ -1,5 +1,5 @@
 import {render} from '@testing-library/react'
-import {Form} from '@/molecules/Form'
+import {Form} from '../../src/molecules/Form'
 
 describe('Form Molecules test', () => {
   it('should match with the snapshot', () => {

@@ -1,6 +1,6 @@
 import {siteBuilder} from '../../builders/stateBuilder'
-import siteReducer, {SiteAction} from '@/store/reducers/site'
-import type {TRootActions} from '@/typing/store'
+import siteReducer, {SiteAction} from '../../../src/store/reducers/site'
+import type {TRootActions} from '../../../src/typing/store'
 
 describe('Reducer Site Test', () => {
   it('should get default site details', () => {

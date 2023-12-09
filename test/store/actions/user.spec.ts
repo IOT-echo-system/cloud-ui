@@ -1,6 +1,6 @@
 import {userBuilder} from '../../builders/stateBuilder'
-import {setUser} from '@/store/actions/user'
-import {UserAction} from '@/store/reducers/user'
+import {setUser} from '../../../src/store/actions/user'
+import {UserAction} from '../../../src/store/reducers/user'
 
 describe('Actions User Test', () => {
   it('should set user', () => {

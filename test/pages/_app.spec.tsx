@@ -1,6 +1,7 @@
 import {render} from '@testing-library/react'
-import App from '@/pages/_app'
+
 import type {Router} from 'next/router'
+import App from '../../src/pages/_app'
 
 describe('_App page test', () => {
   it('should match with the snapshot', () => {

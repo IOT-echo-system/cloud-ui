@@ -1,7 +1,7 @@
 import type {Dispatch, PropsWithChildren} from 'react'
 import React, {createContext, useMemo, useReducer} from 'react'
 import {rootReducer, rootState} from './index'
-import type {TRootActions, TRootState} from '@/typing/store'
+import type {TRootActions, TRootState} from '../typing/store'
 
 type GlobalContextType = {state: TRootState; dispatch: Dispatch<TRootActions>}
 export const GlobalContext = createContext<GlobalContextType>({state: rootState, dispatch: () => ''})

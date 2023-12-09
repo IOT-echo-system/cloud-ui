@@ -2,10 +2,10 @@ import type React from 'react'
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import type {ChangeEvent} from 'react'
-import {useForm} from '@/hooks'
-import type {ServerError} from '@/typing/error'
-import type {FormInputType} from '@/atoms'
-import AuthService from '@/services/authService'
+import type {FormInputType} from '../../../atoms'
+import {useForm} from '../../../hooks'
+import AuthService from '../../../services/authService'
+import type {ServerError} from '../../../typing/error'
 
 type UseSignUpReturnType = {
   inputFields: FormInputType[]

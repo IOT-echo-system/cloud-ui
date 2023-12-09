@@ -1,5 +1,5 @@
 import {render} from '@testing-library/react'
-import {Layout} from '@/organisms/Layout'
+import {Layout} from '../../src/organisms'
 
 describe('Layout component test', () => {
   it('should match with the snapshot', () => {

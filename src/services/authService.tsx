@@ -1,7 +1,7 @@
-import type {User} from '@/typing/user'
-import {Config} from '@/config'
-import {setStorage, StorageKeys} from '@/utils/storage'
 import WebClient from 'web-client-starter'
+import {Config} from '../config'
+import {setStorage, StorageKeys} from '../utils/storage'
+import type {User} from '../typing/user'
 
 const AuthService = {
   login: async (credentials: {email: string; password: string}): Promise<User> => {

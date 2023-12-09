@@ -1,7 +1,7 @@
 import {useSignUp} from './useSignUp'
 import React from 'react'
-import {CenteredContainer} from '@/atoms'
-import {Form} from '@/molecules/Form'
+import {CenteredContainer} from '../../../atoms'
+import {Form} from '../../../molecules/Form'
 
 export const SignUp: React.FC = () => {
   const title = 'Sign up'

@@ -1,8 +1,9 @@
 import {renderHook} from '@testing-library/react'
-import {useDispatch, useSelector} from '@/hooks/useStore'
+
 import type {ServerContextJSONValue} from 'react'
 import React from 'react'
-import {GlobalContext} from '@/store/configureStore'
+import {useDispatch, useSelector} from '../../src/hooks'
+import {GlobalContext} from '../../src/store/configureStore'
 
 describe('UseStore Hook Test', () => {
   beforeEach(jest.resetAllMocks)

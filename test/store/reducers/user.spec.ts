@@ -1,6 +1,6 @@
 import {userBuilder} from '../../builders/stateBuilder'
-import userReducer, {UserAction} from '@/store/reducers/user'
-import type {TRootActions} from '@/typing/store'
+import userReducer, {UserAction} from '../../../src/store/reducers/user'
+import type {TRootActions} from '../../../src/typing/store'
 
 describe('Reducer User Test', () => {
   it('should get default user details', () => {

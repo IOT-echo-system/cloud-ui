@@ -3,11 +3,11 @@ import type {ChangeEvent} from 'react'
 import type React from 'react'
 import {useState} from 'react'
 import {useDispatch, useForm} from '../../../hooks'
-import {Config} from '@/config'
-import type {ServerError} from '@/typing/error'
-import type {FormInputType} from '@/atoms'
-import AuthService from '@/services/authService'
-import {setUser} from '@/store/actions/user'
+import type {FormInputType} from '../../../atoms'
+import AuthService from '../../../services/authService'
+import {setUser} from '../../../store/actions/user'
+import {Config} from '../../../config'
+import type {ServerError} from '../../../typing/error'
 
 type UseLoginReturnType = {
   inputFields: FormInputType[]

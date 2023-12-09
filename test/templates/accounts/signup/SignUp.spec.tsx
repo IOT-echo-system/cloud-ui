@@ -1,8 +1,8 @@
 import React from 'react'
 import {render} from '@testing-library/react'
 import * as UseSignUpHooks from '../../../../src/templates/accounts/signup/useSignUp'
-import {SignUp} from '@/templates/accounts'
-import {Form} from '@/molecules/Form'
+import {SignUp} from '../../../../src/templates/accounts'
+import {Form} from '../../../../src/molecules/Form'
 
 jest.mock('../../../../src/molecules/Form')
 jest.mock('../../../../src/templates/accounts/signup/useSignUp')

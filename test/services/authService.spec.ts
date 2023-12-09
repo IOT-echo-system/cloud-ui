@@ -1,5 +1,5 @@
-import AuthService from '@/services/authService'
 import WebClient from 'web-client-starter'
+import AuthService from '../../src/services/authService'
 
 describe('Auth Service Test', () => {
   beforeEach(jest.clearAllMocks)

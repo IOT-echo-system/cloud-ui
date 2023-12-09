@@ -131,13 +131,21 @@ module.exports = {
         'max-statements': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/await-thenable': 'off',
-        '@typescript-eslint/no-confusing-void-expression': 'off'
+        '@typescript-eslint/no-confusing-void-expression': 'off',
+        "@typescript-eslint/no-unsafe-member-access":'off'
       }
     },
     {
       files: ['**/actions/*.ts'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off'
+      }
+    },
+    {
+      files: ['**/reducers/*.ts'],
+      rules: {
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off'
       }
     }
   ]

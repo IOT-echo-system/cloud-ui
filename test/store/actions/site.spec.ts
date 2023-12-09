@@ -1,6 +1,6 @@
-import {updateSite, updateTheme} from '@/store/actions/site'
 import {siteBuilder} from '../../builders/stateBuilder'
-import {SiteAction} from '@/store/reducers/site'
+import {updateSite, updateTheme} from '../../../src/store/actions/site'
+import {SiteAction} from '../../../src/store/reducers/site'
 
 describe('Actions Site Test', () => {
   it('should update site details', () => {

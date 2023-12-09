@@ -1,8 +1,8 @@
 import {Stack, Typography} from '@mui/material'
 import type {FormEvent} from 'react'
 import React from 'react'
-import type {FormInputType} from '@/atoms'
-import {Button, FormContainer, FormInput} from '@/atoms'
+import type {FormInputType} from '../atoms'
+import {Button, FormContainer, FormInput} from '../atoms'
 
 export type FormProps = {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void

@@ -3,7 +3,7 @@
 exports[`_App page test should match with the snapshot 1`] = `
 <div>
   <div
-    class="MuiStack-root light css-fe8fx7-MuiStack-root"
+    class="MuiStack-root css-fe8fx7-MuiStack-root"
   >
     <div>
       Mock Component
