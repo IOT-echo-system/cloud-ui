@@ -1,11 +1,20 @@
+import type React from 'react'
+import {useState} from 'react'
 import {useRouter} from 'next/router'
-import {ChangeEvent, useState} from 'react'
+import type {ChangeEvent} from 'react'
 import {useForm} from '@/hooks'
-import {ServerError} from '@/typing/error'
-import {FormInputType} from '@/atoms'
+import type {ServerError} from '@/typing/error'
+import type {FormInputType} from '@/atoms'
 import AuthService from '@/services/authService'
 
-export const useSignUp = () => {
+type UseSignUpReturnType = {
+  inputFields: FormInputType[]
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  submitBtnDisabled?: boolean
+  error: string
+}
+
+export const useSignUp = (): UseSignUpReturnType => {
   const router = useRouter()
   const [error, setError] = useState('')
   const [confPassword, setConfPassword] = useState('')
@@ -31,7 +40,7 @@ export const useSignUp = () => {
   }
   const errorOnPassword = confPassword.length !== 0 && values.password !== confPassword
 
-  const inputFields: Array<FormInputType> = [
+  const inputFields: FormInputType[] = [
     {value: values.name, onChange: handleChange('name'), label: 'Name', required: true},
     {type: 'email', value: values.email, onChange: handleChange('email'), label: 'Email', required: true},
     {type: 'password', value: values.password, onChange: handleChange('password'), label: 'Password', required: true},

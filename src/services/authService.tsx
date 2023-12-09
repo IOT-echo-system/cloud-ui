@@ -4,7 +4,7 @@ import {setStorage, StorageKeys} from '@/utils/storage'
 import WebClient from 'web-client-starter'
 
 const AuthService = {
-  async login(credentials: {email: string; password: string}): Promise<User> {
+  login: async (credentials: {email: string; password: string}): Promise<User> => {
     const {authToken, user} = await WebClient.post<{authToken: string; user: User}>({
       baseUrl: Config.BACKEND_BASE_URL,
       path: Config.LOGIN_PATH,
@@ -14,7 +14,7 @@ const AuthService = {
     return user
   },
 
-  signUp(values: {password: string; name: string; email: string}): Promise<void> {
+  signUp: (values: {password: string; name: string; email: string}): Promise<void> => {
     return WebClient.post({baseUrl: Config.BACKEND_BASE_URL, path: Config.SIGN_UP_PATH, body: values})
   }
 }

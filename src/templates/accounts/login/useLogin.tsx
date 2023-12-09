@@ -1,13 +1,20 @@
 import {useRouter} from 'next/router'
-import {ChangeEvent, useState} from 'react'
+import type {ChangeEvent} from 'react'
+import type React from 'react'
+import {useState} from 'react'
 import {useDispatch, useForm} from '../../../hooks'
 import {Config} from '@/config'
-import {ServerError} from '@/typing/error'
-import {FormInputType} from '@/atoms'
+import type {ServerError} from '@/typing/error'
+import type {FormInputType} from '@/atoms'
 import AuthService from '@/services/authService'
 import {setUser} from '@/store/actions/user'
 
-const useLogin = () => {
+type UseLoginReturnType = {
+  inputFields: FormInputType[]
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  error: string
+}
+const useLogin = (): UseLoginReturnType => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [error, setError] = useState('')
@@ -26,10 +33,12 @@ const useLogin = () => {
         dispatch(setUser(user))
         return router.push(Config.HOME_PAGE_PATH)
       })
-      .catch((error: ServerError) => setError(error.errorMessage))
+      .catch((error: ServerError) => {
+        setError(error.errorMessage)
+      })
   }
 
-  const inputFields: Array<FormInputType> = [
+  const inputFields: FormInputType[] = [
     {type: 'email', value: values.email, onChange: handleChange('email'), label: 'Email', required: true},
     {type: 'password', value: values.password, onChange: handleChange('password'), label: 'Password', required: true}
   ]

@@ -1,8 +1,8 @@
 import {act, renderHook} from '@testing-library/react'
 import * as NextRouter from 'next/router'
 import AuthService from '@/services/authService'
-import {Router} from 'next/router'
-import {ChangeEvent, FormEvent} from 'react'
+import type {Router} from 'next/router'
+import type {ChangeEvent, FormEvent} from 'react'
 import {useSignUp} from '@/templates/accounts/signup/useSignUp'
 
 describe('Use SignUp Hook Test', () => {
@@ -88,8 +88,8 @@ describe('Use SignUp Hook Test', () => {
       result.current.inputFields[3].onChange!({target: {value: 'passwo'}} as unknown as ChangeEvent<HTMLInputElement>)
     })
 
-    await act(() => {
-      result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
+    await act(async () => {
+      await result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
     expect(AuthService.signUp).toHaveBeenCalledTimes(1)

@@ -2,8 +2,8 @@ import {act, renderHook} from '@testing-library/react'
 import {useLogin} from '@/templates/accounts/login/useLogin'
 import * as NextRouter from 'next/router'
 import AuthService from '@/services/authService'
-import {Router} from 'next/router'
-import {ChangeEvent, FormEvent} from 'react'
+import type {Router} from 'next/router'
+import type {ChangeEvent, FormEvent} from 'react'
 import {userBuilder} from '../../../builders/stateBuilder'
 
 describe('Use Login Hook Test', () => {

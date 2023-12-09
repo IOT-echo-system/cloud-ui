@@ -1,6 +1,6 @@
-import {SiteStateType} from '@/store/reducers/site'
-import {TRootState} from '@/typing/store'
-import {User} from '@/typing/user'
+import type {SiteStateType} from '@/store/reducers/site'
+import type {TRootState} from '@/typing/store'
+import type {User} from '@/typing/user'
 
 export const siteBuilder = (props: Partial<SiteStateType> = {}): SiteStateType => {
   return {theme: 'light', title: '', ...props}

@@ -129,7 +129,15 @@ module.exports = {
         'max-len': 'warn',
         '@typescript-eslint/no-magic-numbers': 'off',
         'max-statements': 'off',
-        '@typescript-eslint/no-non-null-assertion': 'off'
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/await-thenable': 'off',
+        '@typescript-eslint/no-confusing-void-expression': 'off'
+      }
+    },
+    {
+      files: ['**/actions/*.ts'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'off'
       }
     }
   ]
