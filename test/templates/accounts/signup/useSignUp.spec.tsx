@@ -3,7 +3,6 @@ import * as NextRouter from 'next/router'
 import AuthService from '@/services/authService'
 import {Router} from 'next/router'
 import {ChangeEvent, FormEvent} from 'react'
-import {userBuilder} from '../../../builders/stateBuilder'
 import {useSignUp} from '@/templates/accounts/signup/useSignUp'
 
 describe('Use SignUp Hook Test', () => {
