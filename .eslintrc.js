@@ -8,8 +8,9 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json'
+    project: ['./tsconfig.json', './tsconfig.test.json']
   },
+  ignorePatterns: "*.js",
   root: true,
   env: {
     commonjs: true,
@@ -132,7 +133,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/no-confusing-void-expression': 'off',
-        "@typescript-eslint/no-unsafe-member-access":'off'
+        '@typescript-eslint/no-unsafe-member-access': 'off'
       }
     },
     {
