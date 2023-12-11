@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from '@testing-library/react'
-import LoginPage from '../../../src/pages/accounts/login'
+import LoginPage from '../../../src/pages/auth/login'
 
 jest.mock('../../../src/templates/accounts')
 jest.mock('../../../src/templates/accounts/login/Login')

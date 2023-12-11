@@ -14,7 +14,7 @@ describe('Auth Service Test', () => {
     expect(WebClient.post).toHaveBeenCalledWith({
       baseUrl: '/api',
       body: {email: '', password: ''},
-      path: '/authentications/login'
+      path: '/auth/login'
     })
   })
 
@@ -27,7 +27,7 @@ describe('Auth Service Test', () => {
     expect(WebClient.post).toHaveBeenCalledWith({
       baseUrl: '/api',
       body: {email: '', password: '', name: 'name'},
-      path: '/authentications/sign-up'
+      path: '/auth/sign-up'
     })
   })
 })

@@ -6,6 +6,7 @@ import type {FormInputType} from '../../../atoms'
 import {useForm} from '../../../hooks'
 import AuthService from '../../../services/authService'
 import type {ServerError} from '../../../typing/error'
+import {Config} from '../../../config'
 
 type UseSignUpReturnType = {
   inputFields: FormInputType[]
@@ -29,7 +30,7 @@ export const useSignUp = (): UseSignUpReturnType => {
   const onSubmit = () => {
     setError('')
     AuthService.signUp(values)
-      .then(() => router.push('/accounts/login'))
+      .then(() => router.push(Config.LOGIN_PAGE_PATH))
       .catch((error: ServerError) => {
         setError(error.errorMessage)
       })
