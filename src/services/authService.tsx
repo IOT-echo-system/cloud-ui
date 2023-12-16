@@ -1,13 +1,15 @@
-import WebClient from 'web-client-starter'
-import {Config} from '../config'
-import {setStorage, StorageKeys} from '../utils/storage'
+import WebClient from './webClient'
 import type {User} from '../typing/user'
+import {setStorage, StorageKeys} from '../utils/storage'
+import {apiConfig} from '../config/apiConfig'
+
+const authConfig = apiConfig.auth
 
 const AuthService = {
   login: async (credentials: {email: string; password: string}): Promise<User> => {
     const {authToken, user} = await WebClient.post<{authToken: string; user: User}>({
-      baseUrl: Config.BACKEND_BASE_URL,
-      path: Config.LOGIN_PATH,
+      baseUrl: authConfig.baseUrl,
+      path: authConfig.login,
       body: credentials
     })
     setStorage(StorageKeys.AUTH, {token: authToken})
@@ -15,7 +17,7 @@ const AuthService = {
   },
 
   signUp: (values: {password: string; name: string; email: string}): Promise<void> => {
-    return WebClient.post({baseUrl: Config.BACKEND_BASE_URL, path: Config.SIGN_UP_PATH, body: values})
+    return WebClient.post({baseUrl: authConfig.baseUrl, path: authConfig.signUp, body: values})
   }
 }
 

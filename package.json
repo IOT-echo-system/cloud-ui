@@ -27,6 +27,7 @@
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.0",
+    "uuid": "^9.0.1",
     "web-client-starter": "^0.0.5"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "@types/jest": "^29.5.10",
     "@types/node": "20.10.4",
     "@types/react": "^18",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",

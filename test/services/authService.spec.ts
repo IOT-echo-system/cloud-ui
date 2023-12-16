@@ -1,5 +1,5 @@
 import WebClient from 'web-client-starter'
-import AuthService from '../../src/services/authService'
+import {AuthService} from '../../src/services'
 
 describe('Auth Service Test', () => {
   beforeEach(jest.clearAllMocks)
@@ -12,9 +12,9 @@ describe('Auth Service Test', () => {
     expect(user).toStrictEqual({name: 'name'})
     expect(WebClient.post).toHaveBeenCalledTimes(1)
     expect(WebClient.post).toHaveBeenCalledWith({
-      baseUrl: '/api',
+      baseUrl: '/auth',
       body: {email: '', password: ''},
-      path: '/auth/login'
+      path: '/login'
     })
   })
 
@@ -25,9 +25,9 @@ describe('Auth Service Test', () => {
 
     expect(WebClient.post).toHaveBeenCalledTimes(1)
     expect(WebClient.post).toHaveBeenCalledWith({
-      baseUrl: '/api',
+      baseUrl: '/auth',
       body: {email: '', password: '', name: 'name'},
-      path: '/auth/sign-up'
+      path: '/sign-up'
     })
   })
 })
