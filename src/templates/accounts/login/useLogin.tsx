@@ -2,10 +2,9 @@ import {useRouter} from 'next/router'
 import type {ChangeEvent} from 'react'
 import type React from 'react'
 import {useState} from 'react'
-import {useDispatch, useForm} from '../../../hooks'
+import {useForm} from '../../../hooks'
 import type {FormInputType} from '../../../atoms'
 import AuthService from '../../../services/authService'
-import {setUser} from '../../../store/actions/user'
 import {Config} from '../../../config'
 import type {ServerError} from '../../../typing/error'
 
@@ -16,7 +15,6 @@ type UseLoginReturnType = {
 }
 const useLogin = (): UseLoginReturnType => {
   const router = useRouter()
-  const dispatch = useDispatch()
   const [error, setError] = useState('')
   const {values, onChange, handleSubmit} = useForm({email: '', password: ''})
 
@@ -29,10 +27,7 @@ const useLogin = (): UseLoginReturnType => {
   const onSubmit = () => {
     setError('')
     AuthService.login(values)
-      .then(user => {
-        dispatch(setUser(user))
-        return router.push(Config.HOME_PAGE_PATH)
-      })
+      .then(() => router.push(Config.HOME_PAGE_PATH))
       .catch((error: ServerError) => {
         setError(error.errorMessage)
       })

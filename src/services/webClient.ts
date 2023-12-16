@@ -7,7 +7,7 @@ WebClient.interceptor.request(config => {
   const {token} = getStorage<{token: string}>(StorageKeys.AUTH) ?? {token: ''}
   config.baseURL = apiConfig.baseUrl
   config.headers.authorization = token
-  config.headers['X-Trace-ID'] = uuidV4()
+  config.headers['x-trace-id'] = uuidV4()
   return config
 })
 
