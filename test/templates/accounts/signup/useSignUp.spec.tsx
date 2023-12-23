@@ -24,7 +24,15 @@ describe('Use SignUp Hook Test', () => {
       inputFields: [
         {label: 'Name', onChange: expect.any(Function), required: true, value: ''},
         {label: 'Email', onChange: expect.any(Function), required: true, type: 'email', value: ''},
-        {label: 'Password', onChange: expect.any(Function), required: true, type: 'password', value: ''},
+        {
+          label: 'Password',
+          onChange: expect.any(Function),
+          required: true,
+          type: 'password',
+          value: '',
+          error: false,
+          helperText: ''
+        },
         {
           label: 'Confirm Password',
           helperText: '',
@@ -56,6 +64,79 @@ describe('Use SignUp Hook Test', () => {
       result.current.inputFields[1].onChange!({target: {value: 'name'}} as unknown as ChangeEvent<HTMLInputElement>)
     })
     expect(result.current.inputFields[1].value).toStrictEqual('name')
+  })
+
+  it('should give error if password is not matching the criteria', () => {
+    const {result} = renderHook(useSignUp)
+
+    expect(result.current.inputFields[2].value).toStrictEqual('')
+
+    act(() => {
+      result.current.inputFields[2].onChange!({target: {value: 'pass'}} as unknown as ChangeEvent<HTMLInputElement>)
+    })
+    expect(result.current.inputFields[2]).toStrictEqual({
+      error: true,
+      helperText: 'Password must be at least 8 characters long',
+      label: 'Password',
+      onChange: expect.any(Function),
+      required: true,
+      type: 'password',
+      value: 'pass'
+    })
+
+    act(() => {
+      result.current.inputFields[2].onChange!({target: {value: 'password'}} as unknown as ChangeEvent<HTMLInputElement>)
+    })
+    expect(result.current.inputFields[2]).toStrictEqual({
+      error: true,
+      helperText: 'Password must contain at least one uppercase letter',
+      label: 'Password',
+      onChange: expect.any(Function),
+      required: true,
+      type: 'password',
+      value: 'password'
+    })
+
+    act(() => {
+      result.current.inputFields[2].onChange!({target: {value: 'PASSWORD'}} as unknown as ChangeEvent<HTMLInputElement>)
+    })
+    expect(result.current.inputFields[2]).toStrictEqual({
+      error: true,
+      helperText: 'Password must contain at least one lowercase letter',
+      label: 'Password',
+      onChange: expect.any(Function),
+      required: true,
+      type: 'password',
+      value: 'PASSWORD'
+    })
+
+    act(() => {
+      result.current.inputFields[2].onChange!({target: {value: 'Password'}} as unknown as ChangeEvent<HTMLInputElement>)
+    })
+    expect(result.current.inputFields[2]).toStrictEqual({
+      error: true,
+      helperText: 'Password must contain at least one digit',
+      label: 'Password',
+      onChange: expect.any(Function),
+      required: true,
+      type: 'password',
+      value: 'Password'
+    })
+
+    act(() => {
+      result.current.inputFields[2].onChange!({
+        target: {value: 'Password1'}
+      } as unknown as ChangeEvent<HTMLInputElement>)
+    })
+    expect(result.current.inputFields[2]).toStrictEqual({
+      error: false,
+      helperText: '',
+      label: 'Password',
+      onChange: expect.any(Function),
+      required: true,
+      type: 'password',
+      value: 'Password1'
+    })
   })
 
   it('should submit form on handleSubmit', async () => {
