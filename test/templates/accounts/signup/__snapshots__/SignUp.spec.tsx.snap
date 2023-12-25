@@ -4,6 +4,22 @@ exports[`SignUp Template Test should match with the snapshot 1`] = `
 <div>
   <div
     class="MuiStack-root css-1edlbwa-MuiStack-root"
-  />
+  >
+    <div
+      class="MuiStack-root css-103ehqt-MuiStack-root"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+      >
+        Already have an account?
+      </p>
+      <a
+        class="css-9x8bsw"
+        href="/auth/login"
+      >
+        Login
+      </a>
+    </div>
+  </div>
 </div>
 `;

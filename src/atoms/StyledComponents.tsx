@@ -1,4 +1,5 @@
 import {styled, Button as MUIButton, Stack} from '@mui/material'
+import NextLink from 'next/link'
 
 export const Button = styled(MUIButton)({textTransform: 'none'})
 
@@ -22,4 +23,11 @@ export const FormContainer = styled('form')(({theme}) => ({
 
 export const CenteredContainer = styled(Stack)(() => ({
   margin: 'auto'
+}))
+
+export const Link = styled(NextLink)(() => ({
+  textDecoration: 'none',
+  '&:hover': {
+    textDecoration: 'underline'
+  }
 }))
