@@ -29,7 +29,7 @@ const useLogin = (): UseLoginReturnType => {
     AuthService.login(values)
       .then(() => router.push(Config.HOME_PAGE_PATH))
       .catch((error: ServerError) => {
-        setError(error.errorMessage)
+        setError(error.message)
       })
   }
 

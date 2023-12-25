@@ -34,7 +34,7 @@ export const useSignUp = (): UseSignUpReturnType => {
     AuthService.signUp(values)
       .then(() => router.push(Config.LOGIN_PAGE_PATH))
       .catch((error: ServerError) => {
-        setError(error.errorMessage || 'Something went wrong, Try again!!')
+        setError(error.message)
       })
   }
 

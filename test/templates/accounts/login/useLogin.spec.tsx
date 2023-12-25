@@ -81,7 +81,7 @@ describe('Use Login Hook Test', () => {
   })
 
   it('should give error on failure of form submit', async () => {
-    jest.spyOn(AuthService, 'login').mockRejectedValue({errorMessage: 'already registered'})
+    jest.spyOn(AuthService, 'login').mockRejectedValue({message: 'already registered'})
 
     const {result} = renderHook(useLogin)
 
