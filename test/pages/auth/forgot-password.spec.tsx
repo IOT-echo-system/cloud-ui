@@ -13,11 +13,12 @@ jest.mock('react', (): typeof React => ({
 }))
 
 describe('Forgot password page test', () => {
+  const mockUseState = React.useState as jest.Mock
   beforeEach(jest.clearAllMocks)
   afterEach(jest.clearAllMocks)
 
   it('should match with the snapshot', () => {
-    (React.useState as jest.Mock).mockReturnValue([false, jest.fn()])
+    mockUseState.mockReturnValue([false, jest.fn()])
 
     const {container} = render(<ForgotPasswordPage />)
 
@@ -28,7 +29,7 @@ describe('Forgot password page test', () => {
   })
 
   it('should match with the snapshot if OTP verified', () => {
-    (React.useState as jest.Mock).mockReturnValue([true, jest.fn()])
+    mockUseState.mockReturnValue([true, jest.fn()])
 
     const {container} = render(<ForgotPasswordPage />)
 
