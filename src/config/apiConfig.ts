@@ -4,6 +4,9 @@ export const apiConfig = {
     baseUrl: '/auth',
     signUp: '/sign-up',
     login: '/login',
-    validate: '/validate'
+    validate: '/validate',
+    generateOTP: '/generate-otp',
+    verifyOTP: '/verify-otp',
+    resetPassword: '/reset-password'
   }
 } as const

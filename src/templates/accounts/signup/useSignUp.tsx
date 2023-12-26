@@ -7,6 +7,7 @@ import {useForm} from '../../../hooks'
 import AuthService from '../../../services/authService'
 import type {ServerError} from '../../../typing/error'
 import {Config} from '../../../config'
+import {useResetPassword} from '../resetPassword/useResetPassword'
 
 type UseSignUpReturnType = {
   inputFields: FormInputType[]
@@ -18,10 +19,8 @@ type UseSignUpReturnType = {
 export const useSignUp = (): UseSignUpReturnType => {
   const router = useRouter()
   const [error, setError] = useState('')
-  const [confPassword, setConfPassword] = useState('')
-  const {values, onChange, handleSubmit} = useForm({name: '', email: '', password: ''})
-  const [errorOnPassword, setErrorOnPassword] = useState(false)
-  const [passwordHelperText, setPasswordHelperText] = useState('')
+  const {values, onChange, handleSubmit} = useForm({name: '', email: ''})
+  const {inputFields: passwordInputFields} = useResetPassword(false, '')
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,76 +30,24 @@ export const useSignUp = (): UseSignUpReturnType => {
 
   const onSubmit = () => {
     setError('')
-    AuthService.signUp(values)
+    const password = passwordInputFields[0].value as string
+    AuthService.signUp({password, ...values})
       .then(() => router.push(Config.LOGIN_PAGE_PATH))
       .catch((error: ServerError) => {
         setError(error.message)
       })
   }
 
-  const handleConfPassword = (event: ChangeEvent<HTMLInputElement>): void => {
-    setConfPassword(event.target.value)
-  }
-  const errorOnConfirmPassword = confPassword.length !== 0 && values.password !== confPassword
-
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const password = event.target.value
-    onChange('password', password)
-    if (password.length < 8) {
-      setPasswordHelperText('Password must be at least 8 characters long')
-      setErrorOnPassword(true)
-      return
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      setPasswordHelperText('Password must contain at least one uppercase letter')
-      setErrorOnPassword(true)
-      return
-    }
-
-    if (!/[a-z]/.test(password)) {
-      setPasswordHelperText('Password must contain at least one lowercase letter')
-      setErrorOnPassword(true)
-      return
-    }
-
-    if (!/\d/.test(password)) {
-      setPasswordHelperText('Password must contain at least one digit')
-      setErrorOnPassword(true)
-      return
-    }
-
-    setPasswordHelperText('')
-    setErrorOnPassword(false)
-  }
-
   const inputFields: FormInputType[] = [
     {value: values.name, onChange: handleChange('name'), label: 'Name', required: true},
     {type: 'email', value: values.email, onChange: handleChange('email'), label: 'Email', required: true},
-    {
-      type: 'password',
-      value: values.password,
-      onChange: handlePasswordChange,
-      label: 'Password',
-      required: true,
-      error: errorOnPassword,
-      helperText: passwordHelperText
-    },
-    {
-      type: 'password',
-      value: confPassword,
-      onChange: handleConfPassword,
-      label: 'Confirm Password',
-      required: true,
-      error: errorOnConfirmPassword,
-      helperText: errorOnConfirmPassword ? 'password and confirm password should match.' : ''
-    }
+    ...passwordInputFields
   ]
 
   return {
     error,
     handleSubmit: handleSubmit(onSubmit),
-    submitBtnDisabled: errorOnConfirmPassword,
+    submitBtnDisabled: inputFields.some(inputField => inputField.error),
     inputFields
   }
 }

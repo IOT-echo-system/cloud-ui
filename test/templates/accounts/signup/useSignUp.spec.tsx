@@ -34,7 +34,7 @@ describe('Use SignUp Hook Test', () => {
           helperText: ''
         },
         {
-          label: 'Confirm Password',
+          label: 'Confirm password',
           helperText: '',
           error: false,
           onChange: expect.any(Function),
@@ -45,7 +45,7 @@ describe('Use SignUp Hook Test', () => {
       ]
     })
 
-    expect(NextRouter.useRouter).toHaveBeenCalledTimes(1)
+    expect(NextRouter.useRouter).toHaveBeenCalledTimes(2)
     expect(NextRouter.useRouter).toHaveBeenCalledWith()
   })
 
@@ -140,7 +140,7 @@ describe('Use SignUp Hook Test', () => {
   })
 
   it('should submit form on handleSubmit', async () => {
-    jest.spyOn(AuthService, 'signUp').mockResolvedValue()
+    jest.spyOn(AuthService, 'signUp').mockResolvedValue({email: 'email', name: 'name', userId: 'userId'})
 
     const {result} = renderHook(useSignUp)
 

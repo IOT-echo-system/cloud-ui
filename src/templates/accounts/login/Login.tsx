@@ -11,9 +11,12 @@ export const LogIn: React.FC = () => {
   return (
     <CenteredContainer>
       <Form title={title} error={error} inputFields={inputFields} handleSubmit={handleSubmit} submitBtnText={'Login'} />
-      <Stack mt={2} direction={'row'} spacing={1} alignItems={'center'}>
-        <Typography>Don't have an account?</Typography>
-        <Link href={Config.SIGN_UP_PAGE_PATH}>Signup</Link>
+      <Stack mt={2} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+          <Typography>Don't have an account?</Typography>
+          <Link href={Config.SIGN_UP_PAGE_PATH}>Signup</Link>
+        </Stack>
+        <Link href={Config.FORGOT_PASSWORD_PAGE_PATH}>Forgot password</Link>
       </Stack>
     </CenteredContainer>
   )

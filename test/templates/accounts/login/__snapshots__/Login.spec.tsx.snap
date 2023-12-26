@@ -6,18 +6,28 @@ exports[`Login Template Test should match with the snapshot 1`] = `
     class="MuiStack-root css-1edlbwa-MuiStack-root"
   >
     <div
-      class="MuiStack-root css-103ehqt-MuiStack-root"
+      class="MuiStack-root css-pgz30k-MuiStack-root"
     >
-      <p
-        class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+      <div
+        class="MuiStack-root css-kdc3n8-MuiStack-root"
       >
-        Don't have an account?
-      </p>
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          Don't have an account?
+        </p>
+        <a
+          class="css-9x8bsw"
+          href="/auth/signup"
+        >
+          Signup
+        </a>
+      </div>
       <a
         class="css-9x8bsw"
-        href="/auth/signup"
+        href="/auth/forgot-password"
       >
-        Signup
+        Forgot password
       </a>
     </div>
   </div>

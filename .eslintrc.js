@@ -133,7 +133,8 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/no-confusing-void-expression': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off'
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/unbound-method':'off'
       }
     },
     {
