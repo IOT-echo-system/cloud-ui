@@ -1,16 +1,31 @@
-import WebClient from 'web-client-starter'
 import {AuthService} from '../../src/services'
+import * as UseToastHook from '../../src/hooks/useToast'
+import * as InitWebClient from '../../src/services/webClient'
+import type {Toast} from '../../src/hooks'
+import type WebClient from 'web-client-starter'
+
+jest.mock('../../src/hooks/useToast')
+jest.mock('../../src/services/webClient')
 
 describe('Auth Service Test', () => {
-  beforeEach(jest.clearAllMocks)
+  let authService: ReturnType<typeof AuthService>
+  const mockToast: Toast = {error: jest.fn(), success: jest.fn(), warning: jest.fn(), info: jest.fn()}
+  const MockPost = jest.fn()
+  const MockWebClient = {post: MockPost} as unknown as typeof WebClient
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.spyOn(UseToastHook, 'useToast').mockReturnValue(mockToast)
+    jest.spyOn(InitWebClient, 'initWebClient').mockReturnValue(MockWebClient)
+    authService = AuthService()
+  })
 
   it('should login', async () => {
-    jest.spyOn(WebClient, 'post').mockResolvedValue({token: ''})
+    MockPost.mockResolvedValue({token: ''})
 
-    await AuthService.login({email: '', password: ''})
+    await authService.login({email: '', password: ''})
 
-    expect(WebClient.post).toHaveBeenCalledTimes(1)
-    expect(WebClient.post).toHaveBeenCalledWith({
+    expect(MockPost).toHaveBeenCalledTimes(1)
+    expect(MockPost).toHaveBeenCalledWith({
       baseUrl: '/auth',
       body: {email: '', password: ''},
       path: '/login'
@@ -18,13 +33,13 @@ describe('Auth Service Test', () => {
   })
 
   it('should signup', async () => {
-    jest.spyOn(WebClient, 'post').mockResolvedValue({email: 'email', name: 'name', userId: 'userId'})
+    jest.spyOn(MockWebClient, 'post').mockResolvedValue({email: 'email', name: 'name', userId: 'userId'})
 
-    const response = await AuthService.signUp({email: '', password: '', name: 'name'})
+    const response = await authService.signUp({email: '', password: '', name: 'name'})
 
     expect(response).toStrictEqual({email: 'email', name: 'name', userId: 'userId'})
-    expect(WebClient.post).toHaveBeenCalledTimes(1)
-    expect(WebClient.post).toHaveBeenCalledWith({
+    expect(MockWebClient.post).toHaveBeenCalledTimes(1)
+    expect(MockWebClient.post).toHaveBeenCalledWith({
       baseUrl: '/auth',
       body: {email: '', password: '', name: 'name'},
       path: '/sign-up'
@@ -32,13 +47,13 @@ describe('Auth Service Test', () => {
   })
 
   it('should generate otp', async () => {
-    jest.spyOn(WebClient, 'post').mockResolvedValue({otpId: 'otpId', success: true})
+    jest.spyOn(MockWebClient, 'post').mockResolvedValue({otpId: 'otpId', success: true})
 
-    const response = await AuthService.generateOTP('email')
+    const response = await authService.generateOTP('email')
 
     expect(response).toStrictEqual({otpId: 'otpId', success: true})
-    expect(WebClient.post).toHaveBeenCalledTimes(1)
-    expect(WebClient.post).toHaveBeenCalledWith({
+    expect(MockWebClient.post).toHaveBeenCalledTimes(1)
+    expect(MockWebClient.post).toHaveBeenCalledWith({
       baseUrl: '/auth',
       body: {email: 'email'},
       path: '/generate-otp'
@@ -46,13 +61,13 @@ describe('Auth Service Test', () => {
   })
 
   it('should verify otp', async () => {
-    jest.spyOn(WebClient, 'post').mockResolvedValue({token: 'token', success: true})
+    jest.spyOn(MockWebClient, 'post').mockResolvedValue({token: 'token', success: true})
 
-    const response = await AuthService.verifyOTP({otp: '123456', otpId: 'otpId'})
+    const response = await authService.verifyOTP({otp: '123456', otpId: 'otpId'})
 
     expect(response).toStrictEqual({token: 'token', success: true})
-    expect(WebClient.post).toHaveBeenCalledTimes(1)
-    expect(WebClient.post).toHaveBeenCalledWith({
+    expect(MockWebClient.post).toHaveBeenCalledTimes(1)
+    expect(MockWebClient.post).toHaveBeenCalledWith({
       baseUrl: '/auth',
       body: {otp: '123456', otpId: 'otpId'},
       path: '/verify-otp'
@@ -60,13 +75,13 @@ describe('Auth Service Test', () => {
   })
 
   it('should reset password', async () => {
-    jest.spyOn(WebClient, 'post').mockResolvedValue({success: true})
+    jest.spyOn(MockWebClient, 'post').mockResolvedValue({success: true})
 
-    const response = await AuthService.resetPassword({password: 'password'})
+    const response = await authService.resetPassword({password: 'password'})
 
     expect(response).toStrictEqual({success: true})
-    expect(WebClient.post).toHaveBeenCalledTimes(1)
-    expect(WebClient.post).toHaveBeenCalledWith({
+    expect(MockWebClient.post).toHaveBeenCalledTimes(1)
+    expect(MockWebClient.post).toHaveBeenCalledWith({
       baseUrl: '/auth',
       body: {password: 'password'},
       path: '/reset-password'

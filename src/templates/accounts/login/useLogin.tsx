@@ -4,7 +4,7 @@ import type React from 'react'
 import {useState} from 'react'
 import {useForm} from '../../../hooks'
 import type {FormInputType} from '../../../atoms'
-import AuthService from '../../../services/authService'
+import {AuthService} from '../../../services'
 import {Config} from '../../../config'
 import type {ServerError} from '../../../typing/error'
 
@@ -17,6 +17,7 @@ const useLogin = (): UseLoginReturnType => {
   const router = useRouter()
   const [error, setError] = useState('')
   const {values, onChange, handleSubmit} = useForm({email: '', password: ''})
+  const authService = AuthService()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +27,8 @@ const useLogin = (): UseLoginReturnType => {
 
   const onSubmit = () => {
     setError('')
-    AuthService.login(values)
+    authService
+      .login(values)
       .then(() => router.push(Config.HOME_PAGE_PATH))
       .catch((error: ServerError) => {
         setError(error.message)

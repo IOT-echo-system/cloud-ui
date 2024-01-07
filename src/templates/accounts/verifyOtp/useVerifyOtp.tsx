@@ -4,11 +4,11 @@ import {useState} from 'react'
 import type {CountDownTimerType} from '../../../hooks'
 import {useForm} from '../../../hooks'
 import type {FormInputType} from '../../../atoms'
-import AuthService from '../../../services/authService'
 import type {ServerError} from '../../../typing/error'
 import {useCountDownTimer} from '../../../hooks'
 import {setStorage, StorageKeys} from '../../../utils/storage'
 import type {GenerateOTPResBody, VerifyOTPResBody} from '../../../services/typing/auth'
+import {AuthService} from '../../../services'
 
 type UseVerifyOtpReturnType = {
   inputFields: FormInputType[]
@@ -23,6 +23,7 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
   const [otpGenerated, setOtpGenerated] = useState(false)
   const {values, onChange, handleSubmit} = useForm({email: '', otp: '', otpId: ''})
   const countDownTimer = useCountDownTimer(60)
+  const authService = AuthService()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +33,13 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
 
   const authorizeOTP = async (): Promise<GenerateOTPResBody | VerifyOTPResBody> => {
     if (otpGenerated) {
-      const verifyOTPRes = await AuthService.verifyOTP(values)
+      const verifyOTPRes = await authService.verifyOTP(values)
       countDownTimer.pause()
       setStorage(StorageKeys.AUTH, {token: verifyOTPRes.token})
       otpVerifiedCallback(verifyOTPRes.success)
       return verifyOTPRes
     }
-    const generateOTPRes = await AuthService.generateOTP(values.email)
+    const generateOTPRes = await authService.generateOTP(values.email)
     setOtpGenerated(true)
     onChange('otpId', generateOTPRes.otpId)
     countDownTimer.resetAndPlay()
@@ -53,7 +54,8 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
   }
 
   const resendOtp = (): void => {
-    AuthService.generateOTP(values.email)
+    authService
+      .generateOTP(values.email)
       .then(generateOTPRes => {
         setOtpGenerated(true)
         onChange('otpId', generateOTPRes.otpId)

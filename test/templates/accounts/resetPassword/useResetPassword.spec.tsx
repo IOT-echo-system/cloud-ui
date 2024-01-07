@@ -3,7 +3,10 @@ import * as NextRouter from 'next/router'
 import type {Router} from 'next/router'
 import type {ChangeEvent, FormEvent} from 'react'
 import {useResetPassword} from '../../../../src/templates/accounts/resetPassword/useResetPassword'
-import AuthService from '../../../../src/services/authService'
+import * as AuthServiceHook from '../../../../src/services/authService'
+import type {AuthService} from '../../../../src/services/authService'
+
+jest.mock('../../../../src/services/authService')
 
 describe('Use reset password Hook Test', () => {
   const mockRouter = {} as unknown as Router
@@ -102,7 +105,10 @@ describe('Use reset password Hook Test', () => {
   })
 
   it('should submit form on handleSubmit', async () => {
-    jest.spyOn(AuthService, 'resetPassword').mockResolvedValue({success: true})
+    const mockResetPassword = jest.fn().mockResolvedValue({success: true})
+    jest
+      .spyOn(AuthServiceHook, 'AuthService')
+      .mockReturnValue({resetPassword: mockResetPassword} as unknown as ReturnType<typeof AuthService>)
 
     const {result} = renderHook(() => useResetPassword(false, '/'))
 
@@ -115,12 +121,15 @@ describe('Use reset password Hook Test', () => {
       result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
-    expect(AuthService.resetPassword).toHaveBeenCalledTimes(1)
-    expect(AuthService.resetPassword).toHaveBeenCalledWith({password: 'password'})
+    expect(mockResetPassword).toHaveBeenCalledTimes(1)
+    expect(mockResetPassword).toHaveBeenCalledWith({password: 'password'})
   })
 
   it('should submit form on handleSubmit with old password', async () => {
-    jest.spyOn(AuthService, 'resetPassword').mockResolvedValue({success: true})
+    const mockResetPassword = jest.fn().mockResolvedValue({success: true})
+    jest
+      .spyOn(AuthServiceHook, 'AuthService')
+      .mockReturnValue({resetPassword: mockResetPassword} as unknown as ReturnType<typeof AuthService>)
 
     const {result} = renderHook(() => useResetPassword(true, '/'))
 
@@ -134,12 +143,15 @@ describe('Use reset password Hook Test', () => {
       result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
-    expect(AuthService.resetPassword).toHaveBeenCalledTimes(1)
-    expect(AuthService.resetPassword).toHaveBeenCalledWith({currentPassword: 'password', password: 'password'})
+    expect(mockResetPassword).toHaveBeenCalledTimes(1)
+    expect(mockResetPassword).toHaveBeenCalledWith({currentPassword: 'password', password: 'password'})
   })
 
   it('should give error on failure of form submit', async () => {
-    jest.spyOn(AuthService, 'resetPassword').mockRejectedValue({message: 'Failed to reset'})
+    const mockResetPassword = jest.fn().mockRejectedValue({message: 'Failed to reset'})
+    jest
+      .spyOn(AuthServiceHook, 'AuthService')
+      .mockReturnValue({resetPassword: mockResetPassword} as unknown as ReturnType<typeof AuthService>)
 
     const {result} = renderHook(() => useResetPassword(false, '/'))
 
@@ -152,8 +164,8 @@ describe('Use reset password Hook Test', () => {
       result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
-    expect(AuthService.resetPassword).toHaveBeenCalledTimes(1)
-    expect(AuthService.resetPassword).toHaveBeenCalledWith({password: 'password'})
+    expect(mockResetPassword).toHaveBeenCalledTimes(1)
+    expect(mockResetPassword).toHaveBeenCalledWith({password: 'password'})
 
     expect(result.current.error).toStrictEqual('Failed to reset')
   })

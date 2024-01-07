@@ -6,7 +6,10 @@ import type {Router} from 'next/router'
 import type {ChangeEvent, FormEvent} from 'react'
 import {userBuilder} from '../../../builders/stateBuilder'
 import {useLogin} from '../../../../src/templates/accounts/login/useLogin'
-import AuthService from '../../../../src/services/authService'
+import * as AuthServiceHook from '../../../../src/services/authService'
+import type {AuthService} from '../../../../src/services'
+
+jest.mock('../../../../src/services/authService')
 
 describe('Use Login Hook Test', () => {
   const mockRouter = {} as unknown as Router
@@ -63,7 +66,10 @@ describe('Use Login Hook Test', () => {
 
   it('should submit form on handleSubmit', async () => {
     const mockUser = userBuilder({name: 'name'})
-    jest.spyOn(AuthService, 'login').mockResolvedValue(mockUser)
+    const mockLogin = jest.fn().mockResolvedValue(mockUser)
+    jest
+      .spyOn(AuthServiceHook, 'AuthService')
+      .mockReturnValue({login: mockLogin} as unknown as ReturnType<typeof AuthService>)
 
     const {result} = renderHook(useLogin)
 
@@ -76,12 +82,15 @@ describe('Use Login Hook Test', () => {
       result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
-    expect(AuthService.login).toHaveBeenCalledTimes(1)
-    expect(AuthService.login).toHaveBeenCalledWith({email: 'email', password: 'password'})
+    expect(mockLogin).toHaveBeenCalledTimes(1)
+    expect(mockLogin).toHaveBeenCalledWith({email: 'email', password: 'password'})
   })
 
   it('should give error on failure of form submit', async () => {
-    jest.spyOn(AuthService, 'login').mockRejectedValue({message: 'already registered'})
+    const mockLogin = jest.fn().mockRejectedValue({message: 'already registered'})
+    jest
+      .spyOn(AuthServiceHook, 'AuthService')
+      .mockReturnValue({login: mockLogin} as unknown as ReturnType<typeof AuthService>)
 
     const {result} = renderHook(useLogin)
 
@@ -94,8 +103,8 @@ describe('Use Login Hook Test', () => {
       result.current.handleSubmit({preventDefault: jest.fn()} as unknown as FormEvent<HTMLFormElement>)
     })
 
-    expect(AuthService.login).toHaveBeenCalledTimes(1)
-    expect(AuthService.login).toHaveBeenCalledWith({email: 'email', password: 'password'})
+    expect(mockLogin).toHaveBeenCalledTimes(1)
+    expect(mockLogin).toHaveBeenCalledWith({email: 'email', password: 'password'})
 
     expect(result.current.error).toStrictEqual('already registered')
   })

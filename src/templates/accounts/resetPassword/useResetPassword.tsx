@@ -21,6 +21,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
   const {values, onChange, handleSubmit} = useForm(initValues)
   const [errorOnPassword, setErrorOnPassword] = useState(false)
   const [passwordHelperText, setPasswordHelperText] = useState('')
+  const authService = AuthService()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +31,8 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
 
   const onSubmit = () => {
     setError('')
-    AuthService.resetPassword(values)
+    authService
+      .resetPassword(values)
       .then(() => router.push(redirectTo))
       .catch((error: ServerError) => {
         setError(error.message)

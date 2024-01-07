@@ -138,7 +138,7 @@ module.exports = {
       }
     },
     {
-      files: ['**/actions/*.ts'],
+      files: ['**/actions/*.ts','**/services/*.tsx'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off'
       }

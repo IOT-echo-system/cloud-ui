@@ -5,14 +5,17 @@ import '../../public/styles/index.css'
 import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
 import {Layout} from '../organisms'
+import {ToastWrapper} from '../atoms'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   return (
     <StoreProvider>
       <CustomThemeProvider>
-        <Layout>
-          <Component {...pageProps} key={router.asPath} />
-        </Layout>
+        <ToastWrapper>
+          <Layout>
+            <Component {...pageProps} key={router.asPath} />
+          </Layout>
+        </ToastWrapper>
       </CustomThemeProvider>
     </StoreProvider>
   )

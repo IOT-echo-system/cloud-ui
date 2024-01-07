@@ -1,13 +1,13 @@
 import type React from 'react'
+import type {ChangeEvent} from 'react'
 import {useState} from 'react'
 import {useRouter} from 'next/router'
-import type {ChangeEvent} from 'react'
 import type {FormInputType} from '../../../atoms'
 import {useForm} from '../../../hooks'
-import AuthService from '../../../services/authService'
 import type {ServerError} from '../../../typing/error'
 import {Config} from '../../../config'
 import {useResetPassword} from '../resetPassword/useResetPassword'
+import {AuthService} from '../../../services'
 
 type UseSignUpReturnType = {
   inputFields: FormInputType[]
@@ -21,6 +21,7 @@ export const useSignUp = (): UseSignUpReturnType => {
   const [error, setError] = useState('')
   const {values, onChange, handleSubmit} = useForm({name: '', email: ''})
   const {inputFields: passwordInputFields} = useResetPassword(false, '')
+  const authService = AuthService()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +32,8 @@ export const useSignUp = (): UseSignUpReturnType => {
   const onSubmit = () => {
     setError('')
     const password = passwordInputFields[0].value as string
-    AuthService.signUp({password, ...values})
+    authService
+      .signUp({password, ...values})
       .then(() => router.push(Config.LOGIN_PAGE_PATH))
       .catch((error: ServerError) => {
         setError(error.message)
