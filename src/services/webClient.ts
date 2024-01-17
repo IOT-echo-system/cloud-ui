@@ -1,5 +1,5 @@
-import WebClient from 'web-client-starter'
 import type {AxiosError} from 'axios'
+import WebClient from 'web-client-starter'
 import {getStorage, StorageKeys} from '../utils/storage'
 import {apiConfig} from '../config/apiConfig'
 import {v4 as uuidV4} from 'uuid'

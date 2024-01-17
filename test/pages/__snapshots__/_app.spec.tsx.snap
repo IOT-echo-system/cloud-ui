@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`_App page test should match with the snapshot 1`] = `
+exports[`_App page test should match with the snapshot for authorized path 1`] = `<div />`;
+
+exports[`_App page test should match with the snapshot for authorized path with unauthorized user 1`] = `<div />`;
+
+exports[`_App page test should match with the snapshot for unauthorized path 1`] = `
 <div>
   <div
     class="MuiStack-root css-fe8fx7-MuiStack-root"

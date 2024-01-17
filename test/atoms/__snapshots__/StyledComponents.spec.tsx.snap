@@ -25,7 +25,7 @@ exports[`Styled component test should match with the snapshot for Centered Conta
 exports[`Styled component test should match with the snapshot for FormContainer 1`] = `
 <div>
   <form
-    class="css-yg4hvw"
+    class="css-k6rfkb"
   />
 </div>
 `;

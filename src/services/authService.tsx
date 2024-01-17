@@ -8,6 +8,7 @@ import type {
   ResetPasswordResBody,
   SignUpReqBody,
   SignUpResBody,
+  ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
 
@@ -52,6 +53,13 @@ export const AuthService = () => {
         baseUrl: authConfig.baseUrl,
         path: authConfig.verifyOTP,
         body: {otpId, otp}
+      })
+    },
+
+    validate(): Promise<ValidateResBody> {
+      return WebClient.get<ValidateResBody>({
+        baseUrl: authConfig.baseUrl,
+        path: authConfig.validate
       })
     }
   }

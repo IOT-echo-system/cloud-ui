@@ -1,5 +1,4 @@
 import React from 'react'
-import {CenteredContainer} from '../../../atoms'
 import {useResetPassword} from './useResetPassword'
 import {Form} from '../../../molecules/Form'
 
@@ -9,14 +8,12 @@ export const ResetPassword: React.FC<ResetPasswordPropsType> = ({withOldPassword
   const {handleSubmit, error, inputFields} = useResetPassword(withOldPassword, redirectTo)
 
   return (
-    <CenteredContainer>
-      <Form
-        title={title}
-        error={error}
-        inputFields={inputFields}
-        handleSubmit={handleSubmit}
-        submitBtnText={'Reset password'}
-      />
-    </CenteredContainer>
+    <Form
+      title={title}
+      error={error}
+      inputFields={inputFields}
+      handleSubmit={handleSubmit}
+      submitBtnText={'Reset password'}
+    />
   )
 }

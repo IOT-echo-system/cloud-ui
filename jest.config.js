@@ -10,10 +10,10 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   coverageThreshold: {
     global: {
-      branches: 89.36,
-      functions: 94.05,
-      lines: 97.12,
-      statements: 97.04
+      branches: 92.42,
+      functions: 94.39,
+      lines: 97.31,
+      statements: 97.23
     }
   }
 }

@@ -6,7 +6,41 @@ exports[`Login Template Test should match with the snapshot 1`] = `
     class="MuiStack-root css-1edlbwa-MuiStack-root"
   >
     <div
-      class="MuiStack-root css-pgz30k-MuiStack-root"
+      class="MuiStack-root css-kd7he9-MuiStack-root"
+    >
+      <div
+        class="MuiStack-root css-kdc3n8-MuiStack-root"
+      >
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+        >
+          Don't have an account?
+        </p>
+        <a
+          class="css-9x8bsw"
+          href="/auth/signup"
+        >
+          Signup
+        </a>
+      </div>
+      <a
+        class="css-9x8bsw"
+        href="/auth/forgot-password"
+      >
+        Forgot password
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Login Template Test should match with the snapshot for mobile 1`] = `
+<div>
+  <div
+    class="MuiStack-root css-1edlbwa-MuiStack-root"
+  >
+    <div
+      class="MuiStack-root css-1yxcwai-MuiStack-root"
     >
       <div
         class="MuiStack-root css-kdc3n8-MuiStack-root"

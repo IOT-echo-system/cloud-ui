@@ -11,7 +11,8 @@ describe('Auth Service Test', () => {
   let authService: ReturnType<typeof AuthService>
   const mockToast: Toast = {error: jest.fn(), success: jest.fn(), warning: jest.fn(), info: jest.fn()}
   const MockPost = jest.fn()
-  const MockWebClient = {post: MockPost} as unknown as typeof WebClient
+  const MockGet = jest.fn()
+  const MockWebClient = {post: MockPost, get: MockGet} as unknown as typeof WebClient
   beforeEach(() => {
     jest.clearAllMocks()
     jest.spyOn(UseToastHook, 'useToast').mockReturnValue(mockToast)
@@ -85,6 +86,19 @@ describe('Auth Service Test', () => {
       baseUrl: '/auth',
       body: {password: 'password'},
       path: '/reset-password'
+    })
+  })
+
+  it('should validate user', async () => {
+    jest.spyOn(MockWebClient, 'get').mockResolvedValue({userId: 'userId'})
+
+    const response = await authService.validate()
+
+    expect(response).toStrictEqual({userId: 'userId'})
+    expect(MockWebClient.get).toHaveBeenCalledTimes(1)
+    expect(MockWebClient.get).toHaveBeenCalledWith({
+      baseUrl: '/auth',
+      path: '/validate'
     })
   })
 })
