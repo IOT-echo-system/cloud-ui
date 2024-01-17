@@ -28,7 +28,6 @@ const ForgotPasswordPage: NextPage = () => {
           <Typography>Already have an account?</Typography>
           <Link href={Config.LOGIN_PAGE_PATH}>Login</Link>
         </Stack>
-        <Link href={Config.FORGOT_PASSWORD_PAGE_PATH}>Forgot password</Link>
       </Stack>
     </CenteredContainer>
   )
