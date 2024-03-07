@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react'
 import ForgotPasswordPage from '../../../src/pages/auth/forgot-password'
-import {ResetPassword, VerifyOtp} from '../../../src/templates/accounts'
+import {ResetPassword, VerifyOtp} from '../../../src/templates/auth'
 import React from 'react'
 import {Config} from '../../../src/config'
 import * as MediaHook from '../../../src/hooks/useMedia'

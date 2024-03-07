@@ -4,19 +4,22 @@ import React, {useEffect, useState} from 'react'
 import '../../public/styles/index.css'
 import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
-import {Layout} from '../organisms'
-import {Loader, ToastWrapper} from '../atoms'
 import {AuthService} from '../services'
 import {Config} from '../config'
+import {Loader, ToastWrapper} from '../components/atoms'
+import {Layout} from '../components/organisms'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   const authService = AuthService()
   const [isValidated, setIsValidated] = useState(false)
   useEffect(() => {
-    if (!router.pathname.startsWith('/auth')) {
+    if (!router.pathname.startsWith('/auth') && router.pathname !== '/start') {
       authService
         .validate()
-        .then(() => {
+        .then(res => {
+          if (!res.projectId) {
+            return router.push('/start')
+          }
           setIsValidated(true)
         })
         .catch(() => {

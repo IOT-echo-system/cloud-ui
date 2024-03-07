@@ -8,5 +8,10 @@ export const apiConfig = {
     generateOTP: '/generate-otp',
     verifyOTP: '/verify-otp',
     resetPassword: '/reset-password'
+  },
+  account: {
+    baseUrl: '/accounts',
+    accounts: '',
+    account: '/{accountId}/role/{roleId}'
   }
 } as const
