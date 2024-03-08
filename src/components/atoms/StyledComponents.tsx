@@ -1,8 +1,9 @@
 import type {BoxProps} from '@mui/material'
-import {Box, Button as MUIButton, Stack, styled} from '@mui/material'
+import {Box, Stack, styled} from '@mui/material'
+import {LoadingButton} from '@mui/lab'
 import NextLink from 'next/link'
 
-export const Button = styled(MUIButton)({textTransform: 'none'})
+export const Button = styled(LoadingButton)({textTransform: 'none'})
 
 export const FormContainer = styled('form')(({theme}) => ({
   background: theme.palette.background.paper,

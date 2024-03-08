@@ -7,17 +7,12 @@ import {Stack, Typography} from '@mui/material'
 type VerifyOtpPropsType = {title: string; setOtpVerified: Dispatch<SetStateAction<boolean>>}
 
 export const VerifyOtp: React.FC<VerifyOtpPropsType> = ({title, setOtpVerified}) => {
-  const {handleSubmit, error, inputFields, otpGenerated, resendOtp, countDownTimer} = useVerifyOtp(setOtpVerified)
+  const {handleSubmit, inputFields, otpGenerated, resendOtp, countDownTimer} = useVerifyOtp(setOtpVerified)
 
   return (
     <FormContainer onSubmit={handleSubmit}>
       <Stack spacing={2}>
         <Typography variant={'h5'}>{title}</Typography>
-        {error && (
-          <Typography variant={'body1'} color={'error'}>
-            {error}
-          </Typography>
-        )}
         {inputFields.map((inputField, index) => (
           <FormInput key={`input-${index}`} {...inputField} />
         ))}

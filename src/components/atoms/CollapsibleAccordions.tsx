@@ -12,6 +12,8 @@ const Accordion = styled(MuiAccordion)(({theme}) => ({
   border: `1px solid ${theme.palette.divider}`,
   borderLeft: 0,
   borderRight: 0,
+  borderBottomRightRadius: theme.spacing(0.5),
+  borderBottomLeftRadius: theme.spacing(0.5),
   '&:not(:last-child)': {
     borderBottom: 0
   },

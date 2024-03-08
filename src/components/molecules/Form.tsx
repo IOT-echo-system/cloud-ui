@@ -7,7 +7,6 @@ import {Button, FormContainer, FormInput} from '../atoms'
 export type FormProps = {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void
   title: string
-  error?: string
   inputFields: FormInputType[]
   submitBtnText: string
   submitBtnDisabled?: boolean
@@ -18,11 +17,6 @@ export const Form: React.FC<FormProps> = props => {
     <FormContainer onSubmit={props.handleSubmit}>
       <Stack spacing={2}>
         <Typography variant={'h5'}>{props.title}</Typography>
-        {props.error && (
-          <Typography variant={'body1'} color={'error'}>
-            {props.error}
-          </Typography>
-        )}
         {props.inputFields.map((inputField, index) => (
           <FormInput key={`input-${index}`} {...inputField} />
         ))}

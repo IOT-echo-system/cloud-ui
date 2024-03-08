@@ -3,26 +3,24 @@ import type {ChangeEvent} from 'react'
 import {useState} from 'react'
 import type {FormInputType} from '../../../atoms'
 import type {CountDownTimerType} from '../../../../hooks'
+import {useToast} from '../../../../hooks'
 import {useCountDownTimer, useForm} from '../../../../hooks'
 import {AuthService} from '../../../../services'
 import type {GenerateOTPResBody, VerifyOTPResBody} from '../../../../services/typing/auth'
 import {setStorage, StorageKeys} from '../../../../utils/storage'
-import type {ServerError} from '../../../../typing/error'
 
 type UseVerifyOtpReturnType = {
   inputFields: FormInputType[]
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  error: string
   otpGenerated: boolean
   countDownTimer: CountDownTimerType
   resendOtp: () => void
 }
 const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerifyOtpReturnType => {
-  const [error, setError] = useState('')
   const [otpGenerated, setOtpGenerated] = useState(false)
   const {values, onChange, handleSubmit} = useForm({email: '', otp: '', otpId: ''})
   const countDownTimer = useCountDownTimer(60)
-  const authService = AuthService()
+  const toast = useToast()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +30,13 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
 
   const authorizeOTP = async (): Promise<GenerateOTPResBody | VerifyOTPResBody> => {
     if (otpGenerated) {
-      const verifyOTPRes = await authService.verifyOTP(values)
+      const verifyOTPRes = await AuthService.verifyOTP(values)
       countDownTimer.pause()
       setStorage(StorageKeys.AUTH, {token: verifyOTPRes.token})
       otpVerifiedCallback(verifyOTPRes.success)
       return verifyOTPRes
     }
-    const generateOTPRes = await authService.generateOTP(values.email)
+    const generateOTPRes = await AuthService.generateOTP(values.email)
     setOtpGenerated(true)
     onChange('otpId', generateOTPRes.otpId)
     countDownTimer.resetAndPlay()
@@ -46,24 +44,18 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
   }
 
   const onSubmit = () => {
-    setError('')
-    authorizeOTP().catch((error: ServerError) => {
-      setError(error.message)
-    })
+    authorizeOTP().catch(toast.error)
   }
 
   const resendOtp = (): void => {
-    authService
-      .generateOTP(values.email)
+    AuthService.generateOTP(values.email)
       .then(generateOTPRes => {
         setOtpGenerated(true)
         onChange('otpId', generateOTPRes.otpId)
         countDownTimer.resetAndPlay()
         return generateOTPRes
       })
-      .catch((error: ServerError) => {
-        setError(error.message)
-      })
+      .catch(toast.error)
   }
 
   const inputFields: FormInputType[] = [
@@ -95,7 +87,6 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
   ]
 
   return {
-    error,
     handleSubmit: handleSubmit(onSubmit),
     inputFields: otpGenerated ? inputFieldsForOtp : inputFields,
     countDownTimer,

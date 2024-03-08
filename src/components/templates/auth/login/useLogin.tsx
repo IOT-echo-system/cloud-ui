@@ -1,23 +1,19 @@
 import {useRouter} from 'next/router'
 import type {ChangeEvent} from 'react'
 import type React from 'react'
-import {useState} from 'react'
 import type {FormInputType} from '../../../atoms'
-import {useForm} from '../../../../hooks'
+import {useForm, useToast} from '../../../../hooks'
 import {AuthService} from '../../../../services'
 import {Config} from '../../../../config'
-import type {ServerError} from '../../../../typing/error'
 
 type UseLoginReturnType = {
   inputFields: FormInputType[]
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  error: string
 }
 const useLogin = (): UseLoginReturnType => {
   const router = useRouter()
-  const [error, setError] = useState('')
   const {values, onChange, handleSubmit} = useForm({email: '', password: ''})
-  const authService = AuthService()
+  const toast = useToast()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,13 +22,9 @@ const useLogin = (): UseLoginReturnType => {
   }
 
   const onSubmit = () => {
-    setError('')
-    authService
-      .login(values)
+    AuthService.login(values)
       .then(() => router.push(Config.HOME_PAGE_PATH))
-      .catch((error: ServerError) => {
-        setError(error.message)
-      })
+      .catch(toast.error)
   }
 
   const inputFields: FormInputType[] = [
@@ -41,7 +33,6 @@ const useLogin = (): UseLoginReturnType => {
   ]
 
   return {
-    error,
     handleSubmit: handleSubmit(onSubmit),
     inputFields
   }

@@ -10,14 +10,12 @@ import {Loader, ToastWrapper} from '../components/atoms'
 import {Layout} from '../components/organisms'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
-  const authService = AuthService()
   const [isValidated, setIsValidated] = useState(false)
   useEffect(() => {
-    if (!router.pathname.startsWith('/auth') && router.pathname !== '/start') {
-      authService
-        .validate()
+    if (!router.pathname.startsWith('/auth')) {
+      AuthService.validate()
         .then(res => {
-          if (!res.projectId) {
+          if (!res.projectId && router.pathname !== '/start') {
             return router.push('/start')
           }
           setIsValidated(true)

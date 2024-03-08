@@ -3,25 +3,22 @@ import type React from 'react'
 import type {ChangeEvent} from 'react'
 import {useState} from 'react'
 import type {FormInputType} from '../../../atoms'
-import {useForm} from '../../../../hooks'
+import {useForm, useToast} from '../../../../hooks'
 import {AuthService} from '../../../../services'
-import type {ServerError} from '../../../../typing/error'
 
 type UseLoginReturnType = {
   inputFields: FormInputType[]
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  error: string
 }
 
 const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLoginReturnType => {
   const router = useRouter()
-  const [error, setError] = useState('')
   const initValues = withOldPassword ? {currentPassword: '', password: ''} : {password: ''}
   const [confirmPassword, setConfirmPassword] = useState('')
   const {values, onChange, handleSubmit} = useForm(initValues)
   const [errorOnPassword, setErrorOnPassword] = useState(false)
   const [passwordHelperText, setPasswordHelperText] = useState('')
-  const authService = AuthService()
+  const toast = useToast()
 
   const handleChange = <K extends keyof typeof values>(keyName: K) => {
     return (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +27,9 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
   }
 
   const onSubmit = () => {
-    setError('')
-    authService
-      .resetPassword(values)
+    AuthService.resetPassword(values)
       .then(() => router.push(redirectTo))
-      .catch((error: ServerError) => {
-        setError(error.message)
-      })
+      .catch(toast.error)
   }
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -126,7 +119,6 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
   ]
 
   return {
-    error,
     handleSubmit: handleSubmit(onSubmit),
     inputFields: withOldPassword ? inputFieldsWithOldPassword : inputFields
   }

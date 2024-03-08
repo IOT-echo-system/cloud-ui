@@ -1,17 +1,22 @@
 import React from 'react'
-import {Button, CollapsibleAccordion, TopCenteredContainer} from '../../atoms'
+import {Button, CollapsibleAccordion, FormInput, Modal, TopCenteredContainer} from '../../atoms'
 import {Stack, Typography} from '@mui/material'
 import {Add} from '@mui/icons-material'
 import {useStart} from './useStart'
 import theme from '../../../theme/light'
+import {createProject} from './createProject'
+import {useForm} from '../../../hooks'
+import '../../../utils/extenstions'
 
 export const Start: React.FC = () => {
-  const {accounts, handleClick} = useStart()
+  const {accounts, handleSelect, addAccount} = useStart()
+  const {values, onChange, onClear, handleSubmit} = useForm({name: ''})
+  const {modalOpen, handleOpen, handleClose, onSubmit, loading} = createProject(onClear, addAccount)
 
   return (
     <TopCenteredContainer
       sx={{
-        width: {sx: '100%', sm: '80%', md: '60%', lg: '40%'},
+        width: {xs: '90%', sm: '80%', md: '600px'},
         border: '1px solid rgba(0, 0, 0, .125)',
         borderRadius: '4px'
       }}
@@ -27,11 +32,13 @@ export const Start: React.FC = () => {
               background: 'white',
               boxShadow: theme.shadows[2],
               borderTopLeftRadius: '4px',
-              borderTopRightRadius: '4px'
+              borderTopRightRadius: '4px',
+              borderBottomLeftRadius: accounts.isEmpty() ? '4px' : '0',
+              borderBottomRightRadius: accounts.isEmpty() ? '4px' : '0'
             }}
           >
             <Typography variant={'h4'}>Projects</Typography>
-            <Button variant={'contained'} endIcon={<Add />}>
+            <Button variant={'contained'} endIcon={<Add />} onClick={handleOpen}>
               Create
             </Button>
           </Stack>
@@ -44,7 +51,7 @@ export const Start: React.FC = () => {
               <Typography variant={'body2'}>Project Id: {account.accountId}</Typography>
               <Stack direction={'row'} flexWrap={'wrap'} spacing={2} m={2}>
                 {account.roles.map(role => (
-                  <Button variant={'outlined'} key={role.roleId} onClick={handleClick(account.accountId, role.roleId)}>
+                  <Button variant={'outlined'} key={role.roleId} onClick={handleSelect(account.accountId, role.roleId)}>
                     {role.name}
                   </Button>
                 ))}
@@ -53,6 +60,28 @@ export const Start: React.FC = () => {
           )
         }))}
       />
+      <Modal
+        open={modalOpen}
+        handleClose={handleClose}
+        width={{xs: 'calc(90% - 32px)', sm: 'calc(80% - 64px)', md: '536px'}}
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={2}>
+            <Typography variant={'h5'}>Create Project</Typography>
+            <FormInput
+              value={values.name}
+              onChange={event => {
+                onChange('name', event.target.value)
+              }}
+              required
+              label={'Project name'}
+            />
+            <Button type={'submit'} variant={'contained'} size={'large'} loading={loading}>
+              Create
+            </Button>
+          </Stack>
+        </form>
+      </Modal>
     </TopCenteredContainer>
   )
 }

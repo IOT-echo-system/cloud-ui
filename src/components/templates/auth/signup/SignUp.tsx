@@ -10,13 +10,12 @@ export const SignUp: React.FC = () => {
   const media = useMedia()
   const site = useSelector(state => state.site)
   const title = `${site.title} sign up`
-  const {handleSubmit, error, submitBtnDisabled, inputFields} = useSignUp()
+  const {handleSubmit, submitBtnDisabled, inputFields} = useSignUp()
 
   return (
     <CenteredContainer>
       <Form
         title={title}
-        error={error}
         inputFields={inputFields}
         handleSubmit={handleSubmit}
         submitBtnText={'Sign up'}

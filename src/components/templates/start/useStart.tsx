@@ -2,27 +2,37 @@ import type {MouseEventHandler} from 'react'
 import {useEffect, useState} from 'react'
 import {AccountService} from '../../../services/accountService'
 import type {AccountWithRoles} from '../../../services/typing/account'
+import {useToast} from '../../../hooks'
 
 type UseStartType = {
   accounts: AccountWithRoles[]
-  handleClick: (accountId: string, roleId: string) => MouseEventHandler<HTMLButtonElement>
+  handleSelect: (accountId: string, roleId: string) => MouseEventHandler<HTMLButtonElement>
+  addAccount: (account: AccountWithRoles) => void
 }
 
 export const useStart = (): UseStartType => {
-  const accountService = AccountService()
   const [accounts, setAccounts] = useState<AccountWithRoles[]>([])
+  const toast = useToast()
 
-  const handleClick = (accountId: string, roleId: string): MouseEventHandler<HTMLButtonElement> => {
+  useEffect(() => {
+    AccountService.getAccountsWithRoles().then(setAccounts).catch(toast.error)
+  }, [])
+
+  const handleSelect = (accountId: string, roleId: string): MouseEventHandler<HTMLButtonElement> => {
     return () => {
-      accountService.getAccount(accountId, roleId)
+      AccountService.getAccount(accountId, roleId)
     }
   }
 
+  const addAccount = (account: AccountWithRoles) => {
+    setAccounts([account, ...accounts])
+  }
+
   useEffect(() => {
-    accountService.getAccountsWithRoles().then(res => {
+    AccountService.getAccountsWithRoles().then(res => {
       setAccounts(res)
     })
   }, [])
 
-  return {accounts, handleClick}
+  return {accounts, handleSelect, addAccount}
 }

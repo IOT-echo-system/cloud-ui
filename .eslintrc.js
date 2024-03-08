@@ -127,7 +127,7 @@ module.exports = {
     {
       files: ['*.spec.{ts,tsx}'],
       rules: {
-        'max-len': 'warn',
+        'max-len': 'off',
         '@typescript-eslint/no-magic-numbers': 'off',
         'max-statements': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

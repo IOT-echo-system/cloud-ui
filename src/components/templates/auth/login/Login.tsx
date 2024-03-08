@@ -7,13 +7,13 @@ import {useMedia, useSelector} from '../../../../hooks'
 import {Config} from '../../../../config'
 
 export const LogIn: React.FC = () => {
-  const {handleSubmit, error, inputFields} = useLogin()
+  const {handleSubmit, inputFields} = useLogin()
   const media = useMedia()
   const site = useSelector(state => state.site)
   const title = `${site.title} login`
   return (
     <CenteredContainer>
-      <Form title={title} error={error} inputFields={inputFields} handleSubmit={handleSubmit} submitBtnText={'Login'} />
+      <Form title={title} inputFields={inputFields} handleSubmit={handleSubmit} submitBtnText={'Login'} />
       <Stack
         direction={media.md ? 'row' : 'column'}
         justifyContent={'space-between'}

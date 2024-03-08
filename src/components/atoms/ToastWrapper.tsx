@@ -20,11 +20,11 @@ export const ToastWrapper: React.FC<PropsWithChildren> = ({children}) => {
     <Toast
       maxSnack={5}
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      autoHideDuration={5000}
+      autoHideDuration={30000}
       ref={toastRef}
       aria-multiline={true}
       action={key => (
-        <IconButton onClick={onClickDismiss(key)}>
+        <IconButton onClick={onClickDismiss(key)} color={'inherit'}>
           <Close />
         </IconButton>
       )}
