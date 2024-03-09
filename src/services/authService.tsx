@@ -57,5 +57,15 @@ export const AuthService = {
       baseUrl: authConfig.baseUrl,
       path: authConfig.validate
     })
+  },
+
+  async updateToken(accountId: string, roleId: string): Promise<LoginResBody> {
+    const response = await WebClient.post<LoginResBody>({
+      baseUrl: authConfig.baseUrl,
+      path: authConfig.updateToken,
+      body: {accountId, roleId}
+    })
+    setStorage(StorageKeys.AUTH, {token: response.token})
+    return response
   }
 }

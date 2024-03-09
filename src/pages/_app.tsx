@@ -15,8 +15,8 @@ const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
     if (!router.pathname.startsWith('/auth')) {
       AuthService.validate()
         .then(res => {
-          if (!res.projectId && router.pathname !== '/start') {
-            return router.push('/start')
+          if (!res.projectId && router.pathname !== Config.START_PAGE_PATH) {
+            return router.push(Config.START_PAGE_PATH)
           }
           setIsValidated(true)
         })
