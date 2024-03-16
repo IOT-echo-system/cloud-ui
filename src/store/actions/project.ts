@@ -1,4 +1,4 @@
-import {Project} from '../../typing/project'
+import type {Project} from '../../typing/project'
 import {ProjectAction} from '../reducers/project'
 
 export const setProject = (project: Project) => {

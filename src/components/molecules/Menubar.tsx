@@ -2,7 +2,7 @@ import React from 'react'
 import {List, ListItem, Stack, styled} from '@mui/material'
 import {Link} from '../atoms'
 import {useRouter} from 'next/router'
-import {LinkProps} from 'next/link'
+import type {LinkProps} from 'next/link'
 
 const StyledLink = styled(Link)<LinkProps & {active: boolean}>(({theme, active}) => ({
   color: theme.palette.common.white,
@@ -17,7 +17,7 @@ const menuItems = [
   {name: 'Dashboard', link: '/dashboard'}
 ]
 
-export const Menubar = () => {
+export const Menubar: React.FC = () => {
   const router = useRouter()
 
   return (

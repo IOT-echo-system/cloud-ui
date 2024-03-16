@@ -1,4 +1,5 @@
-import {BoxProps, PropTypes} from '@mui/material'
+import type {BoxProps} from '@mui/material'
+import {PropTypes} from '@mui/material'
 import {Box, Stack, styled} from '@mui/material'
 import {LoadingButton} from '@mui/lab'
 import NextLink from 'next/link'
@@ -48,7 +49,7 @@ export const CenteredContainer = styled(Stack)(({theme}) => ({
   margin: 'auto',
   minHeight: '100vh',
   justifyContent: 'center',
-  width: `100vw`,
+  width: '100vw',
   [theme.breakpoints.up('sm')]: {
     width: theme.spacing(72)
   }
@@ -59,7 +60,7 @@ export const TopCenteredContainer = styled(Stack)(({theme}) => ({
 }))
 
 type LinkPropsType = {disableUnderline?: boolean; color?: Color}
-export const Link = styled(NextLink)<LinkPropsType>(({theme, disableUnderline, color}) => ({
+export const Link = styled(NextLink)<LinkPropsType>(({disableUnderline, color}) => ({
   textDecoration: 'none',
   color: color ?? 'black',
   '&:hover': {

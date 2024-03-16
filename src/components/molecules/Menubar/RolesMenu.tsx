@@ -4,10 +4,9 @@ import {Menu, MenuItem} from '@mui/material'
 import {useSelector, useToast} from '../../../hooks'
 import '../../../utils/extenstions'
 import {AuthService} from '../../../services'
-import {router} from 'next/client'
 import {useRouter} from 'next/router'
 
-export const RolesMenu = () => {
+export const RolesMenu: React.FC = () => {
   const {user, project} = useSelector(state => state)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -34,7 +33,7 @@ export const RolesMenu = () => {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleOpen}
       >
-        {project.roles.find(role => role.roleId === user.roleId)!.name}
+        {project.roles.find(role => role.roleId === user.roleId)?.name ?? ''}
       </Button>
       {roles.isNotEmpty() && (
         <Menu open={open} onClose={handleClose} id={'basic-menu'} anchorEl={anchorEl}>

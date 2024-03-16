@@ -40,5 +40,5 @@ export const useStart = (): UseStartType => {
     })
   }, [])
 
-  return {projects, handleSelect,  addProject}
+  return {projects, handleSelect, addProject}
 }

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Box, Divider, IconButton, Menu, MenuItem, Stack, Typography, Drawer} from '@mui/material'
+import {Box, Divider, IconButton, MenuItem, Stack, Typography, Drawer} from '@mui/material'
 import {Close} from '@mui/icons-material'
 import {useSelector, useToast} from '../../../hooks'
 import {RolesMenu} from './RolesMenu'

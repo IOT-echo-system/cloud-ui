@@ -11,7 +11,7 @@ import type {
   ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
-import {User} from '../typing/user'
+import type {User} from '../typing/user'
 
 const authConfig = apiConfig.auth
 
