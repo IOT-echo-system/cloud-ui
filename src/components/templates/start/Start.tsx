@@ -9,9 +9,9 @@ import {useForm} from '../../../hooks'
 import '../../../utils/extenstions'
 
 export const Start: React.FC = () => {
-  const {accounts, handleSelect, addAccount} = useStart()
+  const {projects, handleSelect, addProject} = useStart()
   const {values, onChange, onClear, handleSubmit} = useForm({name: ''})
-  const {modalOpen, handleOpen, handleClose, onSubmit, loading} = createProject(onClear, addAccount)
+  const {modalOpen, handleOpen, handleClose, onSubmit, loading} = createProject(onClear, addProject)
 
   return (
     <TopCenteredContainer
@@ -33,8 +33,8 @@ export const Start: React.FC = () => {
               boxShadow: theme.shadows[2],
               borderTopLeftRadius: '4px',
               borderTopRightRadius: '4px',
-              borderBottomLeftRadius: accounts.isEmpty() ? '4px' : '0',
-              borderBottomRightRadius: accounts.isEmpty() ? '4px' : '0'
+              borderBottomLeftRadius: projects.isEmpty() ? '4px' : '0',
+              borderBottomRightRadius: projects.isEmpty() ? '4px' : '0'
             }}
           >
             <Typography variant={'h4'}>Projects</Typography>
@@ -43,15 +43,15 @@ export const Start: React.FC = () => {
             </Button>
           </Stack>
         }
-        accordions={accounts.map(account => ({
-          accordionId: account.accountId,
+        accordions={projects.map(account => ({
+          accordionId: account.projectId,
           summary: account.name,
           details: (
             <Stack>
-              <Typography variant={'body2'}>Project Id: {account.accountId}</Typography>
+              <Typography variant={'body2'}>Project Id: {account.projectId}</Typography>
               <Stack direction={'row'} flexWrap={'wrap'} spacing={2} m={2}>
                 {account.roles.map(role => (
-                  <Button variant={'outlined'} key={role.roleId} onClick={handleSelect(account.accountId, role.roleId)}>
+                  <Button variant={'outlined'} key={role.roleId} onClick={handleSelect(account.projectId, role.roleId)}>
                     {role.name}
                   </Button>
                 ))}

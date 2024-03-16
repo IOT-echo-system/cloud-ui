@@ -4,12 +4,14 @@ import {apiConfig} from '../config/apiConfig'
 import type {
   GenerateOTPResBody,
   LoginResBody,
+  LogoutResBody,
   ResetPasswordResBody,
   SignUpReqBody,
   SignUpResBody,
   ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
+import {User} from '../typing/user'
 
 const authConfig = apiConfig.auth
 
@@ -59,13 +61,27 @@ export const AuthService = {
     })
   },
 
-  async updateToken(accountId: string, roleId: string): Promise<LoginResBody> {
+  async updateToken(projectId: string, roleId: string): Promise<LoginResBody> {
     const response = await WebClient.post<LoginResBody>({
       baseUrl: authConfig.baseUrl,
       path: authConfig.updateToken,
-      body: {accountId, roleId}
+      body: {projectId, roleId}
     })
     setStorage(StorageKeys.AUTH, {token: response.token})
     return response
+  },
+
+  getUserDetails(): Promise<User> {
+    return WebClient.get<User>({
+      baseUrl: authConfig.baseUrl,
+      path: authConfig.userDetails
+    })
+  },
+
+  logout(): Promise<LogoutResBody> {
+    return WebClient.get<LogoutResBody>({
+      baseUrl: authConfig.baseUrl,
+      path: authConfig.logout
+    })
   }
 }

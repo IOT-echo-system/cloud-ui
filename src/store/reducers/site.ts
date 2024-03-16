@@ -12,7 +12,8 @@ export type SiteStateType = {
 }
 export const initSiteState: SiteStateType = {
   theme: 'light',
-  title: 'Robotutor Tech'
+  title: 'Robotutor Tech',
+  subtitle: 'Unlock your innovation spirit',
 }
 
 const siteReducer = (state: SiteStateType, action: TRootActions): SiteStateType => {

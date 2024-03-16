@@ -1,44 +1,44 @@
 import type {MouseEventHandler} from 'react'
 import {useEffect, useState} from 'react'
-import {AccountService} from '../../../services/accountService'
-import type {AccountWithRoles} from '../../../services/typing/account'
+import {ProjectService} from '../../../services/projectService'
+import type {ProjectWithRoles} from '../../../services/typing/project'
 import {useToast} from '../../../hooks'
 import {AuthService} from '../../../services'
 import {useRouter} from 'next/router'
 import {Config} from '../../../config'
 
 type UseStartType = {
-  accounts: AccountWithRoles[]
-  handleSelect: (accountId: string, roleId: string) => MouseEventHandler<HTMLButtonElement>
-  addAccount: (account: AccountWithRoles) => void
+  projects: ProjectWithRoles[]
+  handleSelect: (projectId: string, roleId: string) => MouseEventHandler<HTMLButtonElement>
+  addProject: (project: ProjectWithRoles) => void
 }
 
 export const useStart = (): UseStartType => {
-  const [accounts, setAccounts] = useState<AccountWithRoles[]>([])
+  const [projects, setProjects] = useState<ProjectWithRoles[]>([])
   const router = useRouter()
   const toast = useToast()
 
   useEffect(() => {
-    AccountService.getAccountsWithRoles().then(setAccounts).catch(toast.error)
+    ProjectService.getProjectsWithRoles().then(setProjects).catch(toast.error)
   }, [])
 
-  const handleSelect = (accountId: string, roleId: string): MouseEventHandler<HTMLButtonElement> => {
+  const handleSelect = (projectId: string, roleId: string): MouseEventHandler<HTMLButtonElement> => {
     return () => {
-      AuthService.updateToken(accountId, roleId)
+      AuthService.updateToken(projectId, roleId)
         .then(() => router.push(Config.HOME_PAGE_PATH))
         .catch(toast.error)
     }
   }
 
-  const addAccount = (account: AccountWithRoles) => {
-    setAccounts([account, ...accounts])
+  const addProject = (project: ProjectWithRoles) => {
+    setProjects([project, ...projects])
   }
 
   useEffect(() => {
-    AccountService.getAccountsWithRoles().then(res => {
-      setAccounts(res)
+    ProjectService.getProjectsWithRoles().then(res => {
+      setProjects(res)
     })
   }, [])
 
-  return {accounts, handleSelect, addAccount}
+  return {projects, handleSelect,  addProject}
 }

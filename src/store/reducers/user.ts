@@ -6,6 +6,9 @@ export const UserAction = {
 } as const
 
 export const initUserState: User = {
+  roleId: '',
+  registeredAt: new Date(),
+  userId: '',
   email: '',
   name: ''
 }

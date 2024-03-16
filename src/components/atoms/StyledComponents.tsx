@@ -1,7 +1,8 @@
-import type {BoxProps} from '@mui/material'
+import {BoxProps, PropTypes} from '@mui/material'
 import {Box, Stack, styled} from '@mui/material'
 import {LoadingButton} from '@mui/lab'
 import NextLink from 'next/link'
+import Color = PropTypes.Color
 
 export const Button = styled(LoadingButton)({textTransform: 'none'})
 
@@ -10,7 +11,7 @@ export const FormContainer = styled('form')(({theme}) => ({
   padding: theme.spacing(1),
   boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),
-  margin: theme.spacing(1),
+  margin: theme.spacing(1, 'auto'),
   justifyContent: 'center',
   width: `calc(100vw - ${theme.spacing(4)})`,
   '&>*': {
@@ -43,17 +44,25 @@ export const BoxContainer = styled(Box)<BoxProps>(({theme}) => ({
   }
 }))
 
-export const CenteredContainer = styled(Stack)(() => ({
-  margin: 'auto'
+export const CenteredContainer = styled(Stack)(({theme}) => ({
+  margin: 'auto',
+  minHeight: '100vh',
+  justifyContent: 'center',
+  width: `100vw`,
+  [theme.breakpoints.up('sm')]: {
+    width: theme.spacing(72)
+  }
 }))
 
 export const TopCenteredContainer = styled(Stack)(({theme}) => ({
   margin: theme.spacing(4, 'auto')
 }))
 
-export const Link = styled(NextLink)(() => ({
+type LinkPropsType = {disableUnderline?: boolean; color?: Color}
+export const Link = styled(NextLink)<LinkPropsType>(({theme, disableUnderline, color}) => ({
   textDecoration: 'none',
+  color: color ?? 'black',
   '&:hover': {
-    textDecoration: 'underline'
+    textDecoration: disableUnderline ? 'none' : 'underline'
   }
 }))

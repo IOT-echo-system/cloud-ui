@@ -1,11 +1,11 @@
 import {useState} from 'react'
-import {AccountService} from '../../../services/accountService'
-import type {AccountWithRoles} from '../../../services/typing/account'
+import {ProjectService} from '../../../services/projectService'
+import type {ProjectWithRoles} from '../../../services/typing/project'
 import {useToast} from '../../../hooks'
 
 type CreateProjectType = (
   onClear: () => void,
-  addAccount: (account: AccountWithRoles) => void
+  addAccount: (account: ProjectWithRoles) => void
 ) => {
   handleOpen: () => void
   handleClose: () => void
@@ -28,7 +28,7 @@ export const createProject: CreateProjectType = (onClear, addAccount) => {
 
   const onSubmit = (values: {name: string}) => {
     setLoading(true)
-    AccountService.createProject(values)
+    ProjectService.createProject(values)
       .then(account => {
         onClear()
         addAccount(account)

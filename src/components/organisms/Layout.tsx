@@ -1,12 +1,29 @@
 import type {PropsWithChildren} from 'react'
 import React from 'react'
-import {Stack, styled} from '@mui/material'
-
-const Container = styled(Stack)(({theme}) => ({
-  background: theme.palette.background.default,
-  minHeight: '100vh'
-}))
+import {Footer, Header} from '../molecules'
+import {Box, Stack} from '@mui/material'
+import {useRouter} from 'next/router'
 
 export const Layout: React.FC<PropsWithChildren> = ({children}) => {
-  return <Container>{children}</Container>
+  const router = useRouter()
+  const isUnAuthorizedPath = router.pathname.startsWith('/auth') || router.pathname === '/start'
+
+  return (
+    <Stack sx={{minHeight: '100vh', bgcolor: 'background.default'}}>
+      {!isUnAuthorizedPath && (
+        <header>
+          <Header />
+        </header>
+      )}
+      <main>{children}</main>
+      {!isUnAuthorizedPath && (
+        <>
+          <Box sx={{flexGrow: 1}} />
+          <footer>
+            <Footer />
+          </footer>
+        </>
+      )}
+    </Stack>
+  )
 }

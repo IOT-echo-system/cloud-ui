@@ -1,5 +1,5 @@
 export const apiConfig = {
-  baseUrl: 'http://localhost:3001/api',
+  baseUrl: '/api',
   auth: {
     baseUrl: '/auth',
     signUp: '/sign-up',
@@ -8,11 +8,14 @@ export const apiConfig = {
     generateOTP: '/generate-otp',
     verifyOTP: '/verify-otp',
     resetPassword: '/reset-password',
-    updateToken: '/update-token'
+    updateToken: '/update-token',
+    userDetails: '/user-details',
+    logout: '/logout'
   },
-  account: {
-    baseUrl: '/accounts',
-    accounts: '',
-    account: '/{accountId}/role/{roleId}'
+  project: {
+    baseUrl: '/projects',
+    projects: '',
+    project: '/{projectId}/role/{roleId}',
+    projectDetails: '/project-details'
   }
 } as const
