@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
-import {Stack} from '@mui/material'
+import {PageContainer} from '../components/atoms'
 
 const HomePage: NextPage = () => {
-  return <Stack>Home Page</Stack>
+  return <PageContainer pt={2}>Home Page</PageContainer>
 }
 export default HomePage

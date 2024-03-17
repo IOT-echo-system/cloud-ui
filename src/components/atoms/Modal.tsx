@@ -1,9 +1,8 @@
 import type {PropsWithChildren} from 'react'
 import React from 'react'
 import {Backdrop, Box, Fade, Modal as MuiModal, styled} from '@mui/material'
-import type {ResponsiveStyleValue} from '@mui/system'
 
-type ModalProps = {width?: number | ResponsiveStyleValue<string | number>; open: boolean; handleClose: () => void}
+type ModalProps = {open: boolean; handleClose: () => void}
 
 const ModalContainer = styled(Box)(({theme}) => ({
   position: 'absolute',
@@ -15,12 +14,17 @@ const ModalContainer = styled(Box)(({theme}) => ({
   borderRadius: '4px',
   boxShadow: theme.spacing(24),
   padding: theme.spacing(2),
+  width: `calc(90% - ${theme.spacing(4)})`,
   [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
+    width: `calc(80% - ${theme.spacing(8)})`
+  },
+  [theme.breakpoints.up('md')]: {
+    width: theme.spacing(67)
   }
 }))
 
-export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({open, handleClose, width, children}) => {
+export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({open, handleClose, children}) => {
   return (
     <MuiModal
       open={open}
@@ -30,7 +34,7 @@ export const Modal: React.FC<PropsWithChildren<ModalProps>> = ({open, handleClos
       slotProps={{backdrop: {timeout: 500}}}
     >
       <Fade in={open}>
-        <ModalContainer sx={{width: width}}>{children}</ModalContainer>
+        <ModalContainer>{children}</ModalContainer>
       </Fade>
     </MuiModal>
   )

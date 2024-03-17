@@ -60,11 +60,7 @@ export const Start: React.FC = () => {
           )
         }))}
       />
-      <Modal
-        open={modalOpen}
-        handleClose={handleClose}
-        width={{xs: 'calc(90% - 32px)', sm: 'calc(80% - 64px)', md: '536px'}}
-      >
+      <Modal open={modalOpen} handleClose={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2}>
             <Typography variant={'h5'}>Create Project</Typography>
