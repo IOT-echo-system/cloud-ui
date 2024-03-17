@@ -67,3 +67,14 @@ export const Link = styled(NextLink)<LinkPropsType>(({disableUnderline, color}) 
     textDecoration: disableUnderline ? 'none' : 'underline'
   }
 }))
+
+export const PageContainer = styled(Stack)(({theme}) => ({
+  margin: '0 auto',
+  width: '95%',
+  [theme.breakpoints.up('md')]: {
+    width: '90%'
+  },
+  [theme.breakpoints.up('lg')]: {
+    width: '80%'
+  }
+}))

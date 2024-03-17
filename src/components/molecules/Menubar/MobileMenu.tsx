@@ -28,7 +28,7 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
         <Divider />
         <Stack>
           {site.menus.map(({name, link}) => (
-            <Link href={link} key={link} disableUnderline>
+            <Link href={link} key={link} disableUnderline onClick={handleClose}>
               <MenuItem>{name}</MenuItem>
             </Link>
           ))}

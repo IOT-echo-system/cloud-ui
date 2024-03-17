@@ -5,9 +5,8 @@ import type {LinkProps} from 'next/link'
 import {useSelector} from '../../../hooks'
 import {Link} from '../../atoms'
 
-const StyledLink = styled(Link)<LinkProps & {active: boolean}>(({theme, active}) => ({
+const StyledLink = styled(Link)<LinkProps & {active: boolean}>(({theme}) => ({
   color: theme.palette.common.white,
-  fontWeight: active ? 'bold' : 'normal',
   '&:hover': {
     textDecoration: 'none'
   }
@@ -19,9 +18,9 @@ export const Menubar: React.FC = () => {
 
   return (
     <Stack direction={'row'} component={List}>
-      {site.menus.map(({name, link}) => (
+      {site.menus.map(({name, link, exact}) => (
         <ListItem key={link}>
-          <StyledLink href={link} active={router.pathname.startsWith(link)}>
+          <StyledLink href={link} active={exact ? router.pathname === link : router.pathname.startsWith(link)}>
             {name}
           </StyledLink>
         </ListItem>

@@ -6,10 +6,11 @@ import {RolesMenu} from './RolesMenu'
 import {Link} from '../../atoms'
 import {AuthService} from '../../../services'
 import {useRouter} from 'next/router'
+import {Config} from '../../../config'
 
 type MobileProfilePropsType = {open: boolean; handleClose: () => void}
 
-export const MobileProfile: React.FC<MobileProfilePropsType> = ({open, handleClose}) => {
+export const Profile: React.FC<MobileProfilePropsType> = ({open, handleClose}) => {
   const {user} = useSelector(state => state)
   const toast = useToast()
   const router = useRouter()
@@ -43,7 +44,7 @@ export const MobileProfile: React.FC<MobileProfilePropsType> = ({open, handleClo
         </Stack>
         <Divider />
         <Stack mt={1}>
-          <Link href={'/profile'} disableUnderline color={'inherit'}>
+          <Link href={Config.PROFILE_PAGE_PATH} disableUnderline color={'inherit'} onClick={handleClose}>
             <MenuItem>Profile</MenuItem>
           </Link>
           <MenuItem onClick={handleSignOut}>Sign out</MenuItem>

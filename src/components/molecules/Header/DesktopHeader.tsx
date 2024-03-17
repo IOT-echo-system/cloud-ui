@@ -2,9 +2,10 @@ import {AppBar, Box, Stack, Toolbar, Typography} from '@mui/material'
 import React, {useState} from 'react'
 import {useMedia, useSelector} from '../../../hooks'
 import {Menubar} from '../Menubar/Menubar'
-import {Button} from '../../atoms'
+import {Button, Link, PageContainer} from '../../atoms'
 import {AccountCircle} from '@mui/icons-material'
-import {MobileProfile} from '../Menubar/MobileProfile'
+import {Profile} from '../Menubar/Profile'
+import {Config} from '../../../config'
 
 export const DesktopHeader: React.FC = () => {
   const {site, user, project} = useSelector(state => state)
@@ -13,41 +14,41 @@ export const DesktopHeader: React.FC = () => {
 
   return (
     <Stack justifyContent={'center'}>
-      <Stack direction={'row'} alignItems={'center'} spacing={2} ml={3} justifyContent={'space-evenly'}>
-        <Typography variant={'h6'} component={'div'}>
-          {project.name}
-        </Typography>
-        <Typography variant={'body2'}>Project Id: {project.projectId}</Typography>
-      </Stack>
+      <PageContainer direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+        <Stack direction={'row'} alignItems={'center'} spacing={2}>
+          <Typography variant={'h6'} component={'div'}>
+            {project.name}
+          </Typography>
+          <Typography variant={'body2'}>Project Id: {project.projectId}</Typography>
+        </Stack>
+        <Button
+          onClick={() => {
+            setOpen(true)
+          }}
+          startIcon={<AccountCircle />}
+        >
+          {user.name}
+        </Button>
+      </PageContainer>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{width: {md: '90%', lg: '80%'}, margin: 'auto'}}>
           <Stack direction={'row'} alignItems={'center'}>
             <Typography variant={media.lg ? 'h4' : 'h5'} noWrap component="div">
-              {site.title}
+              <Link href={Config.HOME_PAGE_PATH} disableUnderline color={'inherit'}>
+                {site.title}
+              </Link>
             </Typography>
           </Stack>
           <Box sx={{flexGrow: 1}} />
-
-          <Box sx={{flexGrow: 1}} />
           <Menubar />
-          <Button
-            onClick={() => {
-              setOpen(true)
-            }}
-            variant={'contained'}
-            color={'secondary'}
-            startIcon={<AccountCircle />}
-          >
-            {user.name}
-          </Button>
-          <MobileProfile
-            open={open}
-            handleClose={() => {
-              setOpen(false)
-            }}
-          />
         </Toolbar>
       </AppBar>
+      <Profile
+        open={open}
+        handleClose={() => {
+          setOpen(false)
+        }}
+      />
     </Stack>
   )
 }

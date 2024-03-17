@@ -1,16 +1,13 @@
-import {Stack, Typography} from '@mui/material'
+import {Stack} from '@mui/material'
 import React from 'react'
-import {styled} from '@mui/material/styles'
-
-const FooterContainer = styled(Stack)(({theme}) => ({
-  background: theme.palette.background.default,
-  padding: theme.spacing(2)
-}))
+import {CopyRights, PageContainer} from '../atoms'
 
 export const Footer: React.FC = () => {
   return (
-    <FooterContainer spacing={2}>
-      <Typography variant={'body1'}>Footer</Typography>
-    </FooterContainer>
+    <Stack sx={{bgcolor: 'background.default', padding: {xs: '16px 0', md: '24px 0', lg: '32px 0'}}}>
+      <PageContainer>
+        <CopyRights />
+      </PageContainer>
+    </Stack>
   )
 }

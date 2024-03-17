@@ -9,13 +9,16 @@ export type SiteStateType = {
   theme: 'light' | 'dark'
   title: string
   subtitle?: string
-  menus: Array<{link: string; name: string}>
+  menus: Array<{link: string; name: string; exact?: boolean}>
 }
 export const initSiteState: SiteStateType = {
   theme: 'light',
   title: 'Robotutor Tech',
   subtitle: 'Unlock your innovation spirit',
-  menus: [{name: 'Dashboard', link: '/'}]
+  menus: [
+    {name: 'Dashboard', link: '/', exact: true},
+    {name: 'Board', link: '/boards'}
+  ]
 }
 
 const siteReducer = (state: SiteStateType, action: TRootActions): SiteStateType => {
