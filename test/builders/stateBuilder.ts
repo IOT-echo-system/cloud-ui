@@ -12,7 +12,7 @@ export const userBuilder = (props: Partial<User> = {}): User => {
 }
 
 export const projectBuilder = (props: Partial<Project> = {}): Project => {
-  return {name: '', projectId: '', roles: [], ...props}
+  return {name: '', projectId: '', roles: [], policies: [], ...props}
 }
 
 export const globalStateBuilder = (props: Partial<TRootState> = {}): TRootState => {

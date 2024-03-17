@@ -1,3 +1,4 @@
-export type Roles = {roleId: string; name: string}
-export type ProjectWithRoles = {name: string; projectId: string; roles: Roles[]}
+import type {Role} from '../../typing/project'
+
+export type ProjectWithRoles = {name: string; projectId: string; roles: Role[]}
 export type ProjectsWithRoleResponse = ProjectWithRoles[]

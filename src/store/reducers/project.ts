@@ -6,6 +6,7 @@ export const ProjectAction = {
 } as const
 
 export const initProjectState: Project = {
+  policies: [],
   roles: [],
   name: '',
   projectId: ''

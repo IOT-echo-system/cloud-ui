@@ -1,7 +1,9 @@
-import type {Roles} from '../services/typing/project'
+export type Policy = {name: string; policyId: string}
+export type Role = {roleId: string; name: string}
 
 export interface Project {
   projectId: string
   name: string
-  roles: Roles[]
+  roles: Role[]
+  policies: Policy[]
 }

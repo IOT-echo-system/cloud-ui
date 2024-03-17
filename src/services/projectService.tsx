@@ -1,6 +1,7 @@
 import {apiConfig} from '../config/apiConfig'
 import type {ProjectsWithRoleResponse, ProjectWithRoles} from './typing/project'
 import WebClient from './webClient'
+import type {Project} from '../typing/project'
 
 const projectConfig = apiConfig.project
 
@@ -12,14 +13,6 @@ export const ProjectService = {
     })
   },
 
-  getAccount(projectId: string, roleId: string) {
-    return WebClient.get<ProjectsWithRoleResponse>({
-      baseUrl: projectConfig.baseUrl,
-      path: projectConfig.projects,
-      uriVariables: {projectId, roleId}
-    })
-  },
-
   createProject(values: {name: string}): Promise<ProjectWithRoles> {
     return WebClient.post<ProjectWithRoles>({
       baseUrl: projectConfig.baseUrl,
@@ -28,8 +21,8 @@ export const ProjectService = {
     })
   },
 
-  getProjectDetails() {
-    return WebClient.get<ProjectWithRoles>({
+  getProjectDetails(): Promise<Project> {
+    return WebClient.get<Project>({
       baseUrl: projectConfig.baseUrl,
       path: projectConfig.projectDetails
     })
