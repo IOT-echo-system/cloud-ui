@@ -1,18 +1,24 @@
-import {AppBar, Box, Stack, styled, Toolbar, Typography} from '@mui/material'
-import React from 'react'
+import {AppBar, Box, Stack, Toolbar, Typography} from '@mui/material'
+import React, {useState} from 'react'
 import {useMedia, useSelector} from '../../../hooks'
-
-export const HeaderContainer = styled(Stack)(({theme}) => ({
-  background: theme.palette.primary.main,
-  minHeight: theme.spacing(8)
-}))
+import {Menubar} from '../Menubar/Menubar'
+import {Button} from '../../atoms'
+import {AccountCircle} from '@mui/icons-material'
+import {MobileProfile} from '../Menubar/MobileProfile'
 
 export const DesktopHeader: React.FC = () => {
-  const site = useSelector(state => state.site)
+  const {site, user, project} = useSelector(state => state)
+  const [open, setOpen] = useState(false)
   const media = useMedia()
 
   return (
-    <HeaderContainer justifyContent={'center'}>
+    <Stack justifyContent={'center'}>
+      <Stack direction={'row'} alignItems={'center'} spacing={2} ml={3} justifyContent={'space-evenly'}>
+        <Typography variant={'h6'} component={'div'}>
+          {project.name}
+        </Typography>
+        <Typography variant={'body2'}>Project Id: {project.projectId}</Typography>
+      </Stack>
       <AppBar position="static">
         <Toolbar>
           <Stack direction={'row'} alignItems={'center'}>
@@ -21,9 +27,27 @@ export const DesktopHeader: React.FC = () => {
             </Typography>
           </Stack>
           <Box sx={{flexGrow: 1}} />
-          {/*<Menubar/>*/}
+
+          <Box sx={{flexGrow: 1}} />
+          <Menubar />
+          <Button
+            onClick={() => {
+              setOpen(true)
+            }}
+            variant={'contained'}
+            color={'secondary'}
+            startIcon={<AccountCircle />}
+          >
+            {user.name}
+          </Button>
+          <MobileProfile
+            open={open}
+            handleClose={() => {
+              setOpen(false)
+            }}
+          />
         </Toolbar>
       </AppBar>
-    </HeaderContainer>
+    </Stack>
   )
 }

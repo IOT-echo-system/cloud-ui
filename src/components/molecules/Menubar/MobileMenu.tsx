@@ -1,12 +1,13 @@
 import * as React from 'react'
-import {Box, Divider, Drawer, IconButton, Stack, Typography} from '@mui/material'
+import {Box, Divider, Drawer, IconButton, MenuItem, Stack, Typography} from '@mui/material'
 import {Close} from '@mui/icons-material'
 import {useSelector} from '../../../hooks'
+import {Link} from '../../atoms'
 
 type MobileMenuPropsType = {open: boolean; handleClose: () => void}
 
 export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) => {
-  const {project} = useSelector(state => state)
+  const {project, site} = useSelector(state => state)
   return (
     <Drawer open={open} onClose={handleClose}>
       <Box sx={{width: 250}} role="presentation">
@@ -16,7 +17,7 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
           </IconButton>
         </Stack>
         <Divider />
-        <Stack m={1} flexWrap={'wrap'}>
+        <Stack m={2} flexWrap={'wrap'}>
           <Typography variant={'h5'} component={'div'}>
             {project.name}
           </Typography>
@@ -25,6 +26,13 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
           </Typography>
         </Stack>
         <Divider />
+        <Stack>
+          {site.menus.map(({name, link}) => (
+            <Link href={link} key={link} disableUnderline>
+              <MenuItem>{name}</MenuItem>
+            </Link>
+          ))}
+        </Stack>
       </Box>
     </Drawer>
   )

@@ -1,8 +1,9 @@
 import React from 'react'
 import {List, ListItem, Stack, styled} from '@mui/material'
-import {Link} from '../atoms'
 import {useRouter} from 'next/router'
 import type {LinkProps} from 'next/link'
+import {useSelector} from '../../../hooks'
+import {Link} from '../../atoms'
 
 const StyledLink = styled(Link)<LinkProps & {active: boolean}>(({theme, active}) => ({
   color: theme.palette.common.white,
@@ -12,17 +13,13 @@ const StyledLink = styled(Link)<LinkProps & {active: boolean}>(({theme, active})
   }
 }))
 
-const menuItems = [
-  {name: 'Home', link: '/'},
-  {name: 'Dashboard', link: '/dashboard'}
-]
-
 export const Menubar: React.FC = () => {
+  const {site} = useSelector(state => state)
   const router = useRouter()
 
   return (
     <Stack direction={'row'} component={List}>
-      {menuItems.map(({name, link}) => (
+      {site.menus.map(({name, link}) => (
         <ListItem key={link}>
           <StyledLink href={link} active={router.pathname.startsWith(link)}>
             {name}

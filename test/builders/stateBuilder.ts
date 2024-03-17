@@ -4,7 +4,7 @@ import type {TRootState} from '../../src/typing/store'
 import type {Project} from '../../src/typing/project'
 
 export const siteBuilder = (props: Partial<SiteStateType> = {}): SiteStateType => {
-  return {theme: 'light', title: '', ...props}
+  return {theme: 'light', title: '', menus: [], ...props}
 }
 
 export const userBuilder = (props: Partial<User> = {}): User => {
