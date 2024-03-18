@@ -59,12 +59,12 @@ export const TopCenteredContainer = styled(Stack)(({theme}) => ({
   margin: theme.spacing(4, 'auto')
 }))
 
-type LinkPropsType = {disableUnderline?: boolean; color?: Color}
-export const Link = styled(NextLink)<LinkPropsType>(({disableUnderline, color}) => ({
+type LinkPropsType = {disableunderline?: 'true' | 'false'; color?: Color}
+export const Link = styled(NextLink)<LinkPropsType>(({disableunderline, color}) => ({
   textDecoration: 'none',
   color: color ?? 'black',
   '&:hover': {
-    textDecoration: disableUnderline ? 'none' : 'underline'
+    textDecoration: disableunderline === 'true' ? 'none' : 'underline'
   }
 }))
 

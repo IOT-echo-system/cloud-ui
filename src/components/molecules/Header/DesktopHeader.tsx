@@ -34,7 +34,7 @@ export const DesktopHeader: React.FC = () => {
         <Toolbar sx={{width: {md: '90%', lg: '80%'}, margin: 'auto'}}>
           <Stack direction={'row'} alignItems={'center'}>
             <Typography variant={media.lg ? 'h4' : 'h5'} noWrap component="div">
-              <Link href={Config.HOME_PAGE_PATH} disableUnderline color={'inherit'}>
+              <Link href={Config.HOME_PAGE_PATH} disableunderline={'true'} color={'inherit'}>
                 {site.title}
               </Link>
             </Typography>

@@ -44,7 +44,7 @@ export const Profile: React.FC<MobileProfilePropsType> = ({open, handleClose}) =
         </Stack>
         <Divider />
         <Stack mt={1}>
-          <Link href={Config.PROFILE_PAGE_PATH} disableUnderline color={'inherit'} onClick={handleClose}>
+          <Link href={Config.PROFILE_PAGE_PATH} disableunderline={'true'} color={'inherit'} onClick={handleClose}>
             <MenuItem>Profile</MenuItem>
           </Link>
           <MenuItem onClick={handleSignOut}>Sign out</MenuItem>

@@ -31,21 +31,19 @@ export const ValidatedProfile: React.FC<PropsWithChildren> = ({children}) => {
   }, [router.pathname])
 
   useEffect(() => {
-    if (!router.pathname.startsWith('/auth')) {
-      AuthService.getUserDetails()
-        .then(userDetails => {
-          dispatch(setUser(userDetails))
-        })
-        .catch(() => ({}))
-        .finally(() => {
-          setLoading(false)
-        })
-      ProjectService.getProjectDetails()
-        .then(projectDetails => {
-          dispatch(setProject(projectDetails))
-        })
-        .catch(() => ({}))
+    const fetchDetails = async () => {
+      if (!router.pathname.startsWith('/auth')) {
+        const [userDetails, projectDetails] = await Promise.all([
+          AuthService.getUserDetails(),
+          ProjectService.getProjectDetails()
+        ])
+        dispatch(setUser(userDetails))
+        dispatch(setProject(projectDetails))
+      }
     }
+    fetchDetails().finally(() => {
+      setLoading(false)
+    })
   }, [router.pathname])
 
   if (loading) {
