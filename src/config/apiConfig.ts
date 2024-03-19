@@ -17,5 +17,9 @@ export const apiConfig = {
     projects: '',
     project: '/{projectId}/role/{roleId}',
     projectDetails: '/project-details'
+  },
+  board: {
+    baseUrl: '/boards',
+    boards: ''
   }
 } as const

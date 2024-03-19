@@ -1,6 +1,6 @@
 import {useState} from 'react'
-import {ProjectService} from '../../../services/projectService'
 import {useToast} from '../../../hooks'
+import {BoardService} from '../../../services/boardService'
 
 type CreateBoardType = (onClear: () => void) => {
   handleOpen: () => void
@@ -24,7 +24,7 @@ export const createBoard: CreateBoardType = onClear => {
 
   const onSubmit = (values: {name: string}) => {
     setLoading(true)
-    ProjectService.createProject(values)
+    BoardService.createBoard(values)
       .then(() => {
         onClear()
         // addAccount(account)
