@@ -5,9 +5,13 @@ import {Config} from '../../config'
 import {Loader} from '../atoms'
 import {PolicyUtils} from '../../utils/policyUtils'
 
-type PageAllowedPropsType = {policyId: string; Component: React.FC}
+type PageAllowedPropsType<T extends Record<string, unknown>> = {
+  policyId: string
+  Component: React.ComponentType<T>
+} & T
 
-export const PageAllowed: React.FC<PageAllowedPropsType> = ({policyId, Component}) => {
+export const PageAllowed = <T extends Record<string, unknown>>(props: PageAllowedPropsType<T>): React.JSX.Element => {
+  const {policyId, Component} = props
   const {policies} = useSelector(state => state.project)
   const [validated, setValidated] = useState(false)
   const router = useRouter()
@@ -24,5 +28,5 @@ export const PageAllowed: React.FC<PageAllowedPropsType> = ({policyId, Component
     return <Loader loadingText={'Loading...'} />
   }
 
-  return <Component />
+  return <Component {...props} />
 }

@@ -1,6 +1,7 @@
 import {useState} from 'react'
-import {useToast} from '../../../hooks'
+import {useDispatch, useSelector, useToast} from '../../../hooks'
 import {BoardService} from '../../../services/boardService'
+import {setBoards} from '../../../store/actions/boards'
 
 type CreateBoardType = (onClear: () => void) => {
   handleOpen: () => void
@@ -14,6 +15,8 @@ export const createBoard: CreateBoardType = onClear => {
   const [modalOpen, setModalOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const toast = useToast()
+  const {boards} = useSelector(state => state)
+  const dispatch = useDispatch()
 
   const handleClose = () => {
     setModalOpen(false)
@@ -25,9 +28,9 @@ export const createBoard: CreateBoardType = onClear => {
   const onSubmit = (values: {name: string}) => {
     setLoading(true)
     BoardService.createBoard(values)
-      .then(() => {
+      .then(board => {
         onClear()
-        // addAccount(account)
+        dispatch(setBoards([board, ...boards]))
         handleClose()
       })
       .catch(toast.error)

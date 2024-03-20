@@ -5,6 +5,7 @@ import {Add} from '@mui/icons-material'
 import {createBoard} from './createBoard'
 import {useForm, useSelector} from '../../../hooks'
 import {PolicyUtils} from '../../../utils/policyUtils'
+import {BoardsWithDevices} from '../../organisms'
 
 export const Boards: React.FC = () => {
   const project = useSelector(state => state.project)
@@ -20,6 +21,8 @@ export const Boards: React.FC = () => {
           </Button>
         )}
       </Stack>
+
+      <BoardsWithDevices />
 
       <Modal open={modalOpen} handleClose={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -3,11 +3,19 @@ import React, {createRef} from 'react'
 import type {SnackbarKey} from 'notistack'
 import {SnackbarProvider} from 'notistack'
 import {IconButton} from '@mui/material'
-import {Close} from '@mui/icons-material'
+import {Cancel} from '@mui/icons-material'
 import {styled} from '@mui/material/styles'
 
+// @ts-expect-error using !important property here to override the default one
 const Toast = styled(SnackbarProvider)(({theme}) => ({
-  width: theme.spacing(48)
+  width: theme.spacing(48),
+  maxWidth: '85vw',
+  float: 'right',
+  flexWrap: 'nowrap !important',
+  alignItems: 'start !important',
+  '& > * > svg': {
+    display: 'none !important'
+  }
 }))
 
 export const ToastWrapper: React.FC<PropsWithChildren> = ({children}) => {
@@ -25,7 +33,7 @@ export const ToastWrapper: React.FC<PropsWithChildren> = ({children}) => {
       aria-multiline={true}
       action={key => (
         <IconButton onClick={onClickDismiss(key)} color={'inherit'}>
-          <Close />
+          <Cancel />
         </IconButton>
       )}
     >

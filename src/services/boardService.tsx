@@ -1,6 +1,7 @@
 import {apiConfig} from '../config/apiConfig'
 import WebClient from './webClient'
 import type {BoardResponse} from './typing/board'
+import type {Board} from '../typing/board'
 
 const boardConfig = apiConfig.board
 
@@ -11,5 +12,9 @@ export const BoardService = {
       path: boardConfig.boards,
       body: values
     })
+  },
+
+  getBoards(): Promise<Board[]> {
+    return WebClient.get<Board[]>({baseUrl: boardConfig.baseUrl, path: boardConfig.boards})
   }
 }
