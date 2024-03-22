@@ -1,15 +1,15 @@
 import {apiConfig} from '../config/apiConfig'
-import type {ProjectsWithRoleResponse, ProjectWithRoles} from './typing/project'
+import type {ProjectWithRoles} from './typing/project'
 import WebClient from './webClient'
 import type {Project} from '../typing/project'
 
 const projectConfig = apiConfig.project
 
 export const ProjectService = {
-  getProjectsWithRoles(): Promise<ProjectsWithRoleResponse> {
-    return WebClient.get<ProjectsWithRoleResponse>({
+  getProjectsWithRoles(): Promise<ProjectWithRoles[]> {
+    return WebClient.get<ProjectWithRoles[]>({
       baseUrl: projectConfig.baseUrl,
-      path: projectConfig.projects
+      path: projectConfig.projectsWithRoles
     })
   },
 

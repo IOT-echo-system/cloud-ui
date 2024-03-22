@@ -9,7 +9,7 @@ export const Layout: React.FC<PropsWithChildren> = ({children}) => {
   const isUnAuthorizedPath = router.pathname.startsWith('/auth') || router.pathname === '/start'
 
   return (
-    <Stack sx={{minHeight: '100vh'}}>
+    <Stack sx={{minHeight: '100vh', bgcolor: 'background.default'}}>
       {!isUnAuthorizedPath && (
         <header>
           <Header />

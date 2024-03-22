@@ -6,18 +6,18 @@ import {Config} from '../../config'
 
 export type BoardWithDevicesPropsType = {board: Board}
 
-export const BoardWithDevices: React.FC<BoardWithDevicesPropsType> = ({board}) => {
+export const BoardWithStatus: React.FC<BoardWithDevicesPropsType> = ({board}) => {
   return (
     <Box
       boxShadow={2}
       sx={{
-        border: '1px solid',
-        borderColor: 'background.default',
+        bgcolor: 'background.paper',
+        borderRadius: 1,
         padding: {xs: 2, sm: 3, md: 4},
         marginTop: {xs: 2, sm: 3, md: 4},
         marginLeft: {xs: 1, sm: 1.5, md: 2},
         marginRight: {xs: 1, sm: 1.5, md: 2},
-        width: {xs: '100%', md: 'calc(50% - 98px)', lg: 'calc(33% - 96px)'}
+        width: {xs: '100%', md: 'calc(50% - 96px)', lg: 'calc(33% - 96px)', xl: 'calc(25% - 96px)'}
       }}
       component={Link}
       href={`${Config.BOARDS_PAGE_PATH}/${board.boardId}`}

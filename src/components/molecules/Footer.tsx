@@ -4,7 +4,7 @@ import {CopyRights, PageContainer} from '../atoms'
 
 export const Footer: React.FC = () => {
   return (
-    <Stack sx={{bgcolor: 'background.default', padding: {xs: '16px 0', md: '24px 0', lg: '32px 0'}}}>
+    <Stack sx={{padding: {xs: '16px 0', md: '24px 0', lg: '32px 0'}}}>
       <PageContainer>
         <CopyRights />
       </PageContainer>

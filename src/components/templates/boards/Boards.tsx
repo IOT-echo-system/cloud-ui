@@ -5,10 +5,10 @@ import {Add} from '@mui/icons-material'
 import {createBoard} from './createBoard'
 import {useForm, useSelector} from '../../../hooks'
 import {PolicyUtils} from '../../../utils/policyUtils'
-import {BoardsWithDevices} from '../../organisms'
+import {BoardWithStatus} from '../../molecules/BoardWithStatus'
 
 export const Boards: React.FC = () => {
-  const project = useSelector(state => state.project)
+  const {project, boards} = useSelector(state => state)
   const {values, onChange, onClear, handleSubmit} = useForm({name: ''})
   const {modalOpen, handleOpen, handleClose, loading, onSubmit} = createBoard(onClear)
   return (
@@ -22,7 +22,11 @@ export const Boards: React.FC = () => {
         )}
       </Stack>
 
-      <BoardsWithDevices />
+      <Stack direction={'row'} flexWrap={'wrap'}>
+        {boards.map(board => (
+          <BoardWithStatus key={board.boardId} board={board} />
+        ))}
+      </Stack>
 
       <Modal open={modalOpen} handleClose={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -34,7 +38,7 @@ export const Boards: React.FC = () => {
                 onChange('name', event.target.value)
               }}
               required
-              label={'Board name'}
+              label={'BoardTemplate name'}
             />
             <Button type={'submit'} variant={'contained'} size={'large'} loading={loading}>
               Create
