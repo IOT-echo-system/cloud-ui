@@ -1,10 +1,10 @@
 import type {NextPage} from 'next'
 import {PageAllowed} from '../../components/templates/PageAllowed'
 import {PolicyUtils} from '../../utils/policyUtils'
-import {BoardTemplate} from '../../components/templates/boards/BoardTemplate'
 import {useRouter} from 'next/router'
 import {useSelector} from '../../hooks'
 import {Loader} from '../../components/atoms'
+import {Board} from '../../components/templates/boards/Board'
 
 const BoardPage: NextPage = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ const BoardPage: NextPage = () => {
     return <Loader loadingText={'Loading...'} />
   }
 
-  return <PageAllowed Component={BoardTemplate} policyId={PolicyUtils.BOARD_GET} board={board} />
+  return <PageAllowed Component={Board} policyId={PolicyUtils.BOARD_GET} board={board} />
 }
 
 export default BoardPage

@@ -4,6 +4,8 @@ import React from 'react'
 import {PolicyUtils} from '../../utils/policyUtils'
 import {useSelector} from '../../hooks'
 import {Edit} from '@mui/icons-material'
+import {ModalForms} from './ModalForms/ModalForms'
+import {EditBoardName} from './ModalForms/formFunctions'
 
 type BoardDetailsPropsType = {board: Board}
 export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
@@ -20,9 +22,11 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
             <Typography>Board Id: {board.boardId}</Typography>
           </Stack>
           {PolicyUtils.isValid(policies, PolicyUtils.BOARD_UPDATE) && (
-            <IconButton color={'primary'}>
-              <Edit />
-            </IconButton>
+            <ModalForms getFormDetails={EditBoardName} board={board}>
+              <IconButton color={'primary'}>
+                <Edit />
+              </IconButton>
+            </ModalForms>
           )}
         </Stack>
         <Chip

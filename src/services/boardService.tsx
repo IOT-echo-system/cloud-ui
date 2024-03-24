@@ -16,5 +16,14 @@ export const BoardService = {
 
   getBoards(): Promise<Board[]> {
     return WebClient.get<Board[]>({baseUrl: boardConfig.baseUrl, path: boardConfig.boards})
+  },
+
+  updateBoardName(values: {name: string}, boardId: string) {
+    return WebClient.put<Board>({
+      baseUrl: boardConfig.baseUrl,
+      path: boardConfig.updateBoardName,
+      body: values,
+      uriVariables: {boardId}
+    })
   }
 }
