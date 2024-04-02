@@ -1,5 +1,5 @@
 export const apiConfig = {
-  baseUrl: 'http://localhost:3001/api',
+  baseUrl: '/api',
   auth: {
     baseUrl: '/auth',
     signUp: '/sign-up',
