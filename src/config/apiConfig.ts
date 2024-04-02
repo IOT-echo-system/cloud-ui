@@ -1,5 +1,5 @@
 export const apiConfig = {
-  baseUrl: '/api',
+  baseUrl: 'http://localhost:3001/api',
   auth: {
     baseUrl: '/auth',
     signUp: '/sign-up',
@@ -23,5 +23,9 @@ export const apiConfig = {
     baseUrl: '/boards',
     boards: '',
     updateBoardName: '/{boardId}/name'
+  },
+  widget: {
+    baseUrl: '/widgets',
+    widgets: ''
   }
 } as const

@@ -1,4 +1,4 @@
-import type {BoxProps} from '@mui/material'
+import type {BoxProps, StackProps} from '@mui/material'
 import {PropTypes} from '@mui/material'
 import {Box, Stack, styled} from '@mui/material'
 import {LoadingButton} from '@mui/lab'
@@ -42,6 +42,24 @@ export const BoxContainer = styled(Box)<BoxProps>(({theme}) => ({
   },
   '&>hr': {
     margin: 0
+  }
+}))
+
+export const WidgetsContainer = styled(Stack)<StackProps>(({theme}) => ({
+  gap: theme.spacing(2),
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginTop: theme.spacing(2)
+}))
+
+export const WidgetContainer = styled(Box)<BoxProps>(({theme}) => ({
+  background: theme.palette.background.paper,
+  boxShadow: theme.shadows[1],
+  borderRadius: theme.spacing(1),
+  justifyContent: 'center',
+  padding: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(4)
   }
 }))
 

@@ -6,6 +6,8 @@ import {useSelector} from '../../hooks'
 import {Edit} from '@mui/icons-material'
 import {ModalForms} from './ModalForms/ModalForms'
 import {EditBoardName} from './ModalForms/formFunctions'
+import {widgetsMap} from './widgets'
+import {WidgetsContainer} from '../atoms'
 
 type BoardDetailsPropsType = {board: Board}
 export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
@@ -35,6 +37,12 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
           sx={{padding: {xs: '0', md: '8px 32px'}}}
         />
       </Stack>
+      <WidgetsContainer>
+        {board.widgets.map(widget => {
+          const Component = widgetsMap[widget.widgetType]
+          return <Component widget={widget} key={widget.widgetId} />
+        })}
+      </WidgetsContainer>
     </Stack>
   )
 }

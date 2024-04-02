@@ -17,7 +17,8 @@ export const initSiteState: SiteStateType = {
   subtitle: 'Unlock your innovation spirit',
   menus: [
     {name: 'Dashboard', link: '/', exact: true},
-    {name: 'Board', link: '/boards'}
+    {name: 'Board', link: '/boards'},
+    {name: 'Project', link: '/projects'}
   ]
 }
 
