@@ -10,6 +10,7 @@ type UseInvoiceSeed = (widget: Widget) => {
   loadingSeed: boolean
   seed: InvoiceSeed[]
   addSeed: (invoiceSeed: InvoiceSeed) => void
+  updateSeed: (seedCode: string, updatedInvoiceSeed: InvoiceSeed) => void
 }
 
 export const useInvoiceSeed: UseInvoiceSeed = widget => {
@@ -37,5 +38,9 @@ export const useInvoiceSeed: UseInvoiceSeed = widget => {
     setSeed(seed.concat(seedItem))
   }
 
-  return {open, handleToggle, loadingSeed, seed, addSeed}
+  const updateSeed = (seedCode: string, updatedSeedItem: InvoiceSeed) => {
+    setSeed(seed.map(seedItem => (seedItem.code === seedCode ? updatedSeedItem : seedItem)))
+  }
+
+  return {open, handleToggle, loadingSeed, seed, addSeed, updateSeed}
 }

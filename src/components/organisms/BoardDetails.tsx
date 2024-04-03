@@ -1,18 +1,16 @@
-import {Chip, IconButton, Stack, Typography} from '@mui/material'
+import {Chip, Fab, IconButton, Stack, Typography} from '@mui/material'
 import type {Board} from '../../typing/board'
 import React from 'react'
 import {PolicyUtils} from '../../utils/policyUtils'
-import {useSelector} from '../../hooks'
-import {Edit} from '@mui/icons-material'
+import {Edit, Key} from '@mui/icons-material'
 import {ModalForms} from './ModalForms/ModalForms'
 import {EditBoardName} from './ModalForms/formFunctions'
 import {widgetsMap} from './widgets'
-import {WidgetsContainer} from '../atoms'
+import {PolicyAllowed, WidgetsContainer} from '../atoms'
+import {BoardSecretKey, CustomModal} from '../molecules'
 
 type BoardDetailsPropsType = {board: Board}
 export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
-  const {policies} = useSelector(state => state.project)
-
   return (
     <Stack>
       <Stack direction={{xs: 'column', sm: 'row'}} alignItems={'start'} justifyContent={'space-between'} spacing={2}>
@@ -23,19 +21,32 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
             </Typography>
             <Typography>Board Id: {board.boardId}</Typography>
           </Stack>
-          {PolicyUtils.isValid(policies, PolicyUtils.BOARD_UPDATE) && (
+          <PolicyAllowed policyId={PolicyUtils.BOARD_UPDATE}>
             <ModalForms getFormDetails={EditBoardName} board={board}>
               <IconButton color={'primary'}>
                 <Edit />
               </IconButton>
             </ModalForms>
-          )}
+          </PolicyAllowed>
         </Stack>
-        <Chip
-          label={board.status}
-          color={board.status === 'HEALTHY' ? 'success' : 'error'}
-          sx={{padding: {xs: '0', md: '8px 32px'}}}
-        />
+        <Stack direction={{xs: 'row-reverse', sm: 'row'}} spacing={2} alignItems={'center'}>
+          <PolicyAllowed policyId={PolicyUtils.BOARD_UPDATE}>
+            <CustomModal
+              ClickableComponent={
+                <Fab color={'primary'} size={'small'}>
+                  <Key />
+                </Fab>
+              }
+            >
+              <BoardSecretKey board={board} />
+            </CustomModal>
+          </PolicyAllowed>
+          <Chip
+            label={board.status}
+            color={board.status === 'HEALTHY' ? 'success' : 'error'}
+            sx={{padding: {xs: '0', md: '8px 32px'}}}
+          />
+        </Stack>
       </Stack>
       <WidgetsContainer>
         {board.widgets.map(widget => {

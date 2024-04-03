@@ -34,7 +34,7 @@ export const Invoice: React.FC<InvoicePropsType> = ({widget}) => {
       ) : (
         <Typography>{JSON.stringify(widget.cart)}</Typography>
       )}
-      <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_UPDATE}>
+      <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_UPDATE} sx={{display: {xs: 'none', sm: 'unset'}}}>
         <InvoiceSeed widget={widget} />
       </PolicyAllowed>
     </WidgetContainer>

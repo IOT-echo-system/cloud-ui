@@ -1,6 +1,7 @@
 import {apiConfig} from '../config/apiConfig'
 import WebClient from './webClient'
 import type {Board} from '../typing/board'
+import type {BoardSecretKeyResponse} from './typing/board'
 
 const boardConfig = apiConfig.board
 
@@ -22,6 +23,22 @@ export const BoardService = {
       baseUrl: boardConfig.baseUrl,
       path: boardConfig.updateBoardName,
       body: values,
+      uriVariables: {boardId}
+    })
+  },
+
+  getSecretKey(boardId: string): Promise<BoardSecretKeyResponse> {
+    return WebClient.get<BoardSecretKeyResponse>({
+      baseUrl: boardConfig.baseUrl,
+      path: boardConfig.board,
+      uriVariables: {boardId}
+    })
+  },
+
+  updateSecretKey(boardId: string): Promise<BoardSecretKeyResponse> {
+    return WebClient.put<BoardSecretKeyResponse>({
+      baseUrl: boardConfig.baseUrl,
+      path: boardConfig.board,
       uriVariables: {boardId}
     })
   }
