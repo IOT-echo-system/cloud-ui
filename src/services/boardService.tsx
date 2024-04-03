@@ -30,7 +30,7 @@ export const BoardService = {
   getSecretKey(boardId: string): Promise<BoardSecretKeyResponse> {
     return WebClient.get<BoardSecretKeyResponse>({
       baseUrl: boardConfig.baseUrl,
-      path: boardConfig.board,
+      path: boardConfig.secretKey,
       uriVariables: {boardId}
     })
   },
@@ -38,7 +38,7 @@ export const BoardService = {
   updateSecretKey(boardId: string): Promise<BoardSecretKeyResponse> {
     return WebClient.put<BoardSecretKeyResponse>({
       baseUrl: boardConfig.baseUrl,
-      path: boardConfig.board,
+      path: boardConfig.secretKey,
       uriVariables: {boardId}
     })
   }

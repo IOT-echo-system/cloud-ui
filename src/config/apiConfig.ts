@@ -23,7 +23,8 @@ export const apiConfig = {
     baseUrl: '/boards',
     boards: '',
     board: '/{boardId}',
-    updateBoardName: '/{boardId}/name'
+    updateBoardName: '/{boardId}/name',
+    secretKey: '/{boardId}/secret-key'
   },
   widget: {
     baseUrl: '/widgets',

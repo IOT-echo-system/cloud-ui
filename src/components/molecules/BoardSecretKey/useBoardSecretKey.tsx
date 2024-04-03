@@ -11,7 +11,7 @@ export type UseBoardSecretKey = (boardId: string) => {
 }
 
 export const useBoardSecretKey: UseBoardSecretKey = boardId => {
-  const [secretKey, setSecretKey] = useState('secret')
+  const [secretKey, setSecretKey] = useState('')
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
   const toast = useToast()
