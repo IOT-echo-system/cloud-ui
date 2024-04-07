@@ -9,17 +9,24 @@ import {Config} from '../../../config'
 
 type UseStartType = {
   projects: ProjectWithRoles[]
+  userId: string
   handleSelect: (projectId: string, roleId: string) => MouseEventHandler<HTMLButtonElement>
   addProject: (project: ProjectWithRoles) => void
 }
 
 export const useStart = (): UseStartType => {
   const [projects, setProjects] = useState<ProjectWithRoles[]>([])
+  const [userId, setUserId] = useState('')
   const router = useRouter()
   const toast = useToast()
 
   useEffect(() => {
     ProjectService.getProjectsWithRoles().then(setProjects).catch(toast.error)
+    AuthService.validate()
+      .then(user => {
+        setUserId(user.userId)
+      })
+      .catch(toast.error)
   }, [])
 
   const handleSelect = (projectId: string, roleId: string): MouseEventHandler<HTMLButtonElement> => {
@@ -40,5 +47,5 @@ export const useStart = (): UseStartType => {
     })
   }, [])
 
-  return {projects, handleSelect, addProject}
+  return {projects, handleSelect, addProject, userId}
 }

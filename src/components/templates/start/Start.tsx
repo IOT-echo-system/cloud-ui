@@ -1,17 +1,15 @@
 import React from 'react'
-import {Button, CollapsibleAccordion, FormInput, Modal, TopCenteredContainer} from '../../atoms'
+import {Button, CollapsibleAccordion, TopCenteredContainer} from '../../atoms'
 import {Stack, Typography} from '@mui/material'
 import {Add} from '@mui/icons-material'
 import {useStart} from './useStart'
 import theme from '../../../theme/light'
-import {createProject} from './createProject'
-import {useForm} from '../../../hooks'
 import '../../../utils/extenstions'
+import {ModalForms} from '../../organisms'
+import {AddProject} from '../../organisms/ModalForms/formFunctions/AddProject'
 
 export const Start: React.FC = () => {
-  const {projects, handleSelect, addProject} = useStart()
-  const {values, onChange, onClear, handleSubmit} = useForm({name: ''})
-  const {modalOpen, handleOpen, handleClose, onSubmit, loading} = createProject(onClear, addProject)
+  const {projects, handleSelect, addProject, userId} = useStart()
 
   return (
     <TopCenteredContainer
@@ -37,10 +35,19 @@ export const Start: React.FC = () => {
               borderBottomRightRadius: projects.isEmpty() ? '4px' : '0'
             }}
           >
-            <Typography variant={'h4'}>Projects</Typography>
-            <Button variant={'contained'} endIcon={<Add />} onClick={handleOpen}>
-              Create
-            </Button>
+            <Stack direction={{sm: 'row'}} spacing={{sm: 2}} alignItems={{sm: 'center'}}>
+              <Typography variant={'h4'} component={'div'}>
+                Projects
+              </Typography>
+              <Typography variant={'subtitle1'} component={'div'}>
+                User Id: {userId}
+              </Typography>
+            </Stack>
+            <ModalForms getFormDetails={AddProject} handleAdd={addProject}>
+              <Button variant={'contained'} endIcon={<Add />}>
+                Create
+              </Button>
+            </ModalForms>
           </Stack>
         }
         accordions={projects.map(account => ({
@@ -60,24 +67,6 @@ export const Start: React.FC = () => {
           )
         }))}
       />
-      <Modal open={modalOpen} handleClose={handleClose}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack spacing={2}>
-            <Typography variant={'h5'}>Create Project</Typography>
-            <FormInput
-              value={values.name}
-              onChange={event => {
-                onChange('name', event.target.value)
-              }}
-              required
-              label={'Project name'}
-            />
-            <Button type={'submit'} variant={'contained'} size={'large'} loading={loading}>
-              Create
-            </Button>
-          </Stack>
-        </form>
-      </Modal>
     </TopCenteredContainer>
   )
 }
