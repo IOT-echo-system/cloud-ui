@@ -7,6 +7,7 @@ import {ModalForms} from '../../ModalForms/ModalForms'
 import {EditInvoiceWidgetName} from '../../ModalForms/formFunctions'
 import {Edit} from '@mui/icons-material'
 import {InvoiceSeed} from './InvoiceSeed/InvoiceSeed'
+import {InvoiceCart} from './invoiceCart/InvoiceCart'
 
 type InvoicePropsType = {widget: Widget}
 export const Invoice: React.FC<InvoicePropsType> = ({widget}) => {
@@ -27,13 +28,7 @@ export const Invoice: React.FC<InvoicePropsType> = ({widget}) => {
           </ModalForms>
         </PolicyAllowed>
       </Stack>
-      {widget.totalItems.isZero() ? (
-        <Typography color={'error'} textAlign={'center'} p={2}>
-          You haven't added any item in cart!!!
-        </Typography>
-      ) : (
-        <Typography>{JSON.stringify(widget.cart)}</Typography>
-      )}
+      <InvoiceCart widget={widget} />
       <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_UPDATE} sx={{display: {xs: 'none', sm: 'unset'}}}>
         <InvoiceSeed widget={widget} />
       </PolicyAllowed>
