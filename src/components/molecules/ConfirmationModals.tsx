@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from 'react'
 import React, {useState} from 'react'
 import {Stack} from '@mui/material'
-import type { ConfirmationModalPropsType} from '../atoms'
+import type {ConfirmationModalPropsType} from '../atoms'
 import {ConfirmationModal as ConfirmationModalUnit} from '../atoms'
 
 export type GetConfirmationModalPropsTypeFunction<T extends Record<string, unknown> = Record<string, unknown>> = (

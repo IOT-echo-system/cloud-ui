@@ -21,7 +21,7 @@ export const MarkAsPaidConfirmationModal: GetConfirmationModalPropsTypeFunction<
       })
       .catch(toast.error)
       .finally(() => {
-        setLoading(false) 
+        setLoading(false)
       })
   }
   return {
