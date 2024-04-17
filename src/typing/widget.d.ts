@@ -6,6 +6,7 @@ export type InvoiceWidget = {
   cart: CartItem[]
   totalItems: number
   totalPrice: number
+  paid: boolean
 }
 
 type ActualWidgetType = {

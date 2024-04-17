@@ -46,5 +46,15 @@ export const InvoiceService = {
       uriVariables: {widgetId: widget.widgetId, itemCode: values.oldCode},
       body: values
     })
+  },
+
+  updatePayment(paid: boolean, widget: Widget): Promise<Widget> {
+    return WebClient.put<Widget>({
+      baseUrl: baseUrl,
+      path: invoiceConfig.payment,
+      headers: {boardId: widget.boardId},
+      uriVariables: {widgetId: widget.widgetId},
+      body: {paid}
+    })
   }
 }

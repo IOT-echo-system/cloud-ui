@@ -18,6 +18,7 @@ export const PolicyUtils = {
   WIDGET_INVOICE_UPDATE: '000015',
   WIDGET_INVOICE_DELETE: '000016',
   WIDGET_INVOICE_SEED_UPDATE: '000017',
+  WIDGET_INVOICE_PAYMENT_UPDATE: '000020',
 
   isValid(polices: Policy[], policyId: string): boolean {
     return polices.some(policy => policy.policyId === policyId)

@@ -3,6 +3,7 @@ export const widgetConfig = {
     baseUrl: '/invoices',
     title: '/{widgetId}/title',
     seed: '/{widgetId}/seed',
-    updateSeed: '/{widgetId}/seed/{itemCode}'
+    updateSeed: '/{widgetId}/seed/{itemCode}',
+    payment: '/{widgetId}/payment'
   }
 } as const

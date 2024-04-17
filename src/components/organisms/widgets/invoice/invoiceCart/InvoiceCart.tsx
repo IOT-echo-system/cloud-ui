@@ -1,7 +1,22 @@
 import type {Widget} from '../../../../../typing/widget'
 import React from 'react'
-import {Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from '@mui/material'
+import {
+  Chip,
+  Paper,
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography
+} from '@mui/material'
 import {useMedia} from '../../../../../hooks'
+import {Button, PolicyAllowed} from '../../../../atoms'
+import {ConfirmationModals} from '../../../../molecules'
+import {MarkAsPaidConfirmationModal} from './MarkAsPaidConfirmationModal'
+import {PolicyUtils} from '../../../../../utils/policyUtils'
 
 type InvoiceCartPropsType = {widget: Widget}
 
@@ -17,7 +32,22 @@ export const InvoiceCart: React.FC<InvoiceCartPropsType> = ({widget}) => {
   }
 
   return (
-    <Stack mt={1} mb={1}>
+    <Stack mt={1} mb={1} spacing={2}>
+      <Stack spacing={10} direction={'row'} justifyContent={'end'} alignItems={'center'}>
+        <Stack direction={'row'} spacing={2} alignItems={'center'}>
+          <Typography>Payment status: </Typography>
+          <Chip
+            color={widget.paid ? 'success' : 'error'}
+            label={widget.paid ? 'Paid' : 'Not paid'}
+            sx={{paddingLeft: '12px', paddingRight: '12px'}}
+          />
+        </Stack>
+        <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_PAYMENT_UPDATE}>
+          <ConfirmationModals getConfirmationModalDetails={MarkAsPaidConfirmationModal} widget={widget}>
+            <Button variant={'contained'}>Mark as {widget.paid ? 'Unpaid' : 'paid'}</Button>
+          </ConfirmationModals>
+        </PolicyAllowed>
+      </Stack>
       <TableContainer component={Paper} sx={{border: '1px solid #aaa'}}>
         <Table aria-label="invoice seed">
           <TableHead>
