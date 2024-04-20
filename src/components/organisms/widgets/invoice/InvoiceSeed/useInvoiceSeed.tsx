@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {InvoiceService} from '../../../../../services/widgets/invoiceService'
+import {InvoiceService} from '../../../../../services/widgets'
 import {useToast} from '../../../../../hooks'
 import type {InvoiceSeed} from '../../../../../services/widgets/typing/invoice'
 import type {InvoiceWidget} from '../../../../../typing/widget/widget'

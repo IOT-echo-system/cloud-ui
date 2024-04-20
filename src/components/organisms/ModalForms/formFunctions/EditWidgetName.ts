@@ -3,10 +3,10 @@ import {useDispatch, useForm, useToast} from '../../../../hooks'
 import {updateWidget} from '../../../../store/actions/boards'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'
-import {InvoiceService} from '../../../../services/widgets/invoiceService'
-import type {InvoiceWidget} from '../../../../typing/widget/widget'
+import {WidgetService} from '../../../../services/widgets'
+import type {Widget} from '../../../../typing/widget/widget'
 
-export type EditInvoiceWidgetNamePropsType = {widget: InvoiceWidget}
+export type EditInvoiceWidgetNamePropsType = {widget: Widget}
 
 export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNamePropsType> = (handleClose, {widget}) => {
   const [loading, setLoading] = useState(false)
@@ -28,7 +28,7 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
 
   const onSubmit = () => {
     setLoading(true)
-    InvoiceService.updateTitle(values, widget)
+    WidgetService.updateTitle(values, widget)
       .then(updatedWidget => {
         onClear()
         dispatch(updateWidget({...widget, title: updatedWidget.title}, widget.boardId))

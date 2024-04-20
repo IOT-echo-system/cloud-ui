@@ -19,7 +19,7 @@ export const Invoice: React.FC<WidgetPropsType<'INVOICE'>> = ({widget: invoiceWi
           </Typography>
           <Typography>Widget Id: {invoiceWidget.widgetId}</Typography>
         </Stack>
-        <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_UPDATE}>
+        <PolicyAllowed policyId={PolicyUtils.WIDGET_UPDATE}>
           <ModalForms getFormDetails={EditWidgetName} widget={invoiceWidget}>
             <IconButton color={'primary'}>
               <Edit />

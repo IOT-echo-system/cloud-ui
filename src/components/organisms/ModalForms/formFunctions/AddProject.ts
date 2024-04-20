@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useForm, useToast} from '../../../../hooks'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'
-import {ProjectService} from '../../../../services/projectService'
+import {ProjectService} from '../../../../services'
 import type {ProjectWithRoles} from '../../../../services/typing/project'
 
 type AddProjectPropsType = {handleAdd: (project: ProjectWithRoles) => void}

@@ -5,10 +5,10 @@ import {ModalFormSelect} from '../../atoms'
 import {Stack} from '@mui/material'
 import type {Board} from '../../../typing/board'
 import {useDispatch, useForm, useToast} from '../../../hooks'
-import {WidgetService} from '../../../services/widgets/widgetService'
-import type {WidgetType} from '../widgets'
+import {WidgetService} from '../../../services/widgets'
 import {widgetsNameMap} from '../widgets'
 import {addWidget} from '../../../store/actions/boards'
+import type {WidgetType} from '../../../typing/widget/widget'
 
 type AddWidgetPropsType = {board: Board}
 

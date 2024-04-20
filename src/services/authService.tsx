@@ -13,75 +13,77 @@ import type {
 } from './typing/auth'
 import type {User} from '../typing/user'
 
-const authConfig = apiConfig.auth
+class AuthService_ {
+  authConfig = apiConfig.auth
 
-export const AuthService = {
   generateOTP(email: string): Promise<GenerateOTPResBody> {
     return WebClient.post<GenerateOTPResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.generateOTP,
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.generateOTP,
       body: {email}
     })
-  },
+  }
 
   async login(credentials: SignUpReqBody): Promise<LoginResBody> {
     const response = await WebClient.post<LoginResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.login,
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.login,
       body: credentials
     })
     setStorage(StorageKeys.AUTH, {token: response.token})
     return response
-  },
+  }
 
   resetPassword(values: {password: string; currentPassword?: string}): Promise<ResetPasswordResBody> {
     return WebClient.post<ResetPasswordResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.resetPassword,
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.resetPassword,
       body: values
     })
-  },
+  }
 
   signUp(values: {password: string; name: string; email: string}): Promise<SignUpResBody> {
-    return WebClient.post<SignUpResBody>({baseUrl: authConfig.baseUrl, body: values, path: authConfig.signUp})
-  },
+    return WebClient.post<SignUpResBody>({baseUrl: this.authConfig.baseUrl, body: values, path: this.authConfig.signUp})
+  }
 
   verifyOTP({otp, otpId}: {otp: string; otpId: string}): Promise<VerifyOTPResBody> {
     return WebClient.post<VerifyOTPResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.verifyOTP,
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.verifyOTP,
       body: {otpId, otp}
     })
-  },
+  }
 
   validate(): Promise<ValidateResBody> {
     return WebClient.get<ValidateResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.validate
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.validate
     })
-  },
+  }
 
   async updateToken(projectId: string, roleId: string): Promise<LoginResBody> {
     const response = await WebClient.post<LoginResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.updateToken,
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.updateToken,
       body: {projectId, roleId}
     })
     setStorage(StorageKeys.AUTH, {token: response.token})
     return response
-  },
+  }
 
   getUserDetails(): Promise<User> {
     return WebClient.get<User>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.userDetails
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.userDetails
     })
-  },
+  }
 
   logout(): Promise<LogoutResBody> {
     return WebClient.get<LogoutResBody>({
-      baseUrl: authConfig.baseUrl,
-      path: authConfig.logout
+      baseUrl: this.authConfig.baseUrl,
+      path: this.authConfig.logout
     })
   }
 }
+
+export const AuthService = new AuthService_()

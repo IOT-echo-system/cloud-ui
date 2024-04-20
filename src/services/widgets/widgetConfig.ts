@@ -1,6 +1,6 @@
 export const widgetConfig = {
   invoice: {
-    baseUrl: '/invoices',
+    baseUrl: '/widgets/invoices',
     title: '/{widgetId}/title',
     seed: '/{widgetId}/seed',
     updateSeed: '/{widgetId}/seed/{itemCode}',

@@ -1,17 +1,28 @@
 import {apiConfig} from '../../config/apiConfig'
 import WebClient from '../webClient'
-import type {WidgetType} from '../../components/organisms/widgets'
 import type {Widget} from '../../typing/widget/widget'
 
-const widgetConfig = apiConfig.widget
+class _WidgetService {
+  widgetConfig = apiConfig.widget
 
-export const WidgetService = {
-  addWidget(values: {type: string; boardId: string}): Promise<Widget[WidgetType]> {
-    return WebClient.post<Widget[WidgetType]>({
-      baseUrl: widgetConfig.baseUrl,
-      path: widgetConfig.widgets,
+  addWidget(values: {type: string; boardId: string}): Promise<Widget> {
+    return WebClient.post<Widget>({
+      baseUrl: this.widgetConfig.baseUrl,
+      path: this.widgetConfig.widgets,
       headers: {boardId: values.boardId},
       body: values
     })
   }
+
+  updateTitle(values: {name: string}, widget: Widget): Promise<Widget> {
+    return WebClient.put<Widget>({
+      baseUrl: this.widgetConfig.baseUrl,
+      path: this.widgetConfig.title,
+      headers: {boardId: widget.boardId},
+      body: values,
+      uriVariables: {widgetId: widget.widgetId}
+    })
+  }
 }
+
+export const WidgetService = new _WidgetService()
