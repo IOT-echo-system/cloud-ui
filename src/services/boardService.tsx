@@ -18,8 +18,8 @@ class BoardService_ {
     return WebClient.get<Board[]>({baseUrl: this.boardConfig.baseUrl, path: this.boardConfig.boards})
   }
 
-  updateBoardName(values: {name: string}, boardId: string) {
-    return WebClient.put<Board>({
+  updateBoardName(values: {name: string}, boardId: string): Promise<{name: string}> {
+    return WebClient.put<{name: string}>({
       baseUrl: this.boardConfig.baseUrl,
       path: this.boardConfig.updateBoardName,
       body: values,

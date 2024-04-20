@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useDispatch, useForm, useSelector, useToast} from '../../../../hooks'
-import {BoardService} from '../../../../services/boardService'
+import {BoardService} from '../../../../services'
 import {setBoards} from '../../../../store/actions/boards'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'

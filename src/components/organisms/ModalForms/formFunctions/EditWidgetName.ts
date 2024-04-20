@@ -13,7 +13,7 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
   const toast = useToast()
 
   const dispatch = useDispatch()
-  const {onClear, values, handleSubmit, onChange} = useForm({name: widget.title})
+  const {values, handleSubmit, onChange} = useForm({name: widget.title})
 
   const formInputs: FormInputType[] = [
     {
@@ -30,7 +30,6 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
     setLoading(true)
     WidgetService.updateTitle(values, widget)
       .then(({title}) => {
-        onClear()
         dispatch(updateWidget({...widget, title}, widget.boardId))
         handleClose()
       })

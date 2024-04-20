@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useDispatch, useForm, useToast} from '../../../../hooks'
-import {BoardService} from '../../../../services/boardService'
+import {BoardService} from '../../../../services'
 import {updateBoard} from '../../../../store/actions/boards'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'
@@ -13,7 +13,7 @@ export const EditBoardName: GetFormPropsTypeFunction<EditBoardNamePropsType> = (
   const toast = useToast()
 
   const dispatch = useDispatch()
-  const {onClear, values, handleSubmit, onChange} = useForm({name: board.name})
+  const {values, handleSubmit, onChange} = useForm({name: board.name})
 
   const formInputs: FormInputType[] = [
     {
@@ -29,9 +29,8 @@ export const EditBoardName: GetFormPropsTypeFunction<EditBoardNamePropsType> = (
   const onSubmit = (values: {name: string}) => {
     setLoading(true)
     BoardService.updateBoardName(values, board.boardId)
-      .then(board => {
-        onClear()
-        dispatch(updateBoard(board))
+      .then(({name}) => {
+        dispatch(updateBoard({...board, name}))
         handleClose()
       })
       .catch(toast.error)
