@@ -14,8 +14,8 @@ class WidgetService_ {
     })
   }
 
-  updateTitle(values: {name: string}, widget: Widget): Promise<Widget> {
-    return WebClient.put<Widget>({
+  updateTitle(values: {name: string}, widget: Widget): Promise<{title: string}> {
+    return WebClient.put<{title: string}>({
       baseUrl: this.widgetConfig.baseUrl,
       path: this.widgetConfig.title,
       headers: {boardId: widget.boardId},

@@ -5,6 +5,7 @@ import {PolicyUtils} from '../../utils/policyUtils'
 import {Edit, Key} from '@mui/icons-material'
 import {ModalForms} from './ModalForms/ModalForms'
 import {EditBoardName} from './ModalForms/formFunctions'
+import type {WidgetPropsType} from './widgets'
 import {widgetsMap} from './widgets'
 import {PolicyAllowed, WidgetsContainer} from '../atoms'
 import {BoardSecretKey, CustomModal} from '../molecules'
@@ -50,7 +51,7 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
       </Stack>
       <WidgetsContainer>
         {board.widgets.map(widget => {
-          const Component = widgetsMap[widget.widgetType]
+          const Component = widgetsMap[widget.widgetType] as React.FC<WidgetPropsType<typeof widget.widgetType>>
           return <Component widget={widget} key={widget.widgetId} />
         })}
       </WidgetsContainer>

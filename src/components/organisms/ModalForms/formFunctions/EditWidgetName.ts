@@ -29,9 +29,9 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
   const onSubmit = () => {
     setLoading(true)
     WidgetService.updateTitle(values, widget)
-      .then(updatedWidget => {
+      .then(({title}) => {
         onClear()
-        dispatch(updateWidget({...widget, title: updatedWidget.title}, widget.boardId))
+        dispatch(updateWidget({...widget, title}, widget.boardId))
         handleClose()
       })
       .catch(toast.error)
