@@ -51,7 +51,7 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
       </Stack>
       <WidgetsContainer>
         {board.widgets.map(widget => {
-          const Component = widgetsMap[widget.widgetType] as React.FC<WidgetPropsType<typeof widget.widgetType>>
+          const Component = widgetsMap[widget.widgetType] as React.FC<WidgetPropsType>
           return <Component widget={widget} key={widget.widgetId} />
         })}
       </WidgetsContainer>

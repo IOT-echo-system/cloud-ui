@@ -1,32 +1,24 @@
-import type {PropsWithChildren} from 'react'
-import React, {useState} from 'react'
-import type {ModalFormSelectInputType} from '../../atoms'
-import {ModalFormSelect} from '../../atoms'
-import {Stack} from '@mui/material'
+import {useState} from 'react'
+import type {FormInputType} from '../../atoms'
 import type {Board} from '../../../typing/board'
 import {useDispatch, useForm, useToast} from '../../../hooks'
 import {WidgetService} from '../../../services/widgets'
 import {widgetsNameMap} from '../widgets'
 import {addWidget} from '../../../store/actions/boards'
 import type {WidgetType} from '../../../typing/widget/widget'
+import type {GetFormPropsTypeFunction} from './model'
 
-type AddWidgetPropsType = {board: Board}
-
-export const AddWidget: React.FC<PropsWithChildren<AddWidgetPropsType>> = ({children, board}) => {
-  const [open, setOpen] = useState(false)
-  const handleClose = () => {
-    setOpen(false)
-  }
-
+export const AddWidget: GetFormPropsTypeFunction<{board: Board}> = (handleClose, {board}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const dispatch = useDispatch()
   const {onClear, values, handleSubmit, onChange} = useForm({type: ''})
 
-  const formInputs: ModalFormSelectInputType[] = [
+  const formInputs: FormInputType[] = [
     {
-      label: 'Select widget',
+      inputType: 'selectField',
       value: values.type,
+      label: 'Select widget',
       required: true,
       handleChange: (_event, value) => {
         onChange('type', value?.value ?? '')
@@ -52,24 +44,5 @@ export const AddWidget: React.FC<PropsWithChildren<AddWidgetPropsType>> = ({chil
       })
   }
 
-  return (
-    <Stack>
-      <Stack
-        onClick={() => {
-          setOpen(true)
-        }}
-      >
-        {children}
-      </Stack>
-      <ModalFormSelect
-        open={open}
-        handleClose={handleClose}
-        formInputs={formInputs}
-        formTitle={'Add widget'}
-        loading={loading}
-        handleSubmit={handleSubmit(onSubmit)}
-        submitLabel={'Add widget'}
-      />
-    </Stack>
-  )
+  return {formInputs, formTitle: 'Add widget', submitLabel: 'Add widget', handleSubmit: handleSubmit(onSubmit), loading}
 }

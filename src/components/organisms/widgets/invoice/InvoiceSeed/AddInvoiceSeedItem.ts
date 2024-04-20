@@ -2,7 +2,7 @@ import {useState} from 'react'
 import type {GetFormPropsTypeFunction} from '../../../ModalForms/model'
 import {useForm, useToast} from '../../../../../hooks'
 import type {FormInputType} from '../../../../atoms'
-import {InvoiceService} from '../../../../../services/widgets/invoiceService'
+import {InvoiceService} from '../../../../../services/widgets'
 import type {InvoiceSeed} from '../../../../../services/widgets/typing/invoice'
 import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
@@ -19,6 +19,7 @@ export const AddInvoiceSeedItem: GetFormPropsTypeFunction<AddInvoiceSeedItemProp
 
   const formInputs: FormInputType[] = [
     {
+      inputType: 'textField',
       label: 'Code',
       value: values.code,
       required: true,
@@ -27,6 +28,7 @@ export const AddInvoiceSeedItem: GetFormPropsTypeFunction<AddInvoiceSeedItemProp
       }
     },
     {
+      inputType: 'textField',
       label: 'Name',
       value: values.name,
       required: true,
@@ -35,6 +37,7 @@ export const AddInvoiceSeedItem: GetFormPropsTypeFunction<AddInvoiceSeedItemProp
       }
     },
     {
+      inputType: 'textField',
       label: 'Price per unit',
       type: 'number',
       value: values.pricePerUnit === 0 ? '' : values.pricePerUnit,

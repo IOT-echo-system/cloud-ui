@@ -17,6 +17,7 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
 
   const formInputs: FormInputType[] = [
     {
+      inputType: 'textField',
       label: 'Update invoice widget name',
       value: values.name,
       required: true,

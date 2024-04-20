@@ -52,7 +52,7 @@ export const WidgetsContainer = styled(Stack)<StackProps>(({theme}) => ({
   marginTop: theme.spacing(2)
 }))
 
-export const WidgetContainer = styled(Box)<BoxProps>(({theme}) => ({
+export const WidgetContainer = styled(Stack)<StackProps>(({theme}) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),

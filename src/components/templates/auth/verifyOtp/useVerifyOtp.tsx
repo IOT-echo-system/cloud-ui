@@ -60,6 +60,7 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
 
   const inputFields: FormInputType[] = [
     {
+      inputType: 'textField',
       type: 'email',
       value: values.email,
       onChange: handleChange('email'),
@@ -70,6 +71,7 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
 
   const inputFieldsForOtp: FormInputType[] = [
     {
+      inputType: 'textField',
       type: 'email',
       value: values.email,
       onChange: handleChange('email'),
@@ -78,6 +80,7 @@ const useVerifyOtp = (otpVerifiedCallback: (status: boolean) => void): UseVerify
       disabled: true
     },
     {
+      inputType: 'textField',
       type: 'number',
       value: values.otp,
       onChange: handleChange('otp'),

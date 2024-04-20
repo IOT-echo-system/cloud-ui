@@ -67,6 +67,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
 
   const inputFields: FormInputType[] = [
     {
+      inputType: 'textField',
       type: 'password',
       value: values.password,
       onChange: handlePasswordChange,
@@ -76,6 +77,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
       helperText: passwordHelperText
     },
     {
+      inputType: 'textField',
       type: 'password',
       value: confirmPassword,
       onChange: (event: ChangeEvent<HTMLInputElement>): void => {
@@ -90,6 +92,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
 
   const inputFieldsWithOldPassword: FormInputType[] = [
     {
+      inputType: 'textField',
       type: 'password',
       value: values.currentPassword,
       onChange: handleChange('currentPassword'),
@@ -97,6 +100,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
       required: true
     },
     {
+      inputType: 'textField',
       type: 'password',
       value: values.password,
       onChange: handlePasswordChange,
@@ -106,6 +110,7 @@ const useResetPassword = (withOldPassword: boolean, redirectTo: string): UseLogi
       helperText: passwordHelperText
     },
     {
+      inputType: 'textField',
       type: 'password',
       value: confirmPassword,
       onChange: (event: ChangeEvent<HTMLInputElement>): void => {

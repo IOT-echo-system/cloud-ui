@@ -17,6 +17,7 @@ export const EditBoardName: GetFormPropsTypeFunction<EditBoardNamePropsType> = (
 
   const formInputs: FormInputType[] = [
     {
+      inputType: 'textField',
       label: 'Update Board name',
       value: values.name,
       required: true,

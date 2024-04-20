@@ -14,6 +14,7 @@ export const AddBoard: GetFormPropsTypeFunction = handleClose => {
 
   const formInputs: FormInputType[] = [
     {
+      inputType: 'textField',
       label: 'Board name',
       value: values.name,
       required: true,

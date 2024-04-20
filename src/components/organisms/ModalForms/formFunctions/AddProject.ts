@@ -15,6 +15,7 @@ export const AddProject: GetFormPropsTypeFunction<AddProjectPropsType> = (handle
 
   const formInputs: FormInputType[] = [
     {
+      inputType: 'textField',
       label: 'Project name',
       value: values.name,
       required: true,

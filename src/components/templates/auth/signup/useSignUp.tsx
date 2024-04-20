@@ -33,8 +33,15 @@ export const useSignUp = (): UseSignUpReturnType => {
   }
 
   const inputFields: FormInputType[] = [
-    {value: values.name, onChange: handleChange('name'), label: 'Name', required: true},
-    {type: 'email', value: values.email, onChange: handleChange('email'), label: 'Email', required: true},
+    {inputType: 'textField', value: values.name, onChange: handleChange('name'), label: 'Name', required: true},
+    {
+      inputType: 'textField',
+      type: 'email',
+      value: values.email,
+      onChange: handleChange('email'),
+      label: 'Email',
+      required: true
+    },
     ...passwordInputFields
   ]
 

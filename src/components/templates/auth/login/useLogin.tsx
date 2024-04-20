@@ -28,8 +28,22 @@ const useLogin = (): UseLoginReturnType => {
   }
 
   const inputFields: FormInputType[] = [
-    {type: 'email', value: values.email, onChange: handleChange('email'), label: 'Email', required: true},
-    {type: 'password', value: values.password, onChange: handleChange('password'), label: 'Password', required: true}
+    {
+      inputType: 'textField',
+      type: 'email',
+      value: values.email,
+      onChange: handleChange('email'),
+      label: 'Email',
+      required: true
+    },
+    {
+      inputType: 'textField',
+      type: 'password',
+      value: values.password,
+      onChange: handleChange('password'),
+      label: 'Password',
+      required: true
+    }
   ]
 
   return {
