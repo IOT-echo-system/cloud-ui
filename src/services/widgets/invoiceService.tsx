@@ -2,15 +2,15 @@ import {apiConfig} from '../../config/apiConfig'
 import {widgetConfig} from './widgetConfig'
 import WebClient from '../webClient'
 import type {BoardIdWithWidgetId} from './typing/widget'
-import type {InvoiceSeed, InvoiceTitleUpdateResponse} from './typing/invoice'
-import type {Widget} from '../../typing/widget'
+import type {InvoiceSeed} from './typing/invoice'
+import type {InvoiceWidget} from '../../typing/widget/widget'
 
 const invoiceConfig = widgetConfig.invoice
 const baseUrl = apiConfig.widget.baseUrl + invoiceConfig.baseUrl
 
 export const InvoiceService = {
-  updateTitle(values: {name: string}, boardIdAndWidgetId: BoardIdWithWidgetId): Promise<InvoiceTitleUpdateResponse> {
-    return WebClient.put<InvoiceTitleUpdateResponse>({
+  updateTitle(values: {name: string}, boardIdAndWidgetId: BoardIdWithWidgetId): Promise<InvoiceWidget> {
+    return WebClient.put<InvoiceWidget>({
       baseUrl: baseUrl,
       path: invoiceConfig.title,
       headers: {boardId: boardIdAndWidgetId.boardId},
@@ -19,7 +19,7 @@ export const InvoiceService = {
     })
   },
 
-  getSeedData(widget: Widget): Promise<InvoiceSeed[]> {
+  getSeedData(widget: InvoiceWidget): Promise<InvoiceSeed[]> {
     return WebClient.get<InvoiceSeed[]>({
       baseUrl: baseUrl,
       path: invoiceConfig.seed,
@@ -28,7 +28,7 @@ export const InvoiceService = {
     })
   },
 
-  addSeedItem(values: InvoiceSeed, widget: Widget): Promise<InvoiceSeed> {
+  addSeedItem(values: InvoiceSeed, widget: InvoiceWidget): Promise<InvoiceSeed> {
     return WebClient.post<InvoiceSeed>({
       baseUrl: baseUrl,
       path: invoiceConfig.seed,
@@ -38,7 +38,7 @@ export const InvoiceService = {
     })
   },
 
-  updateSeedItem(values: InvoiceSeed & {oldCode: string}, widget: Widget): Promise<InvoiceSeed> {
+  updateSeedItem(values: InvoiceSeed & {oldCode: string}, widget: InvoiceWidget): Promise<InvoiceSeed> {
     return WebClient.put<InvoiceSeed>({
       baseUrl: baseUrl,
       path: invoiceConfig.updateSeed,
@@ -48,8 +48,8 @@ export const InvoiceService = {
     })
   },
 
-  updatePayment(paid: boolean, widget: Widget): Promise<Widget> {
-    return WebClient.put<Widget>({
+  updatePayment(paid: boolean, widget: InvoiceWidget): Promise<InvoiceWidget> {
+    return WebClient.put<InvoiceWidget>({
       baseUrl: baseUrl,
       path: invoiceConfig.payment,
       headers: {boardId: widget.boardId},

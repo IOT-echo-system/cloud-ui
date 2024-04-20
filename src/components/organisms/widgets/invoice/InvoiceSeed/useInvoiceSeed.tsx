@@ -2,9 +2,9 @@ import {useEffect, useState} from 'react'
 import {InvoiceService} from '../../../../../services/widgets/invoiceService'
 import {useToast} from '../../../../../hooks'
 import type {InvoiceSeed} from '../../../../../services/widgets/typing/invoice'
-import type {Widget} from '../../../../../typing/widget'
+import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
-type UseInvoiceSeed = (widget: Widget) => {
+type UseInvoiceSeed = (widget: InvoiceWidget) => {
   open: boolean
   handleToggle: () => void
   loadingSeed: boolean

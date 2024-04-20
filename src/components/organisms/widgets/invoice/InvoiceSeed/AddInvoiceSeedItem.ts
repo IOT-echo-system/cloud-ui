@@ -1,12 +1,12 @@
 import {useState} from 'react'
-import type {Widget} from '../../../../../typing/widget'
 import type {GetFormPropsTypeFunction} from '../../../ModalForms/model'
 import {useForm, useToast} from '../../../../../hooks'
 import type {FormInputType} from '../../../../atoms'
 import {InvoiceService} from '../../../../../services/widgets/invoiceService'
 import type {InvoiceSeed} from '../../../../../services/widgets/typing/invoice'
+import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
-export type AddInvoiceSeedItemPropsType = {widget: Widget; addSeed: (seedItem: InvoiceSeed) => void}
+export type AddInvoiceSeedItemPropsType = {widget: InvoiceWidget; addSeed: (seedItem: InvoiceSeed) => void}
 
 export const AddInvoiceSeedItem: GetFormPropsTypeFunction<AddInvoiceSeedItemPropsType> = (
   handleClose,

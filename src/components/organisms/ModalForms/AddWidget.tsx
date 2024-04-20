@@ -6,7 +6,8 @@ import {Stack} from '@mui/material'
 import type {Board} from '../../../typing/board'
 import {useDispatch, useForm, useToast} from '../../../hooks'
 import {WidgetService} from '../../../services/widgets/widgetService'
-import {widgets} from '../widgets'
+import type {WidgetType} from '../widgets'
+import {widgetsNameMap} from '../widgets'
 import {addWidget} from '../../../store/actions/boards'
 
 type AddWidgetPropsType = {board: Board}
@@ -28,9 +29,12 @@ export const AddWidget: React.FC<PropsWithChildren<AddWidgetPropsType>> = ({chil
       value: values.type,
       required: true,
       handleChange: (_event, value) => {
-        onChange('type', value ?? '')
+        onChange('type', value?.value ?? '')
       },
-      options: [...widgets]
+      options: Object.keys(widgetsNameMap).map(keyName => ({
+        label: widgetsNameMap[keyName as WidgetType],
+        value: keyName
+      }))
     }
   ]
 

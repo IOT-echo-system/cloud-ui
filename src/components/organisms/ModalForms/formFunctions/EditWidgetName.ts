@@ -3,15 +3,12 @@ import {useDispatch, useForm, useToast} from '../../../../hooks'
 import {updateWidget} from '../../../../store/actions/boards'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'
-import type {Widget} from '../../../../typing/widget'
 import {InvoiceService} from '../../../../services/widgets/invoiceService'
+import type {InvoiceWidget} from '../../../../typing/widget/widget'
 
-export type EditInvoiceWidgetNamePropsType = {widget: Widget}
+export type EditInvoiceWidgetNamePropsType = {widget: InvoiceWidget}
 
-export const EditInvoiceWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNamePropsType> = (
-  handleClose,
-  {widget}
-) => {
+export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNamePropsType> = (handleClose, {widget}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
 

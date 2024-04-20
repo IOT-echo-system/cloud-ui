@@ -1,12 +1,12 @@
 import type {GetConfirmationModalPropsTypeFunction} from '../../../../molecules'
-import type {Widget} from '../../../../../typing/widget'
 import {InvoiceService} from '../../../../../services/widgets/invoiceService'
 import {useDispatch, useToast} from '../../../../../hooks'
 import {updateWidget} from '../../../../../store/actions/boards'
 import {useState} from 'react'
+import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
 export const MarkAsPaidConfirmationModal: GetConfirmationModalPropsTypeFunction<{
-  widget: Widget
+  widget: InvoiceWidget
 }> = (handleClose, {widget}) => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)

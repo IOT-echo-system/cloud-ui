@@ -1,4 +1,3 @@
-import type {Widget} from '../../../../../typing/widget'
 import React from 'react'
 import {
   Chip,
@@ -17,8 +16,9 @@ import {Button, PolicyAllowed} from '../../../../atoms'
 import {ConfirmationModals} from '../../../../molecules'
 import {MarkAsPaidConfirmationModal} from './MarkAsPaidConfirmationModal'
 import {PolicyUtils} from '../../../../../utils/policyUtils'
+import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
-type InvoiceCartPropsType = {widget: Widget}
+type InvoiceCartPropsType = {widget: InvoiceWidget}
 
 export const InvoiceCart: React.FC<InvoiceCartPropsType> = ({widget}) => {
   const media = useMedia()

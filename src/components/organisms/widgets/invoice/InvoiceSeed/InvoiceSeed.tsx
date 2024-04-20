@@ -1,6 +1,5 @@
 import React from 'react'
 import {useInvoiceSeed} from './useInvoiceSeed'
-import type {Widget} from '../../../../../typing/widget'
 import {
   IconButton,
   Paper,
@@ -18,8 +17,9 @@ import {ModalForms} from '../../../ModalForms/ModalForms'
 import {Add, Delete, Edit} from '@mui/icons-material'
 import {AddInvoiceSeedItem} from './AddInvoiceSeedItem'
 import {EditInvoiceSeedItem} from './EditInvoiceSeedItem'
+import type {InvoiceWidget} from '../../../../../typing/widget/widget'
 
-type InvoiceSeedPropsType = {widget: Widget}
+type InvoiceSeedPropsType = {widget: InvoiceWidget}
 export const InvoiceSeed: React.FC<InvoiceSeedPropsType> = ({widget}) => {
   const {open, handleToggle, seed, addSeed, updateSeed} = useInvoiceSeed(widget)
 

@@ -7,9 +7,11 @@ import type {FormInputType} from './FormInput'
 import {FormInput} from './FormInput'
 import {Button} from './StyledComponents'
 
+type Option = {label: string; value: string}
+
 export type ModalFormSelectInputType = FormInputType & {
-  options: string[]
-  handleChange: (event: SyntheticEvent, value: string | null) => void
+  options: Option[]
+  handleChange: (event: SyntheticEvent, value: Option | null) => void
 }
 
 export type ModalFormSelectPropsType = {
