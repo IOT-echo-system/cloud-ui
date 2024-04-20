@@ -2,7 +2,7 @@ import {apiConfig} from '../../config/apiConfig'
 import WebClient from '../webClient'
 import type {Widget} from '../../typing/widget/widget'
 
-class _WidgetService {
+class WidgetService_ {
   widgetConfig = apiConfig.widget
 
   addWidget(values: {type: string; boardId: string}): Promise<Widget> {
@@ -25,4 +25,4 @@ class _WidgetService {
   }
 }
 
-export const WidgetService = new _WidgetService()
+export const WidgetService = new WidgetService_()
