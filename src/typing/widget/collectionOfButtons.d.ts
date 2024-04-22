@@ -6,4 +6,5 @@ export type ButtonType = {
   value: number
   min: number
   max: number
+  symbol?: string
 }

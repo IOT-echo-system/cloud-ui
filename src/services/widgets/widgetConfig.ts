@@ -7,6 +7,8 @@ export const widgetConfig = {
   },
   collectionOfButtons: {
     baseUrl: '/widgets/collection-of-buttons',
-    buttons: '/{widgetId}/buttons'
+    buttons: '/{widgetId}/buttons',
+    button: '/{widgetId}/buttons/{buttonId}',
+    buttonValue: '/{widgetId}/buttons/{buttonId}/value'
   }
 } as const

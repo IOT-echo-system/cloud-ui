@@ -23,8 +23,7 @@ export const FormContainer = styled('form')(({theme}) => ({
     padding: theme.spacing(4)
   }
 }))
-
-export const BoxContainer = styled(Box)<BoxProps>(({theme}) => ({
+styled(Box)<BoxProps>(({theme}) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),
@@ -56,7 +55,7 @@ export const WidgetContainer = styled(Stack)<StackProps>(({theme}) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   padding: theme.spacing(2),
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4)

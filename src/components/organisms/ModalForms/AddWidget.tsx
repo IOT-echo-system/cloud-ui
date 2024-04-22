@@ -12,7 +12,12 @@ export const AddWidget: GetFormPropsTypeFunction<{board: Board}> = (handleClose,
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const dispatch = useDispatch()
-  const {onClear, values, handleSubmit, onChange} = useForm({type: ''})
+  const {onClear, values, handleSubmit, onChange} = useForm({type: 'COLLECTION_OF_BUTTONS'} as {type: WidgetType})
+
+  const widgetOptions = Object.keys(widgetsNameMap).map(keyName => ({
+    label: widgetsNameMap[keyName as WidgetType],
+    value: keyName
+  }))
 
   const formInputs: FormInputType[] = [
     {
@@ -20,13 +25,11 @@ export const AddWidget: GetFormPropsTypeFunction<{board: Board}> = (handleClose,
       value: values.type,
       label: 'Select widget',
       required: true,
-      handleChange: (_event, value) => {
-        onChange('type', value?.value ?? '')
+      defaultValue: widgetOptions.find(option => option.value === values.type),
+      handleChange: value => {
+        onChange('type', value as WidgetType)
       },
-      options: Object.keys(widgetsNameMap).map(keyName => ({
-        label: widgetsNameMap[keyName as WidgetType],
-        value: keyName
-      }))
+      options: widgetOptions
     }
   ]
 

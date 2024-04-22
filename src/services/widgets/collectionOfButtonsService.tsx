@@ -15,6 +15,35 @@ class CollectionOfButtonsServiceWidget {
       body: values
     })
   }
+
+  updateButton(values: AddButtonRequest, widget: CollectionOfButtonsWidget, buttonId: string) {
+    return WebClient.put<CollectionOfButtonsWidget>({
+      baseUrl: this.collectionOfButtonsConfig.baseUrl,
+      path: this.collectionOfButtonsConfig.button,
+      headers: {boardId: widget.boardId},
+      uriVariables: {widgetId: widget.widgetId, buttonId},
+      body: values
+    })
+  }
+
+  deleteButton(buttonId: string, widget: CollectionOfButtonsWidget) {
+    return WebClient.deleteAPI<CollectionOfButtonsWidget>({
+      baseUrl: this.collectionOfButtonsConfig.baseUrl,
+      path: this.collectionOfButtonsConfig.button,
+      headers: {boardId: widget.boardId},
+      uriVariables: {widgetId: widget.widgetId, buttonId}
+    })
+  }
+
+  updateButtonValue(value: number, buttonId: string, widget: CollectionOfButtonsWidget) {
+    return WebClient.put<CollectionOfButtonsWidget>({
+      baseUrl: this.collectionOfButtonsConfig.baseUrl,
+      path: this.collectionOfButtonsConfig.buttonValue,
+      headers: {boardId: widget.boardId},
+      uriVariables: {widgetId: widget.widgetId, buttonId},
+      body: {value}
+    })
+  }
 }
 
 export const CollectionOfButtonsService = new CollectionOfButtonsServiceWidget()

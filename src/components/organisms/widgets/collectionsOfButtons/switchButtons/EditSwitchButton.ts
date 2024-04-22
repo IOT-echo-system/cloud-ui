@@ -9,17 +9,18 @@ import type {AddButtonRequest} from '../../../../../services/widgets/typing/coll
 import {updateWidget} from '../../../../../store/actions/boards'
 import type {ButtonType} from '../../../../../typing/widget/collectionOfButtons'
 
-export const AddSwitchButton: GetFormPropsTypeFunction<{
+export const EditSwitchButton: GetFormPropsTypeFunction<{
   widget: CollectionOfButtonsWidget
-}> = (handleClose, {widget}) => {
+  button: ButtonType
+}> = (handleClose, {widget, button}) => {
   const [loading, setLoading] = useState(false)
   const {values, onChange, handleSubmit} = useForm({
-    name: '',
-    mode: 'OUTPUT',
-    type: 'DIGITAL',
-    min: 0,
-    max: 1,
-    symbol: ''
+    name: button.name,
+    mode: button.mode,
+    type: button.type,
+    min: button.min,
+    max: button.max,
+    symbol: button.symbol ?? ''
   } as AddButtonRequest)
   const dispatch = useDispatch()
   const toast = useToast()
@@ -47,8 +48,9 @@ export const AddSwitchButton: GetFormPropsTypeFunction<{
       inputType: 'selectField',
       options: modeOptions,
       label: 'Mode',
-      required: true,
+      value: values.mode,
       defaultValue: modeOptions.find(option => option.value === values.mode),
+      required: true,
       handleChange: value => {
         onChange('mode', value as ButtonType['mode'])
       }
@@ -58,6 +60,7 @@ export const AddSwitchButton: GetFormPropsTypeFunction<{
       options: typeOptions,
       label: 'Type',
       required: true,
+      defaultValue: typeOptions.find(option => option.value === values.type),
       handleChange: value => {
         onChange('type', value as ButtonType['type'])
       }
@@ -97,7 +100,7 @@ export const AddSwitchButton: GetFormPropsTypeFunction<{
 
   const onSubmit = () => {
     setLoading(true)
-    CollectionOfButtonsService.addButton(values, widget)
+    CollectionOfButtonsService.updateButton(values, widget, button.buttonId)
       .then(collectionOfButtons => {
         dispatch(updateWidget({...widget, buttons: collectionOfButtons.buttons}, widget.boardId))
         handleClose()
@@ -110,9 +113,9 @@ export const AddSwitchButton: GetFormPropsTypeFunction<{
 
   return {
     formInputs: values.type === 'ANALOG' ? [...formInputs, ...minAndMaxFormInputs] : formInputs,
-    formTitle: 'Add switch button',
+    formTitle: 'Update switch button',
     loading,
     handleSubmit: handleSubmit(onSubmit),
-    submitLabel: 'Add'
+    submitLabel: 'Update button'
   }
 }

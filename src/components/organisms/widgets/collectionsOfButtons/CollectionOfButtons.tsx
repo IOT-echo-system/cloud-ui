@@ -10,9 +10,11 @@ import {Stack} from '@mui/material'
 
 export const CollectionOfButtons: React.FC<WidgetPropsType<'COLLECTION_OF_BUTTONS'>> = ({widget}) => {
   return (
-    <WidgetContainer spacing={2} p={2}>
-      <WidgetTitle widget={widget} />
-      <SwitchButtons widget={widget} />
+    <WidgetContainer spacing={2} p={2} sx={{minWidth: {xs: '90%', sm: 280}}}>
+      <Stack spacing={2}>
+        <WidgetTitle widget={widget} />
+        <SwitchButtons widget={widget} />
+      </Stack>
       <Stack direction={'row'}>
         <PolicyAllowed policyId={PolicyUtils.WIDGET_INVOICE_UPDATE}>
           <ModalForms getFormDetails={AddSwitchButton} widget={widget}>
