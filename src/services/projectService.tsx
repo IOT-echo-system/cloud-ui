@@ -27,6 +27,15 @@ class ProjectService_ {
       path: this.projectConfig.projectDetails
     })
   }
+
+  updateProjectName(values: {name: string}, projectId: string): Promise<{name: string}> {
+    return WebClient.put<{name: string}>({
+      baseUrl: this.projectConfig.baseUrl,
+      path: this.projectConfig.name,
+      body: values,
+      uriVariables: {projectId}
+    })
+  }
 }
 
 export const ProjectService = new ProjectService_()

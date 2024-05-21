@@ -3,6 +3,7 @@ import {Box, Divider, Drawer, IconButton, MenuItem, Stack, Typography} from '@mu
 import {Close} from '@mui/icons-material'
 import {useSelector} from '../../../hooks'
 import {Link} from '../../atoms'
+import {Config} from '../../../config'
 
 type MobileMenuPropsType = {open: boolean; handleClose: () => void}
 
@@ -17,14 +18,16 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
           </IconButton>
         </Stack>
         <Divider />
-        <Stack m={2} flexWrap={'wrap'}>
-          <Typography variant={'h5'} component={'div'}>
-            {project.name}
-          </Typography>
-          <Typography variant={'subtitle1'} component={'div'}>
-            Project Id: {project.projectId}
-          </Typography>
-        </Stack>
+        <Link href={Config.PROJECT_PAGE_PATH} disableunderline={'true'} onClick={handleClose}>
+          <Stack m={2} flexWrap={'wrap'}>
+            <Typography variant={'h5'} component={'div'}>
+              {project.name}
+            </Typography>
+            <Typography variant={'subtitle1'} component={'div'}>
+              Project Id: {project.projectId}
+            </Typography>
+          </Stack>
+        </Link>
         <Divider />
         <Stack mt={1}>
           {site.menus.map(({name, link}) => (

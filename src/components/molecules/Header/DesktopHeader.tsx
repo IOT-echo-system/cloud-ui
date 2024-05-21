@@ -15,12 +15,14 @@ export const DesktopHeader: React.FC = () => {
   return (
     <Stack justifyContent={'center'}>
       <PageContainer direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
-        <Stack direction={'row'} alignItems={'center'} spacing={2}>
-          <Typography variant={'h6'} component={'div'}>
-            {project.name}
-          </Typography>
-          <Typography variant={'body2'}>Project Id: {project.projectId}</Typography>
-        </Stack>
+        <Link href={Config.PROJECT_PAGE_PATH} disableunderline={'true'}>
+          <Stack direction={'row'} alignItems={'center'} spacing={2}>
+            <Typography variant={'h6'} component={'div'}>
+              {project.name}
+            </Typography>
+            <Typography variant={'body2'}>Project Id: {project.projectId}</Typography>
+          </Stack>
+        </Link>
         <Button
           onClick={() => {
             setOpen(true)

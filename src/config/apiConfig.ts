@@ -17,7 +17,8 @@ export const apiConfig = {
     projects: '',
     projectsWithRoles: '/project-with-roles',
     project: '/{projectId}/role/{roleId}',
-    projectDetails: '/project-details'
+    projectDetails: '/project-details',
+    name: '/{projectId}/name'
   },
   board: {
     baseUrl: '/boards',

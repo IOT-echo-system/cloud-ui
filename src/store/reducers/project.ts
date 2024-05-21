@@ -9,7 +9,8 @@ export const initProjectState: Project = {
   policies: [],
   roles: [],
   name: '',
-  projectId: ''
+  projectId: '',
+  users: []
 }
 
 const projectReducer = (state: Project, action: TRootActions): Project => {

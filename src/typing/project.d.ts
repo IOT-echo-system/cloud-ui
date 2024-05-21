@@ -6,4 +6,5 @@ export interface Project {
   name: string
   roles: Role[]
   policies: Policy[]
+  users: Array<{userId: string; name: string; roles: Role[]}>
 }

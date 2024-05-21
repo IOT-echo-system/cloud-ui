@@ -5,5 +5,6 @@ export const Config = {
   FORGOT_PASSWORD_PAGE_PATH: '/auth/forgot-password',
   START_PAGE_PATH: '/start',
   PROFILE_PAGE_PATH: '/profiles',
-  BOARDS_PAGE_PATH: '/boards'
+  BOARDS_PAGE_PATH: '/boards',
+  PROJECT_PAGE_PATH: '/project'
 } as const

@@ -18,7 +18,7 @@ export const initSiteState: SiteStateType = {
   menus: [
     {name: 'Dashboard', link: '/', exact: true},
     {name: 'Board', link: '/boards'},
-    {name: 'Project', link: '/projects'}
+    {name: 'Project', link: '/project'}
   ]
 }
 
