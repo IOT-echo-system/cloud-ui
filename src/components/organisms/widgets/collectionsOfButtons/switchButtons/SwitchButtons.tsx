@@ -37,9 +37,12 @@ export const SwitchButtons: React.FC<SwitchButtonsPropsType> = ({widget}) => {
               alignItems={button.type === 'DIGITAL' ? 'center' : 'start'}
               width={'100%'}
             >
-              <Typography>
-                {button.name} {button.type === 'ANALOG' ? `[${button.value}${button.symbol}]` : ''}
-              </Typography>
+              <Stack>
+                <Typography>
+                  {button.name} {button.type === 'ANALOG' ? `[${button.value}${button.symbol}]` : ''}
+                </Typography>
+                {editMode && <Typography variant={'body2'}>ButtonId: {button.buttonId}</Typography>}
+              </Stack>
               {button.type === 'DIGITAL' ? (
                 <Switch
                   disabled={button.mode === 'INPUT'}
