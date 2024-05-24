@@ -1,32 +1,32 @@
 import React from 'react'
-import {useSelector} from '../../../hooks'
 import {Breadcrumbs, Button, PageContainer, PolicyAllowed} from '../../atoms'
 import {Stack} from '@mui/material'
 import {PolicyUtils} from '../../../utils/policyUtils'
 import {ModalForms} from '../../organisms'
 import {Add} from '@mui/icons-material'
-import {AddBoard} from '../../organisms/ModalForms/formFunctions'
-import {BoardWithStatus} from './BoardWithStatus'
+import {AddRoutine} from '../../organisms/ModalForms/formFunctions'
+import {useSelector} from '../../../hooks'
+import {RoutineView} from './RoutineView'
 
-export const Boards: React.FC = () => {
-  const {boards} = useSelector(state => state)
+export const Routines: React.FC = () => {
+  const {routines} = useSelector(state => state)
 
   return (
     <PageContainer pt={2}>
       <Stack direction={'row'} justifyContent={'space-between'}>
-        <Breadcrumbs links={[]} text={'Boards'} />
-        <PolicyAllowed policyId={PolicyUtils.BOARD_CREATE}>
-          <ModalForms getFormDetails={AddBoard}>
+        <Breadcrumbs links={[]} text={'Routines'} />
+        <PolicyAllowed policyId={PolicyUtils.ROUTINE_CREATE}>
+          <ModalForms getFormDetails={AddRoutine}>
             <Button variant={'contained'} startIcon={<Add />}>
-              Create board
+              Create Routine
             </Button>
           </ModalForms>
         </PolicyAllowed>
       </Stack>
 
       <Stack direction={'row'} flexWrap={'wrap'}>
-        {boards.map(board => (
-          <BoardWithStatus key={board.boardId} board={board} />
+        {routines.map(routine => (
+          <RoutineView key={routine.routineId} routine={routine} />
         ))}
       </Stack>
     </PageContainer>

@@ -1,12 +1,12 @@
-import {Box, Chip, Stack, Typography} from '@mui/material'
 import React from 'react'
-import {Link} from '../atoms'
-import type {Board} from '../../typing/board'
-import {Config} from '../../config'
+import {Link} from '../../atoms'
+import type {Routine} from '../../../typing/routine'
+import {Config} from '../../../config'
+import {Box, Chip, Stack, Typography} from '@mui/material'
 
-export type BoardWithDevicesPropsType = {board: Board}
+type BoardPropsType = {routine: Routine}
 
-export const BoardWithStatus: React.FC<BoardWithDevicesPropsType> = ({board}) => {
+export const RoutineView: React.FC<BoardPropsType> = ({routine}) => {
   return (
     <Box
       boxShadow={2}
@@ -20,21 +20,22 @@ export const BoardWithStatus: React.FC<BoardWithDevicesPropsType> = ({board}) =>
         width: {xs: '100%', md: 'calc(50% - 96px)', lg: 'calc(33% - 96px)', xl: 'calc(25% - 96px)'}
       }}
       component={Link}
-      href={`${Config.BOARDS_PAGE_PATH}/${board.boardId}`}
+      href={`${Config.ROUTINE_PAGE_PATH}/${routine.routineId}`}
       disableunderline={'true'}
     >
       <Stack spacing={{xs: 1, sm: 2}}>
+        <Typography variant={'body2'}>Routine Id: {routine.routineId}</Typography>
         <Stack>
-          <Typography variant={'h5'} component={'div'} mr={2}>
-            {board.name}
+          <Typography variant={'h5'} component={'div'}>
+            {routine.name}
           </Typography>
-          <Typography>Board Id: {board.boardId}</Typography>
+          <Typography>{routine.description}</Typography>
         </Stack>
         <Stack direction={'row'} alignItems={'center'} sx={{pointerEvents: 'none'}} flexWrap={'wrap'}>
           <Chip
             size={'small'}
-            color={board.status === 'HEALTHY' ? 'success' : 'error'}
-            label={board.status}
+            color={routine.enable ? 'success' : 'error'}
+            label={routine.enable ? 'Active' : 'Inactive'}
             sx={{paddingLeft: '12px', paddingRight: '12px'}}
           />
         </Stack>

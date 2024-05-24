@@ -23,18 +23,17 @@ export const FormContainer = styled('form')(({theme}) => ({
     padding: theme.spacing(4)
   }
 }))
-styled(Box)<BoxProps>(({theme}) => ({
+
+export const BoxContainer = styled(Box)<BoxProps>(({theme}) => ({
   background: theme.palette.background.paper,
   boxShadow: theme.shadows[1],
   borderRadius: theme.spacing(1),
-  margin: theme.spacing(1),
+  margin: theme.spacing(1, 0),
   justifyContent: 'center',
-  width: `calc(100vw - ${theme.spacing(4)})`,
   '&>*': {
     margin: theme.spacing(2)
   },
   [theme.breakpoints.up('sm')]: {
-    width: theme.spacing(72),
     '&>*': {
       margin: theme.spacing(2.5)
     }

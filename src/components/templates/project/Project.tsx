@@ -1,13 +1,12 @@
 import React from 'react'
 import {useSelector} from '../../../hooks'
-import {Breadcrumbs, Button, CollapsibleAccordion, PageContainer, PolicyAllowed} from '../../atoms'
-import {IconButton, Stack, Typography} from '@mui/material'
+import {Breadcrumbs, Button, CollapsibleAccordion, EditableTitleWithId, PageContainer} from '../../atoms'
+import {Stack, Typography} from '@mui/material'
 import {ModalForms} from '../../organisms'
-import {Add, Edit} from '@mui/icons-material'
-import {AddProject} from '../../organisms/ModalForms/formFunctions/AddProject'
+import {Add} from '@mui/icons-material'
+import {AddProject, EditProjectName} from '../../organisms/ModalForms/formFunctions'
 import {useStart} from '../start/useStart'
 import {PolicyUtils} from '../../../utils/policyUtils'
-import {EditProjectName} from '../../organisms/ModalForms/formFunctions/EditProjectName'
 
 export const Project: React.FC = () => {
   const {project} = useSelector(state => state)
@@ -26,21 +25,14 @@ export const Project: React.FC = () => {
       </Stack>
 
       <Stack spacing={2}>
-        <Stack direction={'row'} alignItems={'start'} spacing={2}>
-          <Stack>
-            <Typography component={'div'} variant={'h4'}>
-              {project.name}
-            </Typography>
-            <Typography>Project Id: {project.projectId}</Typography>
-          </Stack>
-          <PolicyAllowed policyId={PolicyUtils.PROJECT_UPDATE}>
-            <ModalForms getFormDetails={EditProjectName} project={project}>
-              <IconButton color={'primary'}>
-                <Edit />
-              </IconButton>
-            </ModalForms>
-          </PolicyAllowed>
-        </Stack>
+        <EditableTitleWithId
+          policyId={PolicyUtils.PROJECT_UPDATE}
+          getFormDetails={EditProjectName}
+          project={project}
+          title={project.name}
+          id={project.projectId}
+          idLabel={'Project Id'}
+        />
         {/*<Users/>*/}
       </Stack>
 

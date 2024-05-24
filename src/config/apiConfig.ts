@@ -31,5 +31,10 @@ export const apiConfig = {
     baseUrl: '/widgets',
     widgets: '',
     title: '/{widgetId}/title'
+  },
+  routine: {
+    baseUrl: '/routines',
+    routines: '',
+    name: '/{routineId}/name'
   }
 } as const

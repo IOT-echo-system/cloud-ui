@@ -1,3 +1,7 @@
 export * from './AddBoard'
+export * from './AddProject'
+export * from './AddRoutine'
 export * from './EditBoardName'
+export * from './EditProjectName'
+export * from './EditRoutineName'
 export * from './EditWidgetName'
