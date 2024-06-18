@@ -24,6 +24,10 @@ export const PolicyUtils = {
   ROUTINE_CREATE: '000028',
   ROUTINE_UPDATE: '000029',
   ROUTINE_DELETE: '000030',
+  WIDGET_LEVEL_MONITOR_GET: '000031',
+  WIDGET_LEVEL_MONITOR_CREATE: '000032',
+  WIDGET_LEVEL_MONITOR_UPDATE: '000033',
+  WIDGET_LEVEL_MONITOR_DELETE: '000034',
 
   isValid(polices: Policy[], policyId: string): boolean {
     return polices.some(policy => policy.policyId === policyId)

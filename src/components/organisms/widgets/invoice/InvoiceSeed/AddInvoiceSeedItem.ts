@@ -15,7 +15,7 @@ export const AddInvoiceSeedItem: GetFormPropsTypeFunction<AddInvoiceSeedItemProp
   const [loading, setLoading] = useState(false)
   const toast = useToast()
 
-  const {onClear, values, handleSubmit, onChange} = useForm({name: '', code: '', pricePerUnit: 0})
+  const {onClear, values, handleSubmit, onChange} = useForm<InvoiceSeed>({name: '', code: '', pricePerUnit: 0})
 
   const formInputs: FormInputType[] = [
     {
