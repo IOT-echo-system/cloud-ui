@@ -13,6 +13,7 @@ export const widgetConfig = {
   },
   levelMonitor: {
     baseUrl: '/widgets/level-monitor',
-    values: '/{widgetId}/values'
+    values: '/{widgetId}/values',
+    captureValue: '/{widgetId}/capture-value',
   }
 } as const

@@ -15,6 +15,16 @@ class LevelMonitorServiceWidget {
       body: values
     })
   }
+
+  captureValue(type: 'min' | 'max', widget: LevelMonitorWidget): Promise<LevelMonitorWidget> {
+    return WebClient.put<LevelMonitorWidget>({
+      baseUrl: this.levelMonitorConfig.baseUrl,
+      path: this.levelMonitorConfig.captureValue,
+      headers: {boardId: widget.boardId},
+      uriVariables: {widgetId: widget.widgetId},
+      body: {type}
+    })
+  }
 }
 
 export const LevelMonitorService = new LevelMonitorServiceWidget()

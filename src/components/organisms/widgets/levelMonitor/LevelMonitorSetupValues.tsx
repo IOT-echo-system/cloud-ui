@@ -5,13 +5,19 @@ import {Stack, Typography} from '@mui/material'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../ModalForms/ModalForms'
 import {UpdateMinAndMaxValue} from './UpdateMinAndMaxValue'
+import {ConfirmationModals} from '../../../molecules'
+import {CaptureValue} from './CaptureValue'
 
 export const LevelMonitorSetupValues: React.FC<WidgetPropsType<'LEVEL_MONITOR'>> = ({widget: levelMonitorWidget}) => {
   return (
     <PolicyAllowed policyId={PolicyUtils.WIDGET_LEVEL_MONITOR_UPDATE} spacing={2}>
       <Stack direction={'row'} spacing={2}>
-        <Button variant={'contained'}>Capture max</Button>
-        <Button variant={'contained'}>Capture min</Button>
+        <ConfirmationModals getConfirmationModalDetails={CaptureValue} widget={levelMonitorWidget} type={'min'}>
+          <Button variant={'contained'}>Capture min</Button>
+        </ConfirmationModals>
+        <ConfirmationModals getConfirmationModalDetails={CaptureValue} widget={levelMonitorWidget} type={'max'}>
+          <Button variant={'contained'}>Capture max</Button>
+        </ConfirmationModals>
       </Stack>
       <Stack spacing={1}>
         <Typography>
