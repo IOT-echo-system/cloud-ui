@@ -26,7 +26,7 @@ export const LevelMonitorSetupValues: React.FC<WidgetPropsType<'LEVEL_MONITOR'>>
         <Typography>
           Max: {levelMonitorWidget.maxValue} ({levelMonitorWidget.maxRange} {levelMonitorWidget.symbol})
         </Typography>
-        <Typography>Current value: {levelMonitorWidget.value}</Typography>
+        <Typography>Current value: {levelMonitorWidget.actualValue}</Typography>
       </Stack>
       <ModalForms getFormDetails={UpdateMinAndMaxValue} widget={levelMonitorWidget}>
         <Button variant={'contained'}>Update values</Button>

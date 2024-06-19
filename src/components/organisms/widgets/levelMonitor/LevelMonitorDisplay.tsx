@@ -6,7 +6,7 @@ export const LevelMonitorDisplay: React.FC<WidgetPropsType<'LEVEL_MONITOR'>> = (
   return (
     <Stack direction={'row'} spacing={2} justifyContent={'center'} alignItems={'center'}>
       <Typography p={'16px 32px'} bgcolor={'paper'}>
-        {levelMonitorWidget.value} {levelMonitorWidget.symbol}
+        {levelMonitorWidget.value.toFixed(2)} {levelMonitorWidget.symbol}
       </Typography>
     </Stack>
   )
