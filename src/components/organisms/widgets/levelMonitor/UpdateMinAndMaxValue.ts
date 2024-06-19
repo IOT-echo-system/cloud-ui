@@ -57,7 +57,7 @@ export const UpdateMinAndMaxValue: GetFormPropsTypeFunction<AddInvoiceSeedItemPr
       .then(levelMonitorWidget => {
         onClear()
         handleClose()
-        dispatch(updateWidget(levelMonitorWidget, widget.boardId))
+        dispatch(updateWidget({...widget, ...levelMonitorWidget}, widget.boardId))
       })
       .catch(toast.error)
       .finally(() => {

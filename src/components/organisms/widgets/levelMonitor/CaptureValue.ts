@@ -18,7 +18,7 @@ export const CaptureValue: GetConfirmationModalPropsTypeFunction<{
     setLoading(true)
     LevelMonitorService.captureValue(type, widget)
       .then(levelMonitorWidget => {
-        dispatch(updateWidget({...levelMonitorWidget}, widget.boardId))
+        dispatch(updateWidget({...widget, ...levelMonitorWidget}, widget.boardId))
         handleClose()
       })
       .catch(toast.error)

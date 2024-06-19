@@ -13,6 +13,7 @@ export const LevelMonitor: React.FC<WidgetPropsType<'LEVEL_MONITOR'>> = ({widget
     setSetupMode(!setupMode)
   }
 
+  const level = ((widget.actualValue - widget.minValue) * 100) / (widget.maxValue - widget.minValue)
   return (
     <Stack sx={{position: 'relative'}}>
       <WidgetContainer spacing={2} sx={{minWidth: {xs: '90%', sm: 280}, minHeight: 320}}>
@@ -34,8 +35,9 @@ export const LevelMonitor: React.FC<WidgetPropsType<'LEVEL_MONITOR'>> = ({widget
           width: '100%',
           bottom: 0,
           bgcolor: 'lightblue',
-          height: `${((widget.actualValue - widget.minValue) * 100) / (widget.maxValue - widget.minValue)}%`,
+          height: `${level}%`,
           zIndex: 0,
+          borderRadius: level >= 98 ? '8px' : 0,
           borderBottomLeftRadius: '8px',
           borderBottomRightRadius: '8px'
         }}
@@ -43,10 +45,3 @@ export const LevelMonitor: React.FC<WidgetPropsType<'LEVEL_MONITOR'>> = ({widget
     </Stack>
   )
 }
-
-/*
-5-------------25
-      10
-10-5/25-5
-
- */
