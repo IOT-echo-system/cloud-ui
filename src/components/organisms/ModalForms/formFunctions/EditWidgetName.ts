@@ -18,7 +18,7 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
   const formInputs: FormInputType[] = [
     {
       inputType: 'textField',
-      label: 'Update invoice widget name',
+      label: 'Update widget name',
       value: values.name,
       required: true,
       onChange: event => {
@@ -44,7 +44,7 @@ export const EditWidgetName: GetFormPropsTypeFunction<EditInvoiceWidgetNameProps
     handleSubmit: handleSubmit(onSubmit),
     loading,
     formInputs,
-    formTitle: 'Update invoice widget name',
+    formTitle: 'Update widget name',
     submitLabel: 'Update widget name'
   }
 }
