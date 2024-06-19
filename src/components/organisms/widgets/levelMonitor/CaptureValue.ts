@@ -1,13 +1,13 @@
 import {useState} from 'react'
 
-import {LevelMonitorWidget} from '../../../../typing/widget/widget'
-import {GetConfirmationModalPropsTypeFunction} from '../../../molecules'
+import type {LevelMonitorWidget} from '../../../../typing/widget/widget'
+import type {GetConfirmationModalPropsTypeFunction} from '../../../molecules'
 import {useDispatch, useToast} from '../../../../hooks'
 import {LevelMonitorService} from '../../../../services/widgets/levelMonitor'
 import {updateWidget} from '../../../../store/actions/boards'
 
 export const CaptureValue: GetConfirmationModalPropsTypeFunction<{
-  widget: LevelMonitorWidget,
+  widget: LevelMonitorWidget
   type: 'min' | 'max'
 }> = (handleClose, {widget, type}) => {
   const [loading, setLoading] = useState(false)
