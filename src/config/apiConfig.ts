@@ -1,5 +1,5 @@
 export const apiConfig = {
-  mqttUrl: 'ws://ws.robotutortech.com',
+  mqttUrl: 'ws://ws.robotutortech.com:1885',
   baseUrl: '/api',
   auth: {
     baseUrl: '/auth',
