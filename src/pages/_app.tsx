@@ -6,22 +6,24 @@ import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
 import {ToastWrapper} from '../components/atoms'
 import {Layout} from '../components/organisms'
-import {FetchDetails, ValidatedProfile} from '../components/molecules'
+import {FetchDetails, MqttSubscriber, ValidatedProfile} from '../components/molecules'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   return (
     <StoreProvider>
-      <CustomThemeProvider>
-        <ToastWrapper>
-          <ValidatedProfile>
-            <FetchDetails>
-              <Layout>
-                <Component {...pageProps} key={router.asPath} />
-              </Layout>
-            </FetchDetails>
-          </ValidatedProfile>
-        </ToastWrapper>
-      </CustomThemeProvider>
+      <MqttSubscriber>
+        <CustomThemeProvider>
+          <ToastWrapper>
+            <ValidatedProfile>
+              <FetchDetails>
+                <Layout>
+                  <Component {...pageProps} key={router.asPath} />
+                </Layout>
+              </FetchDetails>
+            </ValidatedProfile>
+          </ToastWrapper>
+        </CustomThemeProvider>
+      </MqttSubscriber>
     </StoreProvider>
   )
 }

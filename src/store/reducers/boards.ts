@@ -31,7 +31,7 @@ const boardsReducer = (state: Board[], action: TRootActions): Board[] => {
           return board
         }
         board.widgets = board.widgets.map(widget =>
-          widget.widgetId === action.payload.widget.widgetId ? action.payload.widget : widget
+          widget.widgetId === action.payload.widget.widgetId ? {...widget, ...action.payload.widget} : widget
         )
         return board
       })

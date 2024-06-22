@@ -2,11 +2,10 @@ import type {PropsWithChildren} from 'react'
 import React, {useEffect, useState} from 'react'
 import {useDispatch} from '../../hooks'
 import {useRouter} from 'next/router'
-import {AuthService} from '../../services'
+import {AuthService, ProjectService} from '../../services'
 import {Config} from '../../config'
 import {setUser} from '../../store/actions/user'
 import {Loader} from '../atoms'
-import {ProjectService} from '../../services/projectService'
 import {setProject} from '../../store/actions/project'
 
 export const ValidatedProfile: React.FC<PropsWithChildren> = ({children}) => {

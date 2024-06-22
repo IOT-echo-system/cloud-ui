@@ -1,17 +1,15 @@
 import {useState} from 'react'
 import type {LevelMonitorWidget} from '../../../../typing/widget/widget'
 import type {GetFormPropsTypeFunction} from '../../ModalForms/model'
-import {useDispatch, useForm, useToast} from '../../../../hooks'
+import {useForm, useToast} from '../../../../hooks'
 import type {FormInputType} from '../../../atoms'
 import {LevelMonitorService} from '../../../../services/widgets/levelMonitor'
 import type {LevelMonitorValues} from '../../../../services/widgets/typing/levelMonitor'
-import {updateWidget} from '../../../../store/actions/boards'
 
 export type AddInvoiceSeedItemPropsType = {widget: LevelMonitorWidget}
 
 export const UpdateMinAndMaxValue: GetFormPropsTypeFunction<AddInvoiceSeedItemPropsType> = (handleClose, {widget}) => {
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
   const toast = useToast()
 
   const {onClear, values, handleSubmit, onChange} = useForm<LevelMonitorValues>({
@@ -54,10 +52,9 @@ export const UpdateMinAndMaxValue: GetFormPropsTypeFunction<AddInvoiceSeedItemPr
   const onSubmit = () => {
     setLoading(true)
     LevelMonitorService.updateValues(values, widget)
-      .then(levelMonitorWidget => {
+      .then(() => {
         onClear()
         handleClose()
-        dispatch(updateWidget({...widget, ...levelMonitorWidget}, widget.boardId))
       })
       .catch(toast.error)
       .finally(() => {
