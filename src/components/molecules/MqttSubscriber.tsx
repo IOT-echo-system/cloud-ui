@@ -2,7 +2,6 @@ import type {PropsWithChildren} from 'react'
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from '../../hooks'
 import mqtt from 'mqtt'
-import {apiConfig} from '../../config/apiConfig'
 import {updateWidget} from '../../store/actions/boards'
 import type {Widget} from '../../typing/widget/widget'
 
@@ -20,7 +19,10 @@ export const MqttSubscriber: React.FC<PropsWithChildren> = ({children}) => {
 
   useEffect(() => {
     if (user.userId && project.projectId) {
-      const client = mqtt.connect(apiConfig.mqttUrl, {
+      const client = mqtt.connect({
+        protocol: 'ws',
+        host: 'ws.robotutortech.com',
+        port: 1885,
         clientId: `user_${user.userId}`,
         username: 'cloud-ui',
         password: 'Robotutor'
