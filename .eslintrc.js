@@ -10,7 +10,7 @@ module.exports = {
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.test.json']
   },
-  ignorePatterns: "*.js",
+  ignorePatterns: '*.js',
   root: true,
   env: {
     commonjs: true,
@@ -134,13 +134,20 @@ module.exports = {
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/no-confusing-void-expression': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/unbound-method':'off'
+        '@typescript-eslint/unbound-method': 'off'
       }
     },
     {
-      files: ['**/actions/*.ts','**/services/*.tsx'],
+      files: ['**/actions/*.ts', '**/services/*.tsx'],
       rules: {
         '@typescript-eslint/explicit-module-boundary-types': 'off'
+      }
+    },
+    {
+      files: ['**/ErrorBoundary.tsx'],
+      rules: {
+        'no-console': 'off',
+        'class-methods-use-this': 'off'
       }
     },
     {
