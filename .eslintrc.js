@@ -144,7 +144,7 @@ module.exports = {
       }
     },
     {
-      files: ['**/ErrorBoundary.tsx', '**/MqttSubscriber.tsx'],
+      files: ['**/ErrorBoundary.tsx'],
       rules: {
         'no-console': 'off',
         'class-methods-use-this': 'off'

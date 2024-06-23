@@ -19,10 +19,10 @@ export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
   const {user, project} = useSelector(state => state)
   const dispatch = useDispatch()
 
-  const handleMessage = (data: string) => {
-    const {event, payload} = JSON.parse(data)
+  const handleMessage = (content: string) => {
+    const {event, data} = JSON.parse(content)
     if (event === 'UPDATE_WIDGET') {
-      const widget = payload as Widget
+      const widget = data as Widget
       dispatch(updateWidget(widget, widget.boardId))
     }
   }
