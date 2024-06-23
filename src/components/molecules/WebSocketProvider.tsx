@@ -8,11 +8,11 @@ import {getStorage, StorageKeys} from '../../utils/storage'
 const retryCount = 3
 const retryInterval = 3000
 
-const url = typeof window !== 'undefined' ? `${window.location.href.replace('http', 'ws')}websockets` : ''
+const url = typeof window !== 'undefined' ? `${window.location.origin.replace('http', 'ws')}/websockets` : ''
 const {token} =
   typeof window !== 'undefined' ? getStorage<{token: string}>(StorageKeys.AUTH) ?? {token: 'token'} : {token: 'token'}
 
-export const MqttSubscriber: React.FC<PropsWithChildren> = ({children}) => {
+export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
   const [retry, setRetry] = useState(retryCount)
   const [readyState, setReadyState] = useState(false)
 

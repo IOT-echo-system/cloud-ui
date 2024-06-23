@@ -6,14 +6,14 @@ import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
 import {CustomErrorFallback, ToastWrapper} from '../components/atoms'
 import {Layout} from '../components/organisms'
-import {FetchDetails, MqttSubscriber, ValidatedProfile} from '../components/molecules'
+import {FetchDetails, WebSocketProvider, ValidatedProfile} from '../components/molecules'
 import ErrorBoundary from '../components/atoms/ErrorBoundary'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   return (
     <ErrorBoundary fallback={<CustomErrorFallback />}>
       <StoreProvider>
-        <MqttSubscriber>
+        <WebSocketProvider>
           <CustomThemeProvider>
             <ToastWrapper>
               <ValidatedProfile>
@@ -25,7 +25,7 @@ const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
               </ValidatedProfile>
             </ToastWrapper>
           </CustomThemeProvider>
-        </MqttSubscriber>
+        </WebSocketProvider>
       </StoreProvider>
     </ErrorBoundary>
   )
