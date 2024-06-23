@@ -144,13 +144,6 @@ module.exports = {
       }
     },
     {
-      files: ['**/ErrorBoundary.tsx'],
-      rules: {
-        'no-console': 'off',
-        'class-methods-use-this': 'off'
-      }
-    },
-    {
       files: ['**/reducers/*.ts'],
       rules: {
         '@typescript-eslint/no-unsafe-member-access': 'off',

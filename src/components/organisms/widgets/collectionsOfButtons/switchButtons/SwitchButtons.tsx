@@ -46,8 +46,9 @@ export const SwitchButtons: React.FC<SwitchButtonsPropsType> = ({widget}) => {
               {button.type === 'DIGITAL' ? (
                 <Switch
                   disabled={button.mode === 'INPUT'}
-                  defaultChecked={button.value === 1}
+                  checked={button.value === 1}
                   onChange={handleChange<'boolean'>(button)}
+                  inputProps={{'aria-label': 'controlled'}}
                 />
               ) : (
                 <Stack spacing={2} direction="row" sx={{width: '100%'}} alignItems="center" justifyContent={'center'}>
@@ -59,7 +60,7 @@ export const SwitchButtons: React.FC<SwitchButtonsPropsType> = ({widget}) => {
                     disabled={button.mode === 'INPUT'}
                     min={button.min}
                     max={button.max}
-                    defaultValue={button.value}
+                    value={button.value}
                     onChange={handleChange<'number'>(button)}
                     valueLabelDisplay="auto"
                   />
