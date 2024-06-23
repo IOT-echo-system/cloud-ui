@@ -19,17 +19,21 @@ export const MqttSubscriber: React.FC<PropsWithChildren> = ({children}) => {
 
   useEffect(() => {
     if (user.userId && project.projectId) {
-      const client = mqtt.connect({
-        protocol: 'ws',
-        host: 'ws.robotutortech.com',
-        port: 1885,
-        clientId: `user_${user.userId}`,
-        username: 'cloud-ui',
-        password: 'Robotutor'
-      })
-      client.subscribe(`project/${project.projectId}/#`, () => {
-        client.on('message', handleMessage)
-      })
+      try {
+        const client = mqtt.connect({
+          protocol: 'ws',
+          host: 'ws.robotutortech.com',
+          port: 1885,
+          clientId: `user_${user.userId}`,
+          username: 'cloud-ui',
+          password: 'Robotutor'
+        })
+        client.subscribe(`project/${project.projectId}/#`, () => {
+          client.on('message', handleMessage)
+        })
+      } catch (error: unknown) {
+        console.error(error)
+      }
     }
   }, [user.userId, project.projectId])
 
