@@ -8,11 +8,7 @@ import {getStorage, StorageKeys} from '../../utils/storage'
 const retryCount = 3
 const retryInterval = 3000
 
-const url = typeof window !== 'undefined'
-  ? `${window.location.origin
-    .replace('https://', 'ws://')
-    .replace('http://', 'ws://')}/websockets`
-  : ''
+const url = typeof window !== 'undefined' ? `${window.location.origin.replace('http', 'ws')}/websockets` : ''
 const {token} =
   typeof window !== 'undefined' ? getStorage<{token: string}>(StorageKeys.AUTH) ?? {token: 'token'} : {token: 'token'}
 
