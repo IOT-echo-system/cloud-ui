@@ -1,41 +1,53 @@
 import type {PropsWithChildren} from 'react'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from '../../hooks'
-import mqtt from 'mqtt'
 import {updateWidget} from '../../store/actions/boards'
 import type {Widget} from '../../typing/widget/widget'
+import {getStorage, StorageKeys} from '../../utils/storage'
+
+const retryCount = 3
+const retryInterval = 3000
+
+const url = typeof window !== 'undefined' ? `${window.location.href.replace('http', 'ws')}websockets` : ''
+const {token} =
+  typeof window !== 'undefined' ? getStorage<{token: string}>(StorageKeys.AUTH) ?? {token: 'token'} : {token: 'token'}
 
 export const MqttSubscriber: React.FC<PropsWithChildren> = ({children}) => {
+  const [retry, setRetry] = useState(retryCount)
+  const [readyState, setReadyState] = useState(false)
+
   const {user, project} = useSelector(state => state)
   const dispatch = useDispatch()
 
-  const handleMessage = (topic: string, payload: Buffer) => {
-    const topicName = topic.slice(15)
-    if (topicName === 'UPDATE_WIDGET') {
-      const widget = JSON.parse(payload.toString()) as Widget
+  const handleMessage = (data: string) => {
+    const {event, payload} = JSON.parse(data)
+    if (event === 'UPDATE_WIDGET') {
+      const widget = payload as Widget
       dispatch(updateWidget(widget, widget.boardId))
     }
   }
 
   useEffect(() => {
-    if (user.userId && project.projectId) {
-      try {
-        const client = mqtt.connect({
-          protocol: 'ws',
-          host: 'ws.robotutortech.com',
-          port: 1885,
-          clientId: `user_${user.userId}`,
-          username: 'cloud-ui',
-          password: 'Robotutor'
-        })
-        client.subscribe(`project/${project.projectId}/#`, () => {
-          client.on('message', handleMessage)
-        })
-      } catch (error: unknown) {
-        console.error(error)
+    if (typeof window !== 'undefined' && !readyState && user.userId && project.projectId) {
+      const ws = new WebSocket(`${url}?client=web&token=${token}`)
+      ws.onopen = () => {
+        setReadyState(true)
+        ws.onmessage = event => {
+          handleMessage(event.data as string)
+        }
+        setRetry(retryCount)
+      }
+
+      ws.onclose = () => {
+        setReadyState(false)
+        if (retry > 0) {
+          setTimeout(setRetry, retryInterval, retry - 1)
+        } else {
+          setTimeout(setRetry, retryInterval * 20, retryCount)
+        }
       }
     }
-  }, [user.userId, project.projectId])
+  }, [user.userId, project.projectId, retry])
 
   return <>{children}</>
 }

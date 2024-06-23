@@ -13,7 +13,7 @@ export const clearStorage = (key: StorageKeys): void => {
 
 export const getStorage = <T extends Record<string, unknown>>(key: StorageKeys): T | null => {
   try {
-    return JSON.parse(window.localStorage.getItem(key) ?? '') as T
+    return JSON.parse(window.localStorage.getItem(key) ?? '{}') as T
   } catch (error) {
     return null
   }
