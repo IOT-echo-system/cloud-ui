@@ -28,7 +28,10 @@ export const useSignUp = (): UseSignUpReturnType => {
   const onSubmit = () => {
     const password = passwordInputFields[0].value as string
     UserService.registration({password, ...values})
-      .then(() => router.push(Config.LOGIN_PAGE_PATH))
+      .then(() => {
+        toast.success('Your account has been created successfully')
+        return router.push(Config.LOGIN_PAGE_PATH)
+      })
       .catch(toast.error)
   }
 
