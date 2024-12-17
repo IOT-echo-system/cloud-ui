@@ -30,7 +30,7 @@ export const MobileHeader: React.FC = () => {
               <Menu />
             </IconButton>
             <Typography variant={'h5'} noWrap component="div">
-              <Link href={Config.HOME_PAGE_PATH} color={'inherit'} disableunderline={'true'}>
+              <Link href={Config.HOME_PAGE_PATH} color={'inherit'} underline={'false'}>
                 {site.title}
               </Link>
             </Typography>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Box, Divider, IconButton, MenuItem, Stack, Typography, Drawer} from '@mui/material'
+import {Box, Divider, Drawer, IconButton, MenuItem, Stack, Typography} from '@mui/material'
 import {Close} from '@mui/icons-material'
 import {useSelector, useToast} from '../../../hooks'
 import {RolesMenu} from './RolesMenu'
@@ -44,7 +44,7 @@ export const Profile: React.FC<MobileProfilePropsType> = ({open, handleClose}) =
         </Stack>
         <Divider />
         <Stack mt={1}>
-          <Link href={Config.PROFILE_PAGE_PATH} disableunderline={'true'} color={'inherit'} onClick={handleClose}>
+          <Link href={Config.PROFILE_PAGE_PATH} underline={'false'} color={'inherit'} onClick={handleClose}>
             <MenuItem>Profile</MenuItem>
           </Link>
           <MenuItem onClick={handleSignOut}>Sign out</MenuItem>

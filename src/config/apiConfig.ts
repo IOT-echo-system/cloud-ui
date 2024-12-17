@@ -2,7 +2,6 @@ export const apiConfig = {
   baseUrl: '/api',
   auth: {
     baseUrl: '/auth',
-    signUp: '/sign-up',
     login: '/login',
     validate: '/validate',
     generateOTP: '/generate-otp',
@@ -11,6 +10,10 @@ export const apiConfig = {
     updateToken: '/update-token',
     userDetails: '/user-details',
     logout: '/logout'
+  },
+  user: {
+    baseUrl: '/users',
+    registration: '/registration'
   },
   project: {
     baseUrl: '/projects',

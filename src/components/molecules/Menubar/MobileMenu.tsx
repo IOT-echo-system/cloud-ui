@@ -18,7 +18,7 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
           </IconButton>
         </Stack>
         <Divider />
-        <Link href={Config.PROJECT_PAGE_PATH} disableunderline={'true'} onClick={handleClose}>
+        <Link href={Config.PROJECT_PAGE_PATH} underline={'false'} onClick={handleClose}>
           <Stack m={2} flexWrap={'wrap'}>
             <Typography variant={'h5'} component={'div'}>
               {project.name}
@@ -31,7 +31,7 @@ export const MobileMenu: React.FC<MobileMenuPropsType> = ({open, handleClose}) =
         <Divider />
         <Stack mt={1}>
           {site.menus.map(({name, link}) => (
-            <Link href={link} key={link} disableunderline={'true'} onClick={handleClose}>
+            <Link href={link} key={link} underline={'false'} onClick={handleClose}>
               <MenuItem>{name}</MenuItem>
             </Link>
           ))}

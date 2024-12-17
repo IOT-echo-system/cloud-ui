@@ -21,7 +21,7 @@ export const BoardWithStatus: React.FC<BoardWithDevicesPropsType> = ({board}) =>
       }}
       component={Link}
       href={`${Config.BOARDS_PAGE_PATH}/${board.boardId}`}
-      disableunderline={'true'}
+      underline={'true'}
     >
       <Stack spacing={{xs: 1, sm: 2}}>
         <Stack>

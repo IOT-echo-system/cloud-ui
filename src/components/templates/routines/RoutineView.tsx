@@ -21,7 +21,7 @@ export const RoutineView: React.FC<BoardPropsType> = ({routine}) => {
       }}
       component={Link}
       href={`${Config.ROUTINE_PAGE_PATH}/${routine.routineId}`}
-      disableunderline={'true'}
+      underline={'false'}
     >
       <Stack spacing={{xs: 1, sm: 2}}>
         <Typography variant={'body2'}>Routine Id: {routine.routineId}</Typography>

@@ -9,7 +9,7 @@ const LoginPage: NextPage = () => {
   const router = useRouter()
   useEffect(() => {
     AuthService.validate()
-      .then(res => router.push(res.projectId ? Config.HOME_PAGE_PATH : Config.START_PAGE_PATH))
+      .then(() => router.push(Config.HOME_PAGE_PATH))
       .catch(() => ({}))
   }, [])
 

@@ -13,8 +13,8 @@ export type SiteStateType = {
 }
 export const initSiteState: SiteStateType = {
   theme: 'light',
-  title: 'Robotutor Tech',
-  subtitle: 'Unlock your innovation spirit',
+  title: 'EMS',
+  subtitle: '',
   menus: [
     {name: 'Dashboard', link: '/', exact: true},
     {name: 'Board', link: '/boards'},

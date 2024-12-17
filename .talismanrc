@@ -1,0 +1,10 @@
+fileignoreconfig:
+- filename: src/components/templates/auth/signup/useSignUp.tsx
+  checksum: ffc764ef61362a93d8128151b99b61ca64752f99ba0d990329aa1710b5fd1c0f
+- filename: src/services/typing/auth.d.ts
+  checksum: a6bc2b33f25946de8e9f3d8472b3a268752df390b38d9193dcf4e57e4d258ecb
+- filename: package-lock.json
+  checksum: ab0861d69add7ea0c6165484ef5d2fc868ab8461f6d6c3f3aab5c706faaae3b2
+- filename: src/components/molecules/Menubar/MobileMenu.tsx
+  checksum: 1cdf77ef567f9af117fcfab41661a3e1e41a0413ecacb104997fa02743cd5e32
+version: ""

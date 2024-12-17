@@ -1,7 +1,7 @@
 import {useSignUp} from './useSignUp'
 import React from 'react'
 import {CenteredContainer, Link} from '../../../atoms'
-import {Form} from '../../../molecules/Form'
+import {Form} from '../../../molecules'
 import {Stack, Typography} from '@mui/material'
 import {useMedia, useSelector} from '../../../../hooks'
 import {Config} from '../../../../config'

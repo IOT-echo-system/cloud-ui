@@ -1,9 +1,8 @@
 import type {BoxProps, StackProps} from '@mui/material'
-import {PropTypes} from '@mui/material'
 import {Box, Stack, styled} from '@mui/material'
 import {LoadingButton} from '@mui/lab'
 import NextLink from 'next/link'
-import Color = PropTypes.Color
+import type {LinkProps} from 'next/dist/client/link'
 
 export const Button = styled(LoadingButton)({textTransform: 'none'})
 
@@ -75,14 +74,16 @@ export const TopCenteredContainer = styled(Stack)(({theme}) => ({
   margin: theme.spacing(4, 'auto')
 }))
 
-type LinkPropsType = {disableunderline?: 'true' | 'false'; color?: Color}
-export const Link = styled(NextLink)<LinkPropsType>(({disableunderline, color}) => ({
-  textDecoration: 'none',
-  color: color ?? 'black',
-  '&:hover': {
-    textDecoration: disableunderline === 'true' ? 'none' : 'underline'
-  }
-}))
+export const Link = styled(NextLink)<LinkProps & {underline?: 'true' | 'false'}>(
+  ({theme, color, underline = 'true'}) => ({
+    textDecoration: underline === 'false' ? 'none' : 'underline',
+    textUnderlineOffset: theme.spacing(0.3),
+    color: color ?? 'black',
+    '&:hover': {
+      color: theme.palette.primary.dark
+    }
+  })
+)
 
 export const PageContainer = styled(Stack)(({theme}) => ({
   margin: '0 auto',

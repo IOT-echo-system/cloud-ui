@@ -3,11 +3,10 @@ import {setStorage, StorageKeys} from '../utils/storage'
 import {apiConfig} from '../config/apiConfig'
 import type {
   GenerateOTPResBody,
+  LoginReqBody,
   LoginResBody,
   LogoutResBody,
   ResetPasswordResBody,
-  SignUpReqBody,
-  SignUpResBody,
   ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
@@ -24,7 +23,7 @@ class AuthService_ {
     })
   }
 
-  async login(credentials: SignUpReqBody): Promise<LoginResBody> {
+  async login(credentials: LoginReqBody): Promise<LoginResBody> {
     const response = await WebClient.post<LoginResBody>({
       baseUrl: this.authConfig.baseUrl,
       path: this.authConfig.login,
@@ -40,10 +39,6 @@ class AuthService_ {
       path: this.authConfig.resetPassword,
       body: values
     })
-  }
-
-  signUp(values: {password: string; name: string; email: string}): Promise<SignUpResBody> {
-    return WebClient.post<SignUpResBody>({baseUrl: this.authConfig.baseUrl, body: values, path: this.authConfig.signUp})
   }
 
   verifyOTP({otp, otpId}: {otp: string; otpId: string}): Promise<VerifyOTPResBody> {

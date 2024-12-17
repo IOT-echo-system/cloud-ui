@@ -10,7 +10,7 @@ export const Menubar: React.FC = () => {
     <Stack direction={'row'} component={List}>
       {site.menus.map(({name, link}) => (
         <ListItem key={link}>
-          <Link href={link} disableunderline={'true'} color={'inherit'}>
+          <Link href={link} underline={'false'} color={'inherit'}>
             {name}
           </Link>
         </ListItem>

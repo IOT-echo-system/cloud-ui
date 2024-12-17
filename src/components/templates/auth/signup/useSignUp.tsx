@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import type {FormInputType} from '../../../atoms'
 import {useResetPassword} from '../resetPassword/useResetPassword'
 import {useForm, useToast} from '../../../../hooks'
-import {AuthService} from '../../../../services'
+import {UserService} from '../../../../services'
 import {Config} from '../../../../config'
 
 type UseSignUpReturnType = {
@@ -27,7 +27,7 @@ export const useSignUp = (): UseSignUpReturnType => {
 
   const onSubmit = () => {
     const password = passwordInputFields[0].value as string
-    AuthService.signUp({password, ...values})
+    UserService.registration({password, ...values})
       .then(() => router.push(Config.LOGIN_PAGE_PATH))
       .catch(toast.error)
   }

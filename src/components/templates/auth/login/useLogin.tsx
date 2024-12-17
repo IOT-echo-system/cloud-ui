@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router'
-import type {ChangeEvent} from 'react'
 import type React from 'react'
+import type {ChangeEvent} from 'react'
 import type {FormInputType} from '../../../atoms'
 import {useForm, useToast} from '../../../../hooks'
 import {AuthService} from '../../../../services'
@@ -23,7 +23,7 @@ const useLogin = (): UseLoginReturnType => {
 
   const onSubmit = () => {
     AuthService.login(values)
-      .then(() => router.push(Config.START_PAGE_PATH))
+      .then(() => router.push(Config.HOME_PAGE_PATH))
       .catch(toast.error)
   }
 
