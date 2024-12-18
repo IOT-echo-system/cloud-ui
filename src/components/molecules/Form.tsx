@@ -10,6 +10,7 @@ export type FormProps = {
   inputFields: FormInputType[]
   submitBtnText: string
   submitBtnDisabled?: boolean
+  loading?: boolean
 }
 
 export const Form: React.FC<FormProps> = props => {
@@ -20,7 +21,13 @@ export const Form: React.FC<FormProps> = props => {
         {props.inputFields.map((inputField, index) => (
           <FormInput key={`input-${index}`} {...inputField} />
         ))}
-        <Button type={'submit'} variant={'contained'} size={'large'} disabled={props.submitBtnDisabled}>
+        <Button
+          loading={props.loading ?? false}
+          type={'submit'}
+          variant={'contained'}
+          size={'large'}
+          disabled={props.submitBtnDisabled}
+        >
           {props.submitBtnText}
         </Button>
       </Stack>

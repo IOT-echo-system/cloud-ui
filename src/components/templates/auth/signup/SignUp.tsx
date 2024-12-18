@@ -10,7 +10,7 @@ export const SignUp: React.FC = () => {
   const media = useMedia()
   const site = useSelector(state => state.site)
   const title = `${site.title} sign up`
-  const {handleSubmit, submitBtnDisabled, inputFields} = useSignUp()
+  const {handleSubmit, submitBtnDisabled, inputFields, loading} = useSignUp()
 
   return (
     <CenteredContainer>
@@ -20,6 +20,7 @@ export const SignUp: React.FC = () => {
         handleSubmit={handleSubmit}
         submitBtnText={'Sign up'}
         submitBtnDisabled={submitBtnDisabled}
+        loading={loading}
       />
       <Stack
         direction={media.md ? 'row' : 'column'}
