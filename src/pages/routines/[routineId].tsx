@@ -15,7 +15,7 @@ const BoardPage: NextPage = () => {
     return <Loader loadingText={'Loading...'} />
   }
 
-  return <PageAllowed Component={Routine} policyId={PolicyUtils.ROUTINE_GET} routine={routine} />
+  return <PageAllowed Component={Routine} policy={PolicyUtils.ROUTINE_READ} routine={routine} />
 }
 
 export default BoardPage

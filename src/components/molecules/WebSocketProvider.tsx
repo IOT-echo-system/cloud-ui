@@ -16,7 +16,7 @@ export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
   const [retry, setRetry] = useState(retryCount)
   const [readyState, setReadyState] = useState(false)
 
-  const {user, project} = useSelector(state => state)
+  const {user} = useSelector(state => state)
   const dispatch = useDispatch()
 
   const handleMessage = (content: string) => {
@@ -28,7 +28,7 @@ export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
   }
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !readyState && user.userId && project.projectId) {
+    if (typeof window !== 'undefined' && !readyState && user.userId) {
       const ws = new WebSocket(`${url}?client=web&token=${token}`)
       ws.onopen = () => {
         setReadyState(true)
@@ -47,7 +47,7 @@ export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
         }
       }
     }
-  }, [user.userId, project.projectId, retry])
+  }, [user.userId, retry])
 
   return <>{children}</>
 }

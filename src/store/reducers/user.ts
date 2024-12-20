@@ -10,7 +10,8 @@ export const initUserState: User = {
   registeredAt: new Date(),
   userId: '',
   email: '',
-  name: ''
+  name: '',
+  policies: []
 }
 
 const userReducer = (state: User, action: TRootActions): User => {

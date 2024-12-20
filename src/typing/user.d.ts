@@ -4,4 +4,5 @@ export interface User {
   email: string
   registeredAt: Date
   roleId: string
+  policies: Array<{policyId: string; name: string}>
 }

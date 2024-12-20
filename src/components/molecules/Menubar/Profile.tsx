@@ -2,7 +2,6 @@ import * as React from 'react'
 import {Box, Divider, Drawer, IconButton, MenuItem, Stack, Typography} from '@mui/material'
 import {Close} from '@mui/icons-material'
 import {useSelector, useToast} from '../../../hooks'
-import {RolesMenu} from './RolesMenu'
 import {Link} from '../../atoms'
 import {AuthService} from '../../../services'
 import {useRouter} from 'next/router'
@@ -39,7 +38,6 @@ export const Profile: React.FC<MobileProfilePropsType> = ({open, handleClose}) =
             <Typography variant={'subtitle1'} component={'div'}>
               Role:
             </Typography>
-            <RolesMenu />
           </Stack>
         </Stack>
         <Divider />

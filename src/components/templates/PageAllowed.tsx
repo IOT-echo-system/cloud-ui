@@ -6,18 +6,18 @@ import {Loader} from '../atoms'
 import {PolicyUtils} from '../../utils/policyUtils'
 
 type PageAllowedPropsType<T extends Record<string, unknown>> = {
-  policyId: string
+  policy: string
   Component: React.ComponentType<T>
 } & T
 
 export const PageAllowed = <T extends Record<string, unknown>>(props: PageAllowedPropsType<T>): React.JSX.Element => {
-  const {policyId, Component} = props
-  const {policies} = useSelector(state => state.project)
+  const {policy, Component} = props
+  const {policies} = useSelector(state => state.user)
   const [validated, setValidated] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    const isAllowed = PolicyUtils.isValid(policies, policyId)
+    const isAllowed = PolicyUtils.isValid(policies, policy)
     if (!isAllowed) {
       router.push(Config.HOME_PAGE_PATH).catch(() => ({}))
     }

@@ -10,7 +10,6 @@ import type {
   ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
-import type {User} from '../typing/user'
 
 class AuthService_ {
   authConfig = apiConfig.auth
@@ -64,13 +63,6 @@ class AuthService_ {
     })
     setStorage(StorageKeys.AUTH, {token: response.token})
     return response
-  }
-
-  getUserDetails(): Promise<User> {
-    return WebClient.get<User>({
-      baseUrl: this.authConfig.baseUrl,
-      path: this.authConfig.userDetails
-    })
   }
 
   logout(): Promise<LogoutResBody> {

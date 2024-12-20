@@ -1,24 +1,21 @@
 import {useState} from 'react'
-import {useDispatch, useForm, useToast} from '../../../../hooks'
-import {ProjectService} from '../../../../services'
+import {useDispatch, useForm, useSelector, useToast} from '../../../../hooks'
+import {PremisesService} from '../../../../services'
 import type {FormInputType} from '../../../atoms'
 import type {GetFormPropsTypeFunction} from '../model'
-import type {Project} from '../../../../typing/project'
-import {setProject} from '../../../../store/actions/project'
+import {setPremises} from '../../../../store/actions/premises'
 
-export type EditProjectNamePropsType = {project: Project}
-
-export const EditProjectName: GetFormPropsTypeFunction<EditProjectNamePropsType> = (handleClose, {project}) => {
+export const AddPremises: GetFormPropsTypeFunction = handleClose => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
-
+  const {premises} = useSelector(state => state)
   const dispatch = useDispatch()
-  const {values, handleSubmit, onChange} = useForm({name: project.name})
+  const {onClear, values, handleSubmit, onChange} = useForm({name: ''})
 
   const formInputs: FormInputType[] = [
     {
       inputType: 'textField',
-      label: 'Update Project name',
+      label: 'Premises name',
       value: values.name,
       required: true,
       onChange: event => {
@@ -29,9 +26,10 @@ export const EditProjectName: GetFormPropsTypeFunction<EditProjectNamePropsType>
 
   const onSubmit = (values: {name: string}) => {
     setLoading(true)
-    ProjectService.updateProjectName(values, project.projectId)
-      .then(({name}) => {
-        dispatch(setProject({...project, name}))
+    PremisesService.createPremises(values)
+      .then(newPremises => {
+        onClear()
+        dispatch(setPremises([newPremises, ...premises]))
         handleClose()
       })
       .catch(toast.error)
@@ -44,7 +42,7 @@ export const EditProjectName: GetFormPropsTypeFunction<EditProjectNamePropsType>
     handleSubmit: handleSubmit(onSubmit),
     loading,
     formInputs,
-    formTitle: 'Update project name',
-    submitLabel: 'Update project name'
+    formTitle: 'Add premises',
+    submitLabel: 'Add premises'
   }
 }

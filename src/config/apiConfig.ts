@@ -13,11 +13,12 @@ export const apiConfig = {
   },
   user: {
     baseUrl: '/users',
-    registration: '/registration'
+    registration: '/registration',
+    me: '/me'
   },
-  project: {
-    baseUrl: '/projects',
-    projects: '',
+  premises: {
+    baseUrl: '/premises',
+    premises: '',
     projectsWithRoles: '/project-with-roles',
     project: '/{projectId}/role/{roleId}',
     projectDetails: '/project-details',

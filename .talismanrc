@@ -7,4 +7,6 @@ fileignoreconfig:
   checksum: ab0861d69add7ea0c6165484ef5d2fc868ab8461f6d6c3f3aab5c706faaae3b2
 - filename: src/components/molecules/Menubar/MobileMenu.tsx
   checksum: 1cdf77ef567f9af117fcfab41661a3e1e41a0413ecacb104997fa02743cd5e32
+- filename: src/pages/_app.tsx
+  checksum: 24d80e5f4e917b157af2eaf4e0ce072159970609f8770b4e092ea291574cd9f4
 version: ""

@@ -1,5 +1,4 @@
-import type {PropsWithChildren} from 'react'
-import type {FormEventHandler} from 'react'
+import type {FormEventHandler, PropsWithChildren} from 'react'
 import React from 'react'
 import {Stack, Typography} from '@mui/material'
 import {Modal} from './Modal'
@@ -33,7 +32,7 @@ export const ModalForm: React.FC<PropsWithChildren<ModalFormPropsType>> = ({
           {formInputs.map((formInput, index) => {
             return <FormInput key={`form-input-${index}`} {...formInput} />
           })}
-          <Button type={'submit'} variant={'contained'} size={'large'} loading={loading}>
+          <Button type={'submit'} variant={'contained'} loading={loading}>
             {submitLabel}
           </Button>
         </Stack>

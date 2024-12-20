@@ -6,7 +6,7 @@ export const siteBuilder = (props: Partial<SiteStateType> = {}): SiteStateType =
 }
 
 export const userBuilder = (props: Partial<User> = {}): User => {
-  return {email: '', name: '', userId: '', roleId: '', registeredAt: new Date(2024, 1, 1), ...props}
+  return {email: '', name: '', userId: '', roleId: '', registeredAt: new Date(2024, 1, 1), policies: [], ...props}
 }
 
 // export const projectBuilder = (props: Partial<Project> = {}): Project => {

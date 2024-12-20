@@ -8,7 +8,7 @@ import {Stack} from '@mui/material'
 type PolicyAllowedPropsType = {policyId: string} & StackProps
 
 export const PolicyAllowed: React.FC<PropsWithChildren<PolicyAllowedPropsType>> = ({children, policyId, ...props}) => {
-  const {policies} = useSelector(state => state.project)
+  const {policies} = useSelector(state => state.user)
   if (!PolicyUtils.isValid(policies, policyId)) {
     return <></>
   }

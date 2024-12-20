@@ -6,7 +6,7 @@ import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
 import {ToastWrapper} from '../components/atoms'
 import {Layout} from '../components/organisms'
-import {FetchDetails, WebSocketProvider, ValidatedProfile} from '../components/molecules'
+import {ValidatedProfile, WebSocketProvider} from '../components/molecules'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   return (
@@ -15,11 +15,9 @@ const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
         <CustomThemeProvider>
           <ToastWrapper>
             <ValidatedProfile>
-              <FetchDetails>
-                <Layout>
-                  <Component {...pageProps} key={router.asPath} />
-                </Layout>
-              </FetchDetails>
+              <Layout>
+                <Component {...pageProps} key={router.asPath} />
+              </Layout>
             </ValidatedProfile>
           </ToastWrapper>
         </CustomThemeProvider>
