@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from 'react'
 import React, {useEffect, useState} from 'react'
 import {useRouter} from 'next/router'
-import {AuthService, UserService} from '../../services'
+import {UserService} from '../../services'
 import {Config} from '../../config'
 import {Loader} from '../atoms'
 import {useDispatch} from '../../hooks'
@@ -14,14 +14,11 @@ export const ValidatedProfile: React.FC<PropsWithChildren> = ({children}) => {
 
   useEffect(() => {
     if (!router.pathname.startsWith('/auth')) {
-      AuthService.validate()
-        .then(async () => {
-          const user = await UserService.getMyDetails()
+      UserService.getMyDetails()
+        .then(user => {
           dispatch(setUser(user))
         })
-        .catch(() => {
-          return router.push(Config.LOGIN_PAGE_PATH)
-        })
+        .catch(() => router.push(Config.LOGIN_PAGE_PATH))
         .finally(() => {
           setLoading(false)
         })

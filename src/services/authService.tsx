@@ -7,7 +7,6 @@ import type {
   LoginResBody,
   LogoutResBody,
   ResetPasswordResBody,
-  ValidateResBody,
   VerifyOTPResBody
 } from './typing/auth'
 
@@ -46,23 +45,6 @@ class AuthService_ {
       path: this.authConfig.verifyOTP,
       body: {otpId, otp}
     })
-  }
-
-  validate(): Promise<ValidateResBody> {
-    return WebClient.get<ValidateResBody>({
-      baseUrl: this.authConfig.baseUrl,
-      path: this.authConfig.validate
-    })
-  }
-
-  async updateToken(projectId: string, roleId: string): Promise<LoginResBody> {
-    const response = await WebClient.post<LoginResBody>({
-      baseUrl: this.authConfig.baseUrl,
-      path: this.authConfig.updateToken,
-      body: {projectId, roleId}
-    })
-    setStorage(StorageKeys.AUTH, {token: response.token})
-    return response
   }
 
   logout(): Promise<LogoutResBody> {
