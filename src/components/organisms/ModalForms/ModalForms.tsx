@@ -15,7 +15,10 @@ export const ModalForms = <T extends Record<string, unknown>>(
   const handleClose = () => {
     setOpen(false)
   }
-  const {loading, formInputs, handleSubmit, formTitle, submitLabel} = getFormDetails(handleClose, props)
+  const {loading, formInputs, handleSubmit, formTitle, submitLabel, submitBtnDisabled} = getFormDetails(
+    handleClose,
+    props
+  )
 
   return (
     <Stack>
@@ -34,6 +37,7 @@ export const ModalForms = <T extends Record<string, unknown>>(
         loading={loading}
         handleSubmit={handleSubmit}
         submitLabel={submitLabel}
+        submitBtnDisabled={submitBtnDisabled}
       />
     </Stack>
   )

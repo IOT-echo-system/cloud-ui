@@ -11,6 +11,7 @@ export type FormPropsType = {
   submitLabel: string
   loading: boolean
   formTitle?: string
+  submitBtnDisabled?: boolean
   handleSubmit: FormEventHandler<HTMLFormElement>
 }
 type ModalFormPropsType = {open: boolean; handleClose: () => void} & FormPropsType
@@ -22,7 +23,8 @@ export const ModalForm: React.FC<PropsWithChildren<ModalFormPropsType>> = ({
   formInputs,
   submitLabel,
   loading,
-  handleSubmit
+  handleSubmit,
+  submitBtnDisabled
 }) => {
   return (
     <Modal open={open} handleClose={handleClose}>
@@ -32,7 +34,12 @@ export const ModalForm: React.FC<PropsWithChildren<ModalFormPropsType>> = ({
           {formInputs.map((formInput, index) => {
             return <FormInput key={`form-input-${index}`} {...formInput} />
           })}
-          <Button type={'submit'} variant={'contained'} loading={loading}>
+          <Button
+            type={'submit'}
+            variant={'contained'}
+            loading={loading}
+            disabled={submitBtnDisabled ?? formInputs.some(formInput => formInput.error)}
+          >
             {submitLabel}
           </Button>
         </Stack>

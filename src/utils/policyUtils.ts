@@ -1,4 +1,4 @@
-import type {Policy} from '../typing/premises'
+import type {Policy} from '../typing/auth'
 
 export const PolicyUtils = {
   PREMISES_CREATE: 'PREMISES:CREATE',
