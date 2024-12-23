@@ -1,18 +1,38 @@
 import type {NextPage} from 'next'
 import {useRouter} from 'next/router'
-import {useSelector} from '../../hooks'
-import {Loader} from '../../components/atoms'
+import {Error, Loader} from '../../components/atoms'
+import React, {useEffect, useState} from 'react'
+import {PageAllowed} from '../../components/templates/PageAllowed'
+import {PolicyUtils} from '../../utils/policyUtils'
+import {PremisesDetails} from '../../components/templates/premises/PremisesDetails'
+import type {Premises} from '../../typing/premises'
+import {PremisesService} from '../../services'
+import {useToast} from '../../hooks'
 
 const BoardPage: NextPage = () => {
   const router = useRouter()
-  const allPremises = useSelector(state => state.premises)
-  const premises = allPremises.find(prem => prem.premisesId === (router.query.premisesId as string))
+  const [premises, setPremises] = useState<Premises | null>(null)
+  const [loading, setLoading] = useState(true)
+  const toast = useToast()
+
+  useEffect(() => {
+    setLoading(true)
+    PremisesService.getPremisesDetails(router.query.premisesId as string)
+      .then(setPremises)
+      .catch(toast.error)
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading) {
+    return <Loader page loadingText={'Loading...'} />
+  }
 
   if (!premises) {
-    return <Loader loadingText={'Loading...'} />
+    return <Error page errorText={'Premises is not found!!'} />
   }
-  return <>Premises: {router.query.premisesId}</>
-  // return <PageAllowed Component={Board} policy={PolicyUtils.PREMISES_READ} board={premises} />
+  return <PageAllowed Component={PremisesDetails} policy={PolicyUtils.PREMISES_READ} premises={premises} />
 }
 
 export default BoardPage

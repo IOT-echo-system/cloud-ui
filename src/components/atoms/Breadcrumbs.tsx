@@ -9,7 +9,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsPropsType> = ({links, text}) => {
   return (
     <MuiBreadcrumbs separator={<NavigateNext />}>
       {links.map(({link, name}) => (
-        <Link href={link} key={link}>
+        <Link href={link} key={link} underline={'false'}>
           {name}
         </Link>
       ))}

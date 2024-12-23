@@ -3,11 +3,11 @@ import {Breadcrumbs, Button, Loader, PageContainer, PolicyAllowed} from '../../a
 import {PolicyUtils} from '../../../utils/policyUtils'
 import {ModalForms} from '../../organisms'
 import {Stack} from '@mui/material'
-import {AddPremises} from '../../organisms/ModalForms/formFunctions'
 import {AllPremises} from './AllPremises'
 import {PremisesService} from '../../../services'
 import {useDispatch} from '../../../hooks'
 import {setPremises} from '../../../store/actions/premises'
+import {AddPremises} from '../../organisms/ModalForms/formFunctions/premises'
 
 export const Premises: React.FC = () => {
   const dispatch = useDispatch()

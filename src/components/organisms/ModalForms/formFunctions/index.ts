@@ -1,5 +1,4 @@
 export * from './AddBoard'
-export * from './AddPremises'
 export * from './AddRoutine'
 export * from './EditBoardName'
 export * from './EditRoutineName'

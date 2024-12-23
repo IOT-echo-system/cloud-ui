@@ -14,6 +14,10 @@ const premisesReducer = (state: Premises[], action: TRootActions): Premises[] =>
   switch (action.type) {
     case PremisesAction.SET_PREMISES:
       return [...action.payload.premises]
+    case PremisesAction.UPDATE_PREMISES: {
+      const premises = state.filter(prem => prem.premisesId !== action.payload.premises.premisesId)
+      return [action.payload.premises, ...premises]
+    }
     default:
       return state
   }

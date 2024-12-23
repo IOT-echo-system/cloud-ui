@@ -1,23 +1,23 @@
 import {useState} from 'react'
-import {useDispatch, useForm, useSelector, useToast} from '../../../../hooks'
-import {PremisesService} from '../../../../services'
-import type {FormInputType} from '../../../atoms'
-import type {GetFormPropsTypeFunction} from '../model'
-import {setPremises} from '../../../../store/actions/premises'
+import {useDispatch, useForm, useToast} from '../../../../../hooks'
+import {PremisesService} from '../../../../../services'
+import type {FormInputType} from '../../../../atoms'
+import type {GetFormPropsTypeFunction} from '../../model'
+import type {Premises} from '../../../../../typing/premises'
+import {updatePremises} from '../../../../../store/actions/premises'
 
-export const AddPremises: GetFormPropsTypeFunction = handleClose => {
+export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (handleClose, {premises}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
-  const allPremises = useSelector(state => state.premises)
   const dispatch = useDispatch()
   const {onClear, values, handleSubmit, onChange} = useForm({
-    name: '',
-    address1: '',
-    address2: '',
-    city: '',
-    district: '',
-    state: '',
-    zipCode: 0
+    name: premises.name,
+    address1: premises.address.address1,
+    address2: premises.address.address2,
+    city: premises.address.city,
+    district: premises.address.district,
+    state: premises.address.state,
+    zipCode: premises.address.zipCode
   })
 
   const formInputs: FormInputType[] = [
@@ -92,7 +92,7 @@ export const AddPremises: GetFormPropsTypeFunction = handleClose => {
 
   const onSubmit = () => {
     setLoading(true)
-    PremisesService.createPremises({
+    PremisesService.updatePremises(premises.premisesId, {
       name: values.name,
       address: {
         address1: values.address1,
@@ -105,7 +105,8 @@ export const AddPremises: GetFormPropsTypeFunction = handleClose => {
     })
       .then(newPremises => {
         onClear()
-        dispatch(setPremises([newPremises, ...allPremises]))
+        dispatch(updatePremises(newPremises))
+        // dispatch(setPremises([newPremises, ...allPremises]))
         handleClose()
       })
       .catch(toast.error)
@@ -118,7 +119,7 @@ export const AddPremises: GetFormPropsTypeFunction = handleClose => {
     handleSubmit: handleSubmit(onSubmit),
     loading,
     formInputs,
-    formTitle: 'Add premises',
-    submitLabel: 'Add premises'
+    formTitle: 'Update premises',
+    submitLabel: 'Update premises'
   }
 }

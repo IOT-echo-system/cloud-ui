@@ -19,6 +19,7 @@ export const apiConfig = {
   premises: {
     baseUrl: '/premises',
     premises: '',
+    premisesDetails: '/{premisesId}',
     projectsWithRoles: '/project-with-roles',
     project: '/{projectId}/role/{roleId}',
     projectDetails: '/project-details',

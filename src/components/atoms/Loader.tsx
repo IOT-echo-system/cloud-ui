@@ -8,7 +8,7 @@ export const Loader: React.FC<LoaderPropsType> = ({page = false, loadingText}) =
       flexDirection={'row'}
       justifyContent={'center'}
       alignItems={'center'}
-      style={{height: page ? '100vh' : 'auto'}}
+      style={{height: page ? 'calc(100vh - 148px)' : 'auto'}}
     >
       <Stack alignItems={'center'} spacing={2}>
         <CircularProgress />
