@@ -1,10 +1,15 @@
 import React from 'react'
-import {PageContainer} from '../../atoms'
+import {useSelector} from '../../../hooks'
+import {PremisesOverview} from './components/PremisesOverview'
+import {Stack} from '@mui/material'
 
 export const AllPremises: React.FC = () => {
+  const allPremises = useSelector(state => state.premises)
   return (
-    <PageContainer pt={2} spacing={2}>
-      Premises
-    </PageContainer>
+    <Stack direction={'row'} flexWrap={'wrap'} gap={{xs: 2, sm: 3, lg: 3, xl: 4}}>
+      {allPremises.map(premises => (
+        <PremisesOverview key={premises.premisesId} premises={premises} />
+      ))}
+    </Stack>
   )
 }

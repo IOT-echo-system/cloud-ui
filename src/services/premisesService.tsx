@@ -12,6 +12,13 @@ class PremisesService_ {
       body: values
     })
   }
+
+  getPremises() {
+    return WebClient.get<PremisesResBody[]>({
+      baseUrl: this.premisesConfig.baseUrl,
+      path: this.premisesConfig.premises
+    })
+  }
 }
 
 export const PremisesService = new PremisesService_()

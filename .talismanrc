@@ -9,4 +9,6 @@ fileignoreconfig:
   checksum: 1cdf77ef567f9af117fcfab41661a3e1e41a0413ecacb104997fa02743cd5e32
 - filename: src/pages/_app.tsx
   checksum: 24d80e5f4e917b157af2eaf4e0ce072159970609f8770b4e092ea291574cd9f4
+- filename: src/components/templates/premises/AllPremises.tsx
+  checksum: fa6d62d7831f3325f2a6e808a41adf4e92a5cd328228e82a06c519358edbade1
 version: ""
