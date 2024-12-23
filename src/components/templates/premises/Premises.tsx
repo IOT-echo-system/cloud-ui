@@ -34,7 +34,7 @@ export const Premises: React.FC = () => {
           </ModalForms>
         </PolicyAllowed>
       </Stack>
-      {loading ? <Loader loadingText={'Loading'} /> : <AllPremises />}
+      {loading ? <Loader page loadingText={'Loading'} /> : <AllPremises />}
     </PageContainer>
   )
 }
