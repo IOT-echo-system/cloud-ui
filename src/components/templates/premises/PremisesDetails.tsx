@@ -1,11 +1,11 @@
 import React from 'react'
-import {Breadcrumbs, PageContainer, PolicyAllowed} from '../../atoms'
+import {Breadcrumbs, Button, PageContainer, PolicyAllowed} from '../../atoms'
 import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {Config} from '../../../config'
 import {ModalForms} from '../../organisms'
 import {PolicyUtils} from '../../../utils/policyUtils'
 import {Edit} from '@mui/icons-material'
-import {EditPremises} from '../../organisms/ModalForms/formFunctions/premises'
+import {AddZone, EditPremises} from '../../organisms/ModalForms/formFunctions/premises'
 import {useSelector} from '../../../hooks'
 
 export const PremisesDetails: React.FC = () => {
@@ -15,6 +15,13 @@ export const PremisesDetails: React.FC = () => {
     <PageContainer pt={2} spacing={2}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Breadcrumbs links={[{link: Config.PREMISES_PAGE_PATH, name: 'Premises'}]} text={premises.name} />
+        <Stack>
+          <PolicyAllowed policyId={PolicyUtils.ZONE_CREATE}>
+            <ModalForms getFormDetails={AddZone}>
+              <Button variant={'contained'}>Add zone</Button>
+            </ModalForms>
+          </PolicyAllowed>
+        </Stack>
       </Stack>
       <Box boxShadow={2} bgcolor={'background.paper'} p={4} borderRadius={1}>
         <Stack direction={'row'} gap={2} alignItems={'baseline'}>

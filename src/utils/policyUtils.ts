@@ -11,6 +11,7 @@ export const PolicyUtils = {
   ROUTINE_CREATE: 'ROUTINE:CREATE',
   ROUTINE_READ: 'ROUTINE:READ',
   ROUTINE_UPDATE: 'ROUTINE:UPDATE',
+  ZONE_CREATE: 'ZONE:CREATE',
 
   isValid(polices: Policy[], policyName: string): boolean {
     return polices.some(policy => policy.name === policyName)
