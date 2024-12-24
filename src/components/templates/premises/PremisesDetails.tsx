@@ -1,14 +1,16 @@
 import React from 'react'
 import {Breadcrumbs, PageContainer, PolicyAllowed} from '../../atoms'
 import {Box, IconButton, Stack, Typography} from '@mui/material'
-import type {Premises} from '../../../typing/premises'
 import {Config} from '../../../config'
 import {ModalForms} from '../../organisms'
 import {PolicyUtils} from '../../../utils/policyUtils'
 import {Edit} from '@mui/icons-material'
 import {EditPremises} from '../../organisms/ModalForms/formFunctions/premises'
+import {useSelector} from '../../../hooks'
 
-export const PremisesDetails: React.FC<{premises: Premises}> = ({premises}) => {
+export const PremisesDetails: React.FC = () => {
+  const premises = useSelector(state => state.premises)!
+
   return (
     <PageContainer pt={2} spacing={2}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>

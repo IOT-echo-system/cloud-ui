@@ -3,21 +3,21 @@ import type {Premises} from '../../typing/premises'
 
 export const PremisesAction = {
   SET_PREMISES: 'SET_PREMISES',
+  UNSET_PREMISES: 'UNSET_PREMISES',
   UPDATE_PREMISES: 'UPDATE_PREMISES',
   ADD_WIDGET: 'ADD_WIDGET',
   UPDATE_WIDGET: 'UPDATE_WIDGET'
 } as const
 
-export const initPremisesState: Premises[] = []
+export const initPremisesState: Premises | null = null
 
-const premisesReducer = (state: Premises[], action: TRootActions): Premises[] => {
+const premisesReducer = (state: Premises | null, action: TRootActions): Premises | null => {
   switch (action.type) {
     case PremisesAction.SET_PREMISES:
-      return [...action.payload.premises]
-    case PremisesAction.UPDATE_PREMISES: {
-      const premises = state.filter(prem => prem.premisesId !== action.payload.premises.premisesId)
-      return [action.payload.premises, ...premises]
-    }
+    case PremisesAction.UPDATE_PREMISES:
+      return {...action.payload.premises}
+    case PremisesAction.UNSET_PREMISES:
+      return null
     default:
       return state
   }

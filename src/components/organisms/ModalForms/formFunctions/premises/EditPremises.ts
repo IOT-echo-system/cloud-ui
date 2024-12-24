@@ -10,7 +10,7 @@ export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (han
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const dispatch = useDispatch()
-  const {onClear, values, handleSubmit, onChange} = useForm({
+  const {values, handleSubmit, onChange} = useForm({
     name: premises.name,
     address1: premises.address.address1,
     address2: premises.address.address2,
@@ -104,9 +104,7 @@ export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (han
       }
     })
       .then(newPremises => {
-        onClear()
         dispatch(updatePremises(newPremises))
-        // dispatch(setPremises([newPremises, ...allPremises]))
         handleClose()
       })
       .catch(toast.error)

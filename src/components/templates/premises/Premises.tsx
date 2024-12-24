@@ -5,19 +5,20 @@ import {ModalForms} from '../../organisms'
 import {Stack} from '@mui/material'
 import {AllPremises} from './AllPremises'
 import {PremisesService} from '../../../services'
-import {useDispatch} from '../../../hooks'
-import {setPremises} from '../../../store/actions/premises'
 import {AddPremises} from '../../organisms/ModalForms/formFunctions/premises'
+import type {Premises as PremisesType} from '../../../typing/premises'
 
 export const Premises: React.FC = () => {
-  const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
+  const [allPremises, setAllPremises] = useState<PremisesType[]>([])
+
+  const addPremises = (premises: PremisesType) => {
+    setAllPremises([premises, ...allPremises])
+  }
 
   useEffect(() => {
     PremisesService.getPremises()
-      .then(allPremises => {
-        dispatch(setPremises(allPremises))
-      })
+      .then(setAllPremises)
       .catch()
       .finally(() => {
         setLoading(false)
@@ -29,12 +30,12 @@ export const Premises: React.FC = () => {
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Breadcrumbs links={[]} text={'Premises'} />
         <PolicyAllowed policyId={PolicyUtils.PREMISES_CREATE}>
-          <ModalForms getFormDetails={AddPremises}>
+          <ModalForms getFormDetails={AddPremises} addPremises={addPremises}>
             <Button variant={'contained'}>Add premises</Button>
           </ModalForms>
         </PolicyAllowed>
       </Stack>
-      {loading ? <Loader page loadingText={'Loading'} /> : <AllPremises />}
+      {loading ? <Loader page loadingText={'Loading'} /> : <AllPremises allPremises={allPremises} />}
     </PageContainer>
   )
 }

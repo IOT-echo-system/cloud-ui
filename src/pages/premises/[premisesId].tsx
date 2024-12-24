@@ -5,24 +5,30 @@ import React, {useEffect, useState} from 'react'
 import {PageAllowed} from '../../components/templates/PageAllowed'
 import {PolicyUtils} from '../../utils/policyUtils'
 import {PremisesDetails} from '../../components/templates/premises/PremisesDetails'
-import type {Premises} from '../../typing/premises'
 import {PremisesService} from '../../services'
-import {useToast} from '../../hooks'
+import {useDispatch, useSelector, useToast} from '../../hooks'
+import {setPremises, unsetPremises} from '../../store/actions/premises'
 
 const BoardPage: NextPage = () => {
   const router = useRouter()
-  const [premises, setPremises] = useState<Premises | null>(null)
   const [loading, setLoading] = useState(true)
   const toast = useToast()
+  const dispatch = useDispatch()
+  const premises = useSelector(state => state.premises)
 
   useEffect(() => {
     setLoading(true)
-    PremisesService.getPremisesDetails(router.query.premisesId as string)
-      .then(setPremises)
-      .catch(toast.error)
-      .finally(() => {
-        setLoading(false)
-      })
+    dispatch(unsetPremises())
+    if (router.query.premisesId) {
+      PremisesService.getPremisesDetails(router.query.premisesId as string)
+        .then(premises => {
+          dispatch(setPremises(premises))
+        })
+        .catch(toast.error)
+        .finally(() => {
+          setLoading(false)
+        })
+    }
   }, [])
 
   if (loading) {
@@ -32,7 +38,7 @@ const BoardPage: NextPage = () => {
   if (!premises) {
     return <Error page errorText={'Premises is not found!!'} />
   }
-  return <PageAllowed Component={PremisesDetails} policy={PolicyUtils.PREMISES_READ} premises={premises} />
+  return <PageAllowed Component={PremisesDetails} policy={PolicyUtils.PREMISES_READ} />
 }
 
 export default BoardPage

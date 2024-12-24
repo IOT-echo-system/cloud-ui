@@ -1,15 +1,14 @@
 import {useState} from 'react'
-import {useDispatch, useForm, useSelector, useToast} from '../../../../../hooks'
+import {useForm, useToast} from '../../../../../hooks'
 import {PremisesService} from '../../../../../services'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
-import {setPremises} from '../../../../../store/actions/premises'
+import type {Premises} from '../../../../../typing/premises'
 
-export const AddPremises: GetFormPropsTypeFunction = handleClose => {
+type AddPremisesPropsType = {addPremises: (premises: Premises) => void}
+export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (handleClose, {addPremises}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
-  const allPremises = useSelector(state => state.premises)
-  const dispatch = useDispatch()
   const {onClear, values, handleSubmit, onChange} = useForm({
     name: '',
     address1: '',
@@ -105,7 +104,7 @@ export const AddPremises: GetFormPropsTypeFunction = handleClose => {
     })
       .then(newPremises => {
         onClear()
-        dispatch(setPremises([newPremises, ...allPremises]))
+        addPremises(newPremises)
         handleClose()
       })
       .catch(toast.error)
