@@ -34,7 +34,8 @@ export const apiConfig = {
   },
   master: {
     baseUrl: '/masters',
-    boards: '/boards'
+    boards: '/boards',
+    locations: '/locations/{pincode}'
   },
   widget: {
     baseUrl: '/widgets',

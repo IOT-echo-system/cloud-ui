@@ -1,9 +1,11 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useForm, useToast} from '../../../../../hooks'
 import {PremisesService} from '../../../../../services'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
 import type {Premises} from '../../../../../typing/premises'
+import {MasterService} from '../../../../../services/masterService'
+import type {ServerError} from '../../../../../typing/error'
 
 type AddPremisesPropsType = {addPremises: (premises: Premises) => void}
 export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (handleClose, {addPremises}) => {
@@ -18,6 +20,23 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
     state: '',
     zipCode: 0
   })
+
+  useEffect(() => {
+    if (values.zipCode.toString().length === 6) {
+      MasterService.getLocation(values.zipCode)
+        .then(location => {
+          onChange('city', location.city)
+          onChange('state', location.state)
+          onChange('district', location.district)
+        })
+        .catch((error: ServerError) => {
+          onChange('city', '')
+          onChange('state', '')
+          onChange('district', '')
+          toast.error(error)
+        })
+    }
+  }, [values.zipCode])
 
   const formInputs: FormInputType[] = [
     {
@@ -48,33 +67,6 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
     },
     {
       inputType: 'textField',
-      label: 'City',
-      value: values.city,
-      required: true,
-      onChange: event => {
-        onChange('city', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
-      label: 'District',
-      value: values.district,
-      required: true,
-      onChange: event => {
-        onChange('district', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
-      label: 'State',
-      value: values.state,
-      required: true,
-      onChange: event => {
-        onChange('state', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
       label: 'Zip code',
       type: 'number',
       value: values.zipCode === 0 ? '' : values.zipCode,
@@ -86,6 +78,27 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
       get helperText() {
         return this.error ? 'Zip code should be 6 digits long' : ''
       }
+    },
+    {
+      disabled: true,
+      inputType: 'textField',
+      label: 'City',
+      value: values.city,
+      required: true
+    },
+    {
+      disabled: true,
+      inputType: 'textField',
+      label: 'District',
+      value: values.district,
+      required: true
+    },
+    {
+      disabled: true,
+      inputType: 'textField',
+      label: 'State',
+      value: values.state,
+      required: true
     }
   ]
 
