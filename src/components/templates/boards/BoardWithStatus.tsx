@@ -1,4 +1,4 @@
-import {Box, Chip, Stack, Typography} from '@mui/material'
+import {Box, Stack, Typography} from '@mui/material'
 import React from 'react'
 import {Link} from '../../atoms'
 import {Config} from '../../../config'
@@ -31,12 +31,12 @@ export const BoardWithStatus: React.FC<BoardWithDevicesPropsType> = ({board}) =>
           <Typography>Board Id: {board.boardId}</Typography>
         </Stack>
         <Stack direction={'row'} alignItems={'center'} sx={{pointerEvents: 'none'}} flexWrap={'wrap'}>
-          <Chip
-            size={'small'}
-            color={board.status === 'HEALTHY' ? 'success' : 'error'}
-            label={board.status}
-            sx={{paddingLeft: '12px', paddingRight: '12px'}}
-          />
+          {/*<Chip*/}
+          {/*  size={'small'}*/}
+          {/*  color={board.status === 'HEALTHY' ? 'success' : 'error'}*/}
+          {/*  label={board.status}*/}
+          {/*  sx={{paddingLeft: '12px', paddingRight: '12px'}}*/}
+          {/*/>*/}
         </Stack>
       </Stack>
     </Box>

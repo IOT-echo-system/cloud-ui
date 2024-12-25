@@ -7,6 +7,7 @@ import {PolicyUtils} from '../../../utils/policyUtils'
 import {Edit} from '@mui/icons-material'
 import {AddZone, EditPremises} from '../../organisms/ModalForms/formFunctions/premises'
 import {useSelector} from '../../../hooks'
+import {AddBoard} from '../../organisms/ModalForms/formFunctions/boards'
 
 export const PremisesDetails: React.FC = () => {
   const premises = useSelector(state => state.premises)!
@@ -15,10 +16,15 @@ export const PremisesDetails: React.FC = () => {
     <PageContainer pt={2} spacing={2}>
       <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Breadcrumbs links={[{link: Config.PREMISES_PAGE_PATH, name: 'Premises'}]} text={premises.name} />
-        <Stack>
+        <Stack direction={'row'} spacing={2}>
           <PolicyAllowed policyId={PolicyUtils.ZONE_CREATE}>
             <ModalForms getFormDetails={AddZone}>
               <Button variant={'contained'}>Add zone</Button>
+            </ModalForms>
+          </PolicyAllowed>
+          <PolicyAllowed policyId={PolicyUtils.BOARD_CREATE}>
+            <ModalForms getFormDetails={AddBoard}>
+              <Button variant={'contained'}>Add board</Button>
             </ModalForms>
           </PolicyAllowed>
         </Stack>

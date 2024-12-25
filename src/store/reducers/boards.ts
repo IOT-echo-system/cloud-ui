@@ -1,6 +1,5 @@
 import type {TRootActions} from '../../typing/store'
 import type {Board} from '../../typing/board'
-import {unique} from '../../utils/utils'
 
 export const BoardsAction = {
   SET_BOARDS: 'SET_BOARDS',
@@ -17,24 +16,6 @@ const boardsReducer = (state: Board[], action: TRootActions): Board[] => {
       return [...action.payload.boards]
     case BoardsAction.UPDATE_BOARD:
       return state.map(board => (board.boardId === action.payload.board.boardId ? action.payload.board : board))
-    case BoardsAction.ADD_WIDGET:
-      return state.map(board => {
-        if (board.boardId !== action.payload.boardId) {
-          return board
-        }
-        board.widgets = unique(board.widgets.concat(action.payload.widget))
-        return board
-      })
-    case BoardsAction.UPDATE_WIDGET:
-      return state.map(board => {
-        if (board.boardId !== action.payload.boardId) {
-          return board
-        }
-        board.widgets = board.widgets.map(widget =>
-          widget.widgetId === action.payload.widget.widgetId ? {...widget, ...action.payload.widget} : widget
-        )
-        return board
-      })
     default:
       return state
   }

@@ -6,7 +6,7 @@ import type {BoardSecretKeyResponse} from './typing/board'
 class BoardService_ {
   boardConfig = apiConfig.board
 
-  createBoard(values: {name: string}): Promise<Board> {
+  createBoard(values: {name: string; type: string; premisesId: string}): Promise<Board> {
     return WebClient.post<Board>({
       baseUrl: this.boardConfig.baseUrl,
       path: this.boardConfig.boards,

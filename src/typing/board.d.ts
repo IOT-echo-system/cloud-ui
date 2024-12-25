@@ -1,8 +1,8 @@
-import type {Widget} from './widget/widget'
-
 export type Board = {
   boardId: string
+  premisesId: string
   name: string
-  status: 'HEALTHY' | 'UNHEALTHY'
-  widgets: Widget[]
+  type: string
+  createdBy: string
+  createdAt: Date
 }
