@@ -1,10 +1,12 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useForm, useToast} from '../../../../../hooks'
 import {PremisesService} from '../../../../../services'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
 import type {Premises} from '../../../../../typing/premises'
 import {updatePremises} from '../../../../../store/actions/premises'
+import {MasterService} from '../../../../../services/masterService'
+import type {ServerError} from '../../../../../typing/error'
 
 export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (handleClose, {premises}) => {
   const [loading, setLoading] = useState(false)
@@ -14,11 +16,25 @@ export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (han
     name: premises.name,
     address1: premises.address.address1,
     address2: premises.address.address2,
-    city: premises.address.city,
     district: premises.address.district,
     state: premises.address.state,
-    zipCode: premises.address.zipCode
+    pincode: premises.address.pincode
   })
+
+  useEffect(() => {
+    if (values.pincode.toString().length === 6) {
+      MasterService.getLocation(values.pincode)
+        .then(location => {
+          onChange('state', location.state)
+          onChange('district', location.district)
+        })
+        .catch((error: ServerError) => {
+          onChange('state', '')
+          onChange('district', '')
+          toast.error(error)
+        })
+    }
+  }, [values.pincode])
 
   const formInputs: FormInputType[] = [
     {
@@ -49,44 +65,31 @@ export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (han
     },
     {
       inputType: 'textField',
-      label: 'City',
-      value: values.city,
-      required: true,
-      onChange: event => {
-        onChange('city', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
-      label: 'District',
-      value: values.district,
-      required: true,
-      onChange: event => {
-        onChange('district', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
-      label: 'State',
-      value: values.state,
-      required: true,
-      onChange: event => {
-        onChange('state', event.target.value)
-      }
-    },
-    {
-      inputType: 'textField',
-      label: 'Zip code',
+      label: 'Pincode',
       type: 'number',
-      value: values.zipCode === 0 ? '' : values.zipCode,
+      value: values.pincode === 0 ? '' : values.pincode,
       required: true,
       onChange: event => {
-        onChange('zipCode', +event.target.value)
+        onChange('pincode', +event.target.value)
       },
-      error: values.zipCode !== 0 && !(100000 <= values.zipCode && values.zipCode <= 999999),
+      error: values.pincode !== 0 && !(100000 <= values.pincode && values.pincode <= 999999),
       get helperText() {
         return this.error ? 'Zip code should be 6 digits long' : ''
       }
+    },
+    {
+      disabled: true,
+      inputType: 'textField',
+      label: 'District',
+      value: values.district,
+      required: true
+    },
+    {
+      disabled: true,
+      inputType: 'textField',
+      label: 'State',
+      value: values.state,
+      required: true
     }
   ]
 
@@ -97,10 +100,9 @@ export const EditPremises: GetFormPropsTypeFunction<{premises: Premises}> = (han
       address: {
         address1: values.address1,
         address2: values.address2,
-        city: values.city,
         district: values.district,
         state: values.state,
-        zipCode: values.zipCode
+        pincode: values.pincode
       }
     })
       .then(newPremises => {

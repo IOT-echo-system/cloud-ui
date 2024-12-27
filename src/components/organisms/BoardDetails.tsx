@@ -20,7 +20,7 @@ export const BoardDetails: React.FC<BoardDetailsPropsType> = ({board}) => {
         {/*  idLabel={'Board Id'}*/}
         {/*/>*/}
         <Stack direction={{xs: 'row-reverse', sm: 'row'}} spacing={2} alignItems={'center'}>
-          <PolicyAllowed policyId={PolicyUtils.BOARD_UPDATE}>
+          <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE}>
             <CustomModal
               ClickableComponent={
                 <Fab color={'primary'} size={'small'}>

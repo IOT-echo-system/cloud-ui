@@ -5,6 +5,7 @@ import {Config} from '../../../../config'
 import {Box, Typography} from '@mui/material'
 
 export const PremisesOverview: React.FC<{premises: Premises}> = ({premises}) => {
+  const address = premises.address
   return (
     <Box
       boxShadow={2}
@@ -22,10 +23,7 @@ export const PremisesOverview: React.FC<{premises: Premises}> = ({premises}) => 
       <Typography>Name: {premises.name}</Typography>
       <Typography variant={'body2'}>Premises Id: {premises.premisesId}</Typography>
       <Typography>
-        Location: {premises.address.address1}, {premises.address.address2}, {premises.address.city}
-      </Typography>
-      <Typography>
-        {premises.address.district}, {premises.address.state} - {premises.address.zipCode}
+        Location: {address.address1}, {address.address2}, {address.district}, {address.state} - {address.pincode}
       </Typography>
     </Box>
   )

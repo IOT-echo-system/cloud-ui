@@ -11,6 +11,7 @@ import {AddBoard} from '../../organisms/ModalForms/formFunctions/boards'
 
 export const PremisesDetails: React.FC = () => {
   const premises = useSelector(state => state.premises)!
+  const address = premises.address
 
   return (
     <PageContainer pt={2} spacing={2}>
@@ -22,7 +23,7 @@ export const PremisesDetails: React.FC = () => {
               <Button variant={'contained'}>Add zone</Button>
             </ModalForms>
           </PolicyAllowed>
-          <PolicyAllowed policyId={PolicyUtils.BOARD_CREATE}>
+          <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE}>
             <ModalForms getFormDetails={AddBoard}>
               <Button variant={'contained'}>Add board</Button>
             </ModalForms>
@@ -42,10 +43,7 @@ export const PremisesDetails: React.FC = () => {
           </PolicyAllowed>
         </Stack>
         <Typography>
-          Location: {premises.address.address1}, {premises.address.address2}, {premises.address.city}
-        </Typography>
-        <Typography>
-          {premises.address.district}, {premises.address.state} - {premises.address.zipCode}
+          Location: {address.address1}, {address.address2}, {address.district}, {address.state} - {address.pincode}
         </Typography>
       </Box>
     </PageContainer>

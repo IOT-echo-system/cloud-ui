@@ -1,10 +1,9 @@
 export type Address = {
   address1: string
   address2?: string
-  city: string
   district: string
   state: string
-  zipCode: number
+  pincode: number
 }
 
 export interface Premises {

@@ -15,28 +15,25 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
     name: '',
     address1: '',
     address2: '',
-    city: '',
     district: '',
     state: '',
-    zipCode: 0
+    pincode: 0
   })
 
   useEffect(() => {
-    if (values.zipCode.toString().length === 6) {
-      MasterService.getLocation(values.zipCode)
+    if (values.pincode.toString().length === 6) {
+      MasterService.getLocation(values.pincode)
         .then(location => {
-          onChange('city', location.city)
           onChange('state', location.state)
           onChange('district', location.district)
         })
         .catch((error: ServerError) => {
-          onChange('city', '')
           onChange('state', '')
           onChange('district', '')
           toast.error(error)
         })
     }
-  }, [values.zipCode])
+  }, [values.pincode])
 
   const formInputs: FormInputType[] = [
     {
@@ -67,24 +64,17 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
     },
     {
       inputType: 'textField',
-      label: 'Zip code',
+      label: 'Pincode',
       type: 'number',
-      value: values.zipCode === 0 ? '' : values.zipCode,
+      value: values.pincode === 0 ? '' : values.pincode,
       required: true,
       onChange: event => {
-        onChange('zipCode', +event.target.value)
+        onChange('pincode', +event.target.value)
       },
-      error: values.zipCode !== 0 && !(100000 <= values.zipCode && values.zipCode <= 999999),
+      error: values.pincode !== 0 && !(100000 <= values.pincode && values.pincode <= 999999),
       get helperText() {
         return this.error ? 'Zip code should be 6 digits long' : ''
       }
-    },
-    {
-      disabled: true,
-      inputType: 'textField',
-      label: 'City',
-      value: values.city,
-      required: true
     },
     {
       disabled: true,
@@ -109,10 +99,9 @@ export const AddPremises: GetFormPropsTypeFunction<AddPremisesPropsType> = (hand
       address: {
         address1: values.address1,
         address2: values.address2,
-        city: values.city,
         district: values.district,
         state: values.state,
-        zipCode: values.zipCode
+        pincode: values.pincode
       }
     })
       .then(newPremises => {
