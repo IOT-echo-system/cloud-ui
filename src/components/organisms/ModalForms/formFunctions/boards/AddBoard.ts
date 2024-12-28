@@ -15,7 +15,7 @@ export const AddBoard: GetFormPropsTypeFunction = handleClose => {
   useEffect(() => {
     MasterService.getBoards()
       .then(boardsType => {
-        setBoards(boardsType.map(board => ({label: board.name, value: board.type})))
+        setBoards(boardsType.map(board => ({label: board.name, value: board.name})))
       })
       .catch(toast.error)
   }, [])
