@@ -1,6 +1,7 @@
 import * as siteActions from './actions/site'
 import * as userActions from './actions/user'
 import * as premisesActions from './actions/premises'
+import * as zonesActions from './actions/zones'
 import * as boardsActions from './actions/boards'
 import * as routinesActions from './actions/routines'
 
@@ -10,6 +11,7 @@ import type {TRootActions, TRootReducer, TRootState} from '../typing/store'
 import boardsReducer, {initBoardsState} from './reducers/boards'
 import routinesReducer, {initRoutinesState} from './reducers/routines'
 import premisesReducer, {initPremisesState} from './reducers/premises'
+import zonesReducer, {initZonesState} from './reducers/zones'
 
 const combineReducers = <S = TRootState>(reducers: {[K in keyof S]: TRootReducer<S[K]>}): TRootReducer<S> => {
   return (state: S, action: TRootActions): S => {
@@ -24,6 +26,7 @@ export const rootState = {
   site: initSiteState,
   user: initUserState,
   premises: initPremisesState,
+  zones: initZonesState,
   boards: initBoardsState,
   routines: initRoutinesState
 }
@@ -32,6 +35,7 @@ export const rootActions = {
   site: siteActions,
   user: userActions,
   premises: premisesActions,
+  zones: zonesActions,
   boards: boardsActions,
   routines: routinesActions
 }
@@ -40,6 +44,7 @@ export const rootReducer = combineReducers({
   site: siteReducer,
   user: userReducer,
   premises: premisesReducer,
+  zones: zonesReducer,
   boards: boardsReducer,
   routines: routinesReducer
 })

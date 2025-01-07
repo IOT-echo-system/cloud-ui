@@ -8,9 +8,15 @@ fileignoreconfig:
 - filename: src/components/molecules/Menubar/MobileMenu.tsx
   checksum: 1cdf77ef567f9af117fcfab41661a3e1e41a0413ecacb104997fa02743cd5e32
 - filename: src/pages/_app.tsx
-  checksum: 24d80e5f4e917b157af2eaf4e0ce072159970609f8770b4e092ea291574cd9f4
+  checksum: e6c3fc1665b5cfefb907863379ddf2e0f231038533905808b7d0cc28ad6bf5d2
 - filename: src/components/templates/premises/AllPremises.tsx
   checksum: fa6d62d7831f3325f2a6e808a41adf4e92a5cd328228e82a06c519358edbade1
 - filename: src/components/atoms/Breadcrumbs.tsx
   checksum: 55c2e737ead67039a8eaf76278aad18bca252dd0deea00874010547d39edb6d1
+- filename: src/components/templates/premises/PremisesDetails.tsx
+  checksum: 416639068ff1c487db812e13549c1dcb0b7850858172655a7bb8b61f8f4a2b7d
+- filename: src/components/templates/premises/components/BoardsView.tsx
+  checksum: 3ab958287ef302d6eed259031a9df202fc018e7b99705743b6dfdd4c69b973f4
+- filename: src/components/templates/premises/components/ZonesView.tsx
+  checksum: 46b6f8811441e79ec1db12d39352284978df95f53bc84cfa43c0857d3216fd35
 version: ""

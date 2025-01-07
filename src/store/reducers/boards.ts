@@ -1,21 +1,23 @@
 import type {TRootActions} from '../../typing/store'
-import type {Board} from '../../typing/board'
+import type {Boards} from '../../typing/board'
 
 export const BoardsAction = {
-  SET_BOARDS: 'SET_BOARDS',
-  UPDATE_BOARD: 'UPDATE_BOARD',
-  ADD_WIDGET: 'ADD_WIDGET',
-  UPDATE_WIDGET: 'UPDATE_WIDGET'
+  UPDATE_BOARDS: 'UPDATE_BOARDS',
+  UPDATE_BOARD: 'UPDATE_BOARD'
 } as const
 
-export const initBoardsState: Board[] = []
+export const initBoardsState: Boards = {}
 
-const boardsReducer = (state: Board[], action: TRootActions): Board[] => {
+const boardsReducer = (state: Boards, action: TRootActions): Boards => {
   switch (action.type) {
-    case BoardsAction.SET_BOARDS:
-      return [...action.payload.boards]
+    case BoardsAction.UPDATE_BOARDS: {
+      const boards = action.payload.boards.reduce<Boards>((allBoards, board) => {
+        return {...allBoards, [board.boardId]: board}
+      }, {})
+      return {...state, ...boards}
+    }
     case BoardsAction.UPDATE_BOARD:
-      return state.map(board => (board.boardId === action.payload.board.boardId ? action.payload.board : board))
+      return {...state, [action.payload.board.boardId]: action.payload.board}
     default:
       return state
   }

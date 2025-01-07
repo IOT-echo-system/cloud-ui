@@ -6,3 +6,5 @@ export type Board = {
   createdBy: string
   createdAt: Date
 }
+
+export type Boards = Record<string, Board>

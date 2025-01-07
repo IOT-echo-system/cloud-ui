@@ -1,8 +1,6 @@
 import type {PropsWithChildren} from 'react'
 import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from '../../hooks'
-import {updateWidget} from '../../store/actions/boards'
-import type {Widget} from '../../typing/widget/widget'
+import {useSelector} from '../../hooks'
 import {getStorage, StorageKeys} from '../../utils/storage'
 
 const retryCount = 3
@@ -17,14 +15,9 @@ export const WebSocketProvider: React.FC<PropsWithChildren> = ({children}) => {
   const [readyState, setReadyState] = useState(false)
 
   const {user} = useSelector(state => state)
-  const dispatch = useDispatch()
 
   const handleMessage = (content: string) => {
-    const {event, data} = JSON.parse(content)
-    if (event === 'UPDATE_WIDGET') {
-      const widget = data as Widget
-      dispatch(updateWidget(widget, widget.boardId))
-    }
+    JSON.parse(content)
   }
 
   useEffect(() => {

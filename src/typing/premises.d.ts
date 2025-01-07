@@ -10,4 +10,6 @@ export interface Premises {
   premisesId: string
   name: string
   address: Address
+  zoneIds: string[]
+  boardIds: string[]
 }

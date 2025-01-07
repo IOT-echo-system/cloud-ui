@@ -8,6 +8,8 @@ import {PremisesDetails} from '../../components/templates/premises/PremisesDetai
 import {PremisesService} from '../../services'
 import {useDispatch, useSelector, useToast} from '../../hooks'
 import {setPremises, unsetPremises} from '../../store/actions/premises'
+import {updateZones} from '../../store/actions/zones'
+import {updateBoards} from '../../store/actions/boards'
 
 const BoardPage: NextPage = () => {
   const router = useRouter()
@@ -22,7 +24,10 @@ const BoardPage: NextPage = () => {
     if (router.query.premisesId) {
       PremisesService.getPremisesDetails(router.query.premisesId as string)
         .then(premises => {
-          dispatch(setPremises(premises))
+          const {zones, boards, ...rest} = premises
+          dispatch(setPremises(rest))
+          dispatch(updateZones(zones))
+          dispatch(updateBoards(boards))
         })
         .catch(toast.error)
         .finally(() => {

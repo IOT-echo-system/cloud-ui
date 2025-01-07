@@ -6,22 +6,22 @@ import StoreProvider from '../store/configureStore'
 import CustomThemeProvider from '../theme/CustomThemeProvider'
 import {ToastWrapper} from '../components/atoms'
 import {Layout} from '../components/organisms'
-import {ValidatedProfile, WebSocketProvider} from '../components/molecules'
+import {ValidatedProfile} from '../components/molecules'
 
 const App: React.FC<AppProps> = ({Component, pageProps, router}) => {
   return (
     <StoreProvider>
-      <WebSocketProvider>
-        <CustomThemeProvider>
-          <ToastWrapper>
-            <ValidatedProfile>
-              <Layout>
-                <Component {...pageProps} key={router.asPath} />
-              </Layout>
-            </ValidatedProfile>
-          </ToastWrapper>
-        </CustomThemeProvider>
-      </WebSocketProvider>
+      {/*<WebSocketProvider>*/}
+      <CustomThemeProvider>
+        <ToastWrapper>
+          <ValidatedProfile>
+            <Layout>
+              <Component {...pageProps} key={router.asPath} />
+            </Layout>
+          </ValidatedProfile>
+        </ToastWrapper>
+      </CustomThemeProvider>
+      {/*</WebSocketProvider>*/}
     </StoreProvider>
   )
 }
