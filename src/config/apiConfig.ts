@@ -26,7 +26,7 @@ export const apiConfig = {
     zones: ''
   },
   board: {
-    baseUrl: '/boards',
+    baseUrl: '/premises/{premisesId}/boards',
     boards: '',
     board: '/{boardId}',
     updateBoardName: '/{boardId}/name',

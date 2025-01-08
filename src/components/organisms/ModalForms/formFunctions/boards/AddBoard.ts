@@ -10,7 +10,7 @@ export const AddBoard: GetFormPropsTypeFunction = handleClose => {
   const toast = useToast()
   const premises = useSelector(state => state.premises)!
   const [boards, setBoards] = useState<FormSelectOption[]>([])
-  const {onClear, values, handleSubmit, onChange} = useForm({name: '', type: '', premisesId: premises.premisesId})
+  const {onClear, values, handleSubmit, onChange} = useForm({name: '', type: ''})
 
   useEffect(() => {
     MasterService.getBoards()
@@ -43,7 +43,7 @@ export const AddBoard: GetFormPropsTypeFunction = handleClose => {
 
   const onSubmit = () => {
     setLoading(true)
-    BoardService.createBoard(values)
+    BoardService.createBoard(premises.premisesId, values)
       .then(() => {
         onClear()
         handleClose()
