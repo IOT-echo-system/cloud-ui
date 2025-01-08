@@ -5,8 +5,8 @@ export const PremisesAction = {
   SET_PREMISES: 'SET_PREMISES',
   UNSET_PREMISES: 'UNSET_PREMISES',
   UPDATE_PREMISES: 'UPDATE_PREMISES',
-  ADD_WIDGET: 'ADD_WIDGET',
-  UPDATE_WIDGET: 'UPDATE_WIDGET'
+  ADD_BOARD: 'ADD_BOARD',
+  ADD_ZONE: 'ADD_ZONE'
 } as const
 
 export const initPremisesState: Premises | null = null
@@ -18,6 +18,16 @@ const premisesReducer = (state: Premises | null, action: TRootActions): Premises
       return {...action.payload.premises}
     case PremisesAction.UNSET_PREMISES:
       return null
+    case PremisesAction.ADD_BOARD:
+      if (state) {
+        return {...state, boardIds: [...new Set(state.boardIds.concat(action.payload.boardId))]}
+      }
+      return state
+    case PremisesAction.ADD_ZONE:
+      if (state) {
+        return {...state, zoneIds: [...new Set(state.zoneIds.concat(action.payload.zoneId))]}
+      }
+      return state
     default:
       return state
   }
