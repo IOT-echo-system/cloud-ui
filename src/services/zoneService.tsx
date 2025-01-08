@@ -5,11 +5,12 @@ import type {ZoneReqBody, ZoneResBody} from './typing/zone'
 class ZoneService_ {
   private readonly zoneConfig = apiConfig.zone
 
-  createZone(values: ZoneReqBody): Promise<ZoneResBody> {
+  createZone(premisesId: string, values: ZoneReqBody): Promise<ZoneResBody> {
     return WebClient.post<ZoneResBody>({
       baseUrl: this.zoneConfig.baseUrl,
       path: this.zoneConfig.zones,
-      body: values
+      body: values,
+      uriVariables: {premisesId}
     })
   }
 

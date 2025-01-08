@@ -8,7 +8,7 @@ export const AddZone: GetFormPropsTypeFunction = handleClose => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const premises = useSelector(state => state.premises)!
-  const {onClear, values, handleSubmit, onChange} = useForm({name: '', premisesId: premises.premisesId})
+  const {onClear, values, handleSubmit, onChange} = useForm({name: ''})
 
   const formInputs: FormInputType[] = [
     {
@@ -24,7 +24,7 @@ export const AddZone: GetFormPropsTypeFunction = handleClose => {
 
   const onSubmit = () => {
     setLoading(true)
-    ZoneService.createZone(values)
+    ZoneService.createZone(premises.premisesId, values)
       .then(() => {
         onClear()
         handleClose()

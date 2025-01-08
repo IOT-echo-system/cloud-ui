@@ -22,7 +22,7 @@ export const apiConfig = {
     premisesDetails: '/{premisesId}'
   },
   zone: {
-    baseUrl: '/zones',
+    baseUrl: '/premises/{premisesId}/zones',
     zones: ''
   },
   board: {
