@@ -1,10 +1,11 @@
 import React from 'react'
-import {Box, Stack, Typography} from '@mui/material'
+import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {useZones} from '../../../../hooks'
 import {Button, PolicyAllowed} from '../../../atoms'
 import {ModalForms} from '../../../organisms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
-import {AddZone} from '../../../organisms/ModalForms/formFunctions/premises'
+import {AddZone, UpdateZoneName} from '../../../organisms/ModalForms/formFunctions/premises'
+import {Edit} from '@mui/icons-material'
 
 export const ZonesView: React.FC = () => {
   const {zones} = useZones()
@@ -32,7 +33,16 @@ export const ZonesView: React.FC = () => {
                 '&:hover': {color: 'inherit'}
               }}
             >
-              <Typography>{zone.name}</Typography>
+              <Stack gap={2} direction={'row'} alignItems={'baseline'}>
+                <Typography variant={'h5'}>{zone.name}</Typography>
+                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE}>
+                  <ModalForms getFormDetails={UpdateZoneName} zone={zone}>
+                    <IconButton color={'primary'}>
+                      <Edit />
+                    </IconButton>
+                  </ModalForms>
+                </PolicyAllowed>
+              </Stack>
               <Typography variant={'body2'}>Zone Id: {zone.zoneId} </Typography>
             </Box>
           )

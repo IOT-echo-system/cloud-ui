@@ -15,19 +15,6 @@ class BoardService_ {
     })
   }
 
-  getBoards(): Promise<Board[]> {
-    return WebClient.get<Board[]>({baseUrl: this.boardConfig.baseUrl, path: this.boardConfig.boards})
-  }
-
-  updateBoardName(values: {name: string}, boardId: string): Promise<{name: string}> {
-    return WebClient.put<{name: string}>({
-      baseUrl: this.boardConfig.baseUrl,
-      path: this.boardConfig.updateBoardName,
-      body: values,
-      uriVariables: {boardId}
-    })
-  }
-
   getSecretKey(boardId: string): Promise<BoardSecretKeyResponse> {
     return WebClient.get<BoardSecretKeyResponse>({
       baseUrl: this.boardConfig.baseUrl,
@@ -41,6 +28,15 @@ class BoardService_ {
       baseUrl: this.boardConfig.baseUrl,
       path: this.boardConfig.secretKey,
       uriVariables: {boardId}
+    })
+  }
+
+  updateName(premisesId: string, boardId: string, values: {name: string}): Promise<Board> {
+    return WebClient.put<Board>({
+      baseUrl: this.boardConfig.baseUrl,
+      path: this.boardConfig.updateBoardName,
+      uriVariables: {boardId, premisesId},
+      body: values
     })
   }
 }

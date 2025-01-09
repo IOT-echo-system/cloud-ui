@@ -23,7 +23,8 @@ export const apiConfig = {
   },
   zone: {
     baseUrl: '/premises/{premisesId}/zones',
-    zones: ''
+    zones: '',
+    updateName: '/{zoneId}/name'
   },
   board: {
     baseUrl: '/premises/{premisesId}/boards',

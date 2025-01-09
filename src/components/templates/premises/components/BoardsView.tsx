@@ -1,10 +1,11 @@
 import React from 'react'
-import {Box, Stack, Typography} from '@mui/material'
+import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {Button, PolicyAllowed} from '../../../atoms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../../organisms'
-import {AddBoard} from '../../../organisms/ModalForms/formFunctions/boards'
+import {AddBoard, UpdateBoardName} from '../../../organisms/ModalForms/formFunctions/boards'
 import {useBoards} from '../../../../hooks'
+import {Edit} from '@mui/icons-material'
 
 export const BoardsView: React.FC = () => {
   const {boards} = useBoards()
@@ -32,7 +33,16 @@ export const BoardsView: React.FC = () => {
                 '&:hover': {color: 'inherit'}
               }}
             >
-              <Typography>{board.name}</Typography>
+              <Stack gap={2} direction={'row'} alignItems={'baseline'}>
+                <Typography variant={'h5'}>{board.name}</Typography>
+                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE}>
+                  <ModalForms getFormDetails={UpdateBoardName} board={board}>
+                    <IconButton color={'primary'}>
+                      <Edit />
+                    </IconButton>
+                  </ModalForms>
+                </PolicyAllowed>
+              </Stack>
               <Typography variant={'body2'}>Board Id: {board.boardId}</Typography>
               <Typography variant={'body2'}>Board type: {board.type}</Typography>
             </Box>
