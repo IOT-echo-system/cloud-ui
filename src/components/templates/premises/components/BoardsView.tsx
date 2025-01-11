@@ -14,7 +14,7 @@ export const BoardsView: React.FC = () => {
   return (
     <Stack mt={2} gap={2}>
       <Stack direction={'row'} justifyContent={'end'} gap={2}>
-        <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE} otherConditions={[premises.enableEdit]}>
+        <PolicyAllowed policyId={PolicyUtils.BOARD_CREATE} otherConditions={[premises.enableEdit]}>
           <ModalForms getFormDetails={AddBoard}>
             <Button variant={'contained'}>Add board</Button>
           </ModalForms>
@@ -36,7 +36,7 @@ export const BoardsView: React.FC = () => {
             >
               <Stack gap={2} direction={'row'} alignItems={'baseline'}>
                 <Typography variant={'h5'}>{board.name}</Typography>
-                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE} otherConditions={[premises.enableEdit]}>
+                <PolicyAllowed policyId={PolicyUtils.BOARD_UPDATE} otherConditions={[premises.enableEdit]}>
                   <ModalForms getFormDetails={UpdateBoardName} board={board}>
                     <IconButton color={'primary'}>
                       <Edit />

@@ -6,7 +6,6 @@ import {ModalForms} from '../../../organisms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {AddZone, UpdateZoneName} from '../../../organisms/ModalForms/formFunctions/premises'
 import {Edit} from '@mui/icons-material'
-import {AddFeed} from '../../../organisms/ModalForms/formFunctions/boards'
 
 export const ZonesView: React.FC = () => {
   const {zones} = useZones()
@@ -18,11 +17,6 @@ export const ZonesView: React.FC = () => {
         <PolicyAllowed policyId={PolicyUtils.ZONE_CREATE} otherConditions={[premises.enableEdit]}>
           <ModalForms getFormDetails={AddZone}>
             <Button variant={'contained'}>Add zone</Button>
-          </ModalForms>
-        </PolicyAllowed>
-        <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE} otherConditions={[premises.enableEdit]}>
-          <ModalForms getFormDetails={AddFeed}>
-            <Button variant={'contained'}>Add device</Button>
           </ModalForms>
         </PolicyAllowed>
       </Stack>
@@ -42,7 +36,7 @@ export const ZonesView: React.FC = () => {
             >
               <Stack gap={2} direction={'row'} alignItems={'baseline'}>
                 <Typography variant={'h5'}>{zone.name}</Typography>
-                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE} otherConditions={[premises.enableEdit]}>
+                <PolicyAllowed policyId={PolicyUtils.ZONE_UPDATE} otherConditions={[premises.enableEdit]}>
                   <ModalForms getFormDetails={UpdateZoneName} zone={zone}>
                     <IconButton color={'primary'}>
                       <Edit />

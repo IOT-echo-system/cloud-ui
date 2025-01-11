@@ -11,7 +11,7 @@ export const FeedsView: React.FC = () => {
   return (
     <Stack mt={2} gap={2}>
       <Stack direction={'row'} justifyContent={'end'} gap={2}>
-        <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE} otherConditions={[premises.enableEdit]}>
+        <PolicyAllowed policyId={PolicyUtils.FEED_CREATE} otherConditions={[premises.enableEdit]}>
           <ModalForms getFormDetails={AddFeed}>
             <Button variant={'contained'}>Add feed</Button>
           </ModalForms>
