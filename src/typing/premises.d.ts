@@ -12,4 +12,6 @@ export interface Premises {
   address: Address
   zoneIds: string[]
   boardIds: string[]
+  user: {userId: string; role: 'OWNER' | 'ADMIN' | 'USER'}
+  enableEdit: boolean
 }

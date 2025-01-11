@@ -33,11 +33,16 @@ export const apiConfig = {
     updateBoardName: '/{boardId}/name',
     secretKey: '/{boardId}/secret-key'
   },
+  feed: {
+    baseUrl: '/premises/{premisesId}/feeds',
+    feeds: ''
+  },
   master: {
     baseUrl: '/masters',
     boards: '/boards',
     locations: '/locations/{pincode}'
   },
+
   widget: {
     baseUrl: '/widgets',
     widgets: '',

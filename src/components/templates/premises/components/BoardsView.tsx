@@ -4,16 +4,17 @@ import {Button, PolicyAllowed} from '../../../atoms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../../organisms'
 import {AddBoard, UpdateBoardName} from '../../../organisms/ModalForms/formFunctions/boards'
-import {useBoards} from '../../../../hooks'
+import {useBoards, useSelector} from '../../../../hooks'
 import {Edit} from '@mui/icons-material'
 
 export const BoardsView: React.FC = () => {
   const {boards} = useBoards()
+  const premises = useSelector(state => state.premises!)
 
   return (
     <Stack mt={2} gap={2}>
-      <Stack direction={'row'} justifyContent={'end'}>
-        <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE}>
+      <Stack direction={'row'} justifyContent={'end'} gap={2}>
+        <PolicyAllowed policyId={PolicyUtils.DEVICE_CREATE} otherConditions={[premises.enableEdit]}>
           <ModalForms getFormDetails={AddBoard}>
             <Button variant={'contained'}>Add board</Button>
           </ModalForms>
@@ -35,7 +36,7 @@ export const BoardsView: React.FC = () => {
             >
               <Stack gap={2} direction={'row'} alignItems={'baseline'}>
                 <Typography variant={'h5'}>{board.name}</Typography>
-                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE}>
+                <PolicyAllowed policyId={PolicyUtils.DEVICE_UPDATE} otherConditions={[premises.enableEdit]}>
                   <ModalForms getFormDetails={UpdateBoardName} board={board}>
                     <IconButton color={'primary'}>
                       <Edit />

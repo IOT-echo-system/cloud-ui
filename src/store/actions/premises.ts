@@ -20,3 +20,7 @@ export const addBoardInPremises = (boardId: string) => {
 export const addZoneInPremises = (zoneId: string) => {
   return {type: PremisesAction.ADD_ZONE, payload: {zoneId}}
 }
+
+export const toggleEdit = () => {
+  return {type: PremisesAction.TOGGLE_EDIT}
+}

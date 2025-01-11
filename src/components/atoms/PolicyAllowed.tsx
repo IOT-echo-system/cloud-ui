@@ -5,11 +5,16 @@ import {PolicyUtils} from '../../utils/policyUtils'
 import type {StackProps} from '@mui/material'
 import {Stack} from '@mui/material'
 
-type PolicyAllowedPropsType = {policyId: string} & StackProps
+type PolicyAllowedPropsType = {policyId: string; otherConditions?: boolean[]} & StackProps
 
-export const PolicyAllowed: React.FC<PropsWithChildren<PolicyAllowedPropsType>> = ({children, policyId, ...props}) => {
+export const PolicyAllowed: React.FC<PropsWithChildren<PolicyAllowedPropsType>> = ({
+  children,
+  policyId,
+  otherConditions = [],
+  ...props
+}) => {
   const {policies} = useSelector(state => state.user)
-  if (!PolicyUtils.isValid(policies, policyId)) {
+  if (!PolicyUtils.isValid(policies, policyId) || otherConditions.some(match => !match)) {
     return <></>
   }
   return <Stack {...props}>{children}</Stack>
