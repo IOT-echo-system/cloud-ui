@@ -1,6 +1,7 @@
 export enum StorageKeys {
   AUTH = 'AUTH',
-  PREMISES_VIEW = 'PREMISES_VIEW'
+  PREMISES_VIEW = 'PREMISES_VIEW',
+  PREMISES_ID = 'PREMISES_ID'
 }
 
 export const setStorage = <T extends Record<string, unknown>>(key: StorageKeys, value: T): T => {

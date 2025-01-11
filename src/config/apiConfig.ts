@@ -22,19 +22,19 @@ export const apiConfig = {
     premisesDetails: '/{premisesId}'
   },
   zone: {
-    baseUrl: '/premises/{premisesId}/zones',
+    baseUrl: '/zones',
     zones: '',
     updateName: '/{zoneId}/name'
   },
   board: {
-    baseUrl: '/premises/{premisesId}/boards',
+    baseUrl: '/boards',
     boards: '',
     board: '/{boardId}',
     updateBoardName: '/{boardId}/name',
     secretKey: '/{boardId}/secret-key'
   },
   feed: {
-    baseUrl: '/premises/{premisesId}/feeds',
+    baseUrl: '/feeds',
     feeds: ''
   },
   master: {

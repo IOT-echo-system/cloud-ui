@@ -10,6 +10,7 @@ import {useDispatch, useSelector, useToast} from '../../hooks'
 import {setPremises, unsetPremises} from '../../store/actions/premises'
 import {updateZones} from '../../store/actions/zones'
 import {updateBoards} from '../../store/actions/boards'
+import {setStorage, StorageKeys} from '../../utils/storage'
 
 const BoardPage: NextPage = () => {
   const router = useRouter()
@@ -25,6 +26,7 @@ const BoardPage: NextPage = () => {
       PremisesService.getPremisesDetails(router.query.premisesId as string)
         .then(premises => {
           const {zones, boards, ...rest} = premises
+          setStorage(StorageKeys.PREMISES_ID, {premisesId: premises.premisesId})
           dispatch(setPremises(rest))
           dispatch(updateZones(zones))
           dispatch(updateBoards(boards))

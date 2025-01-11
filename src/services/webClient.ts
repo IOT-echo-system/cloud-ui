@@ -6,9 +6,11 @@ import {v4 as uuidV4} from 'uuid'
 
 WebClient.interceptor.request(config => {
   const {token} = getStorage<{token: string}>(StorageKeys.AUTH) ?? {token: ''}
+  const {premisesId} = getStorage<{premisesId: string}>(StorageKeys.PREMISES_ID) ?? {premisesId: ''}
   config.baseURL = apiConfig.baseUrl
   config.headers.authorization = token
   config.headers['x-trace-id'] = uuidV4()
+  config.headers['x-premises-id'] = premisesId
   return config
 })
 
