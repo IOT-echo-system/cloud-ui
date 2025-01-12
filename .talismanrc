@@ -20,5 +20,5 @@ fileignoreconfig:
 - filename: src/components/templates/premises/components/ZonesView.tsx
   checksum: 46b6f8811441e79ec1db12d39352284978df95f53bc84cfa43c0857d3216fd35
 - filename: src/pages/premises/[premisesId].tsx
-  checksum: e4ce5f60b6d681d591d6470b9554bc1a6f11c06fdaeca6dda3793064a2d0593b
+  checksum: 30c8246f3711dedfceb1a7aa4005c28dc4da685a7aeef26b63a37fae7f921194
 version: ""

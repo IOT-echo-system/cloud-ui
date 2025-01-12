@@ -12,7 +12,7 @@ import {updateZones} from '../../store/actions/zones'
 import {updateBoards} from '../../store/actions/boards'
 import {setStorage, StorageKeys} from '../../utils/storage'
 
-const BoardPage: NextPage = () => {
+const PremisesPage: NextPage = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const toast = useToast()
@@ -23,10 +23,10 @@ const BoardPage: NextPage = () => {
     setLoading(true)
     dispatch(unsetPremises())
     if (router.query.premisesId) {
+      setStorage(StorageKeys.PREMISES_ID, {premisesId: router.query.premisesId})
       PremisesService.getPremisesDetails(router.query.premisesId as string)
         .then(premises => {
           const {zones, boards, ...rest} = premises
-          setStorage(StorageKeys.PREMISES_ID, {premisesId: premises.premisesId})
           dispatch(setPremises(rest))
           dispatch(updateZones(zones))
           dispatch(updateBoards(boards))
@@ -36,7 +36,7 @@ const BoardPage: NextPage = () => {
           setLoading(false)
         })
     }
-  }, [])
+  }, [router.query.premisesId])
 
   if (loading) {
     return <Loader page loadingText={'Loading...'} />
@@ -48,4 +48,4 @@ const BoardPage: NextPage = () => {
   return <PageAllowed Component={PremisesDetails} policy={PolicyUtils.PREMISES_READ} />
 }
 
-export default BoardPage
+export default PremisesPage
