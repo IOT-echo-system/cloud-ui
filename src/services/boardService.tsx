@@ -6,12 +6,11 @@ import type {BoardSecretKeyResponse} from './typing/board'
 class BoardService_ {
   boardConfig = apiConfig.board
 
-  createBoard(premisesId: string, values: {name: string; type: string}): Promise<Board> {
+  createBoard(values: {name: string; type: string}): Promise<Board> {
     return WebClient.post<Board>({
       baseUrl: this.boardConfig.baseUrl,
       path: this.boardConfig.boards,
-      body: values,
-      uriVariables: {premisesId}
+      body: values
     })
   }
 
@@ -37,6 +36,13 @@ class BoardService_ {
       path: this.boardConfig.updateBoardName,
       uriVariables: {boardId, premisesId},
       body: values
+    })
+  }
+
+  getBoards(): Promise<Board[]> {
+    return WebClient.get<Board[]>({
+      baseUrl: this.boardConfig.baseUrl,
+      path: this.boardConfig.boards
     })
   }
 }

@@ -23,6 +23,13 @@ class ZoneService_ {
       uriVariables: {premisesId, zoneId}
     })
   }
+
+  getZones(): Promise<Zone[]> {
+    return WebClient.get<Zone[]>({
+      baseUrl: this.zoneConfig.baseUrl,
+      path: this.zoneConfig.zones
+    })
+  }
 }
 
 export const ZoneService = new ZoneService_()

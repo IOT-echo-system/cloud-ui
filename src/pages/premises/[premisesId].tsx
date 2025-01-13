@@ -5,12 +5,14 @@ import React, {useEffect, useState} from 'react'
 import {PageAllowed} from '../../components/templates/PageAllowed'
 import {PolicyUtils} from '../../utils/policyUtils'
 import {PremisesDetails} from '../../components/templates/premises/PremisesDetails'
-import {PremisesService} from '../../services'
+import {BoardService, PremisesService} from '../../services'
 import {useDispatch, useSelector, useToast} from '../../hooks'
 import {setPremises, unsetPremises} from '../../store/actions/premises'
+import {setStorage, StorageKeys} from '../../utils/storage'
+import {ZoneService} from '../../services/zoneService'
 import {updateZones} from '../../store/actions/zones'
 import {updateBoards} from '../../store/actions/boards'
-import {setStorage, StorageKeys} from '../../utils/storage'
+import type {ServerError} from '../../typing/error'
 
 const PremisesPage: NextPage = () => {
   const router = useRouter()
@@ -22,19 +24,26 @@ const PremisesPage: NextPage = () => {
   useEffect(() => {
     setLoading(true)
     dispatch(unsetPremises())
+    const fetchData = async () => {
+      try {
+        const [premises, zones, boards] = await Promise.all([
+          PremisesService.getPremisesDetails(router.query.premisesId as string),
+          ZoneService.getZones(),
+          BoardService.getBoards()
+        ])
+        dispatch(setPremises(premises))
+        dispatch(updateZones(zones))
+        dispatch(updateBoards(boards))
+      } catch (error) {
+        toast.error(error as ServerError)
+      } finally {
+        setLoading(false)
+      }
+    }
+
     if (router.query.premisesId) {
       setStorage(StorageKeys.PREMISES_ID, {premisesId: router.query.premisesId})
-      PremisesService.getPremisesDetails(router.query.premisesId as string)
-        .then(premises => {
-          const {zones, boards, ...rest} = premises
-          dispatch(setPremises(rest))
-          dispatch(updateZones(zones))
-          dispatch(updateBoards(boards))
-        })
-        .catch(toast.error)
-        .finally(() => {
-          setLoading(false)
-        })
+      fetchData()
     }
   }, [router.query.premisesId])
 
