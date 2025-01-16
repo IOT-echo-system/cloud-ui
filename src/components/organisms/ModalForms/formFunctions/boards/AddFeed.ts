@@ -8,7 +8,7 @@ export const AddFeed: GetFormPropsTypeFunction = handleClose => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const {premises, boards} = useSelector(state => state)
-  const boardIds = premises!.boardIds.map(boardId => ({label: `${boards[boardId].name} (${boardId})`, value: boardId}))
+  const boardIds = premises!.boards.map(boardId => ({label: `${boards[boardId].name} (${boardId})`, value: boardId}))
   const {onClear, values, handleSubmit, onChange} = useForm({name: '', boardId: '', type: ''})
 
   const formInputs: FormInputType[] = [

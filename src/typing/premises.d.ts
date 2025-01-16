@@ -10,8 +10,8 @@ export interface Premises {
   premisesId: string
   name: string
   address: Address
-  zoneIds: string[]
-  boardIds: string[]
+  zones: string[]
+  boards: string[]
   user: {userId: string; role: 'OWNER' | 'ADMIN' | 'USER'}
   enableEdit: boolean
 }

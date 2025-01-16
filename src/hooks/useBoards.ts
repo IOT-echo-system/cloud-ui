@@ -9,13 +9,13 @@ export const useBoards = (): {boards: Board[]} => {
     if (!premises) {
       return []
     }
-    const currentBoards = premises.boardIds.reduce<Set<Board>>((currentBoards, boardId) => {
+    const currentBoards = premises.boards.reduce<Set<Board>>((currentBoards, boardId) => {
       const board = allBoards[boardId] as Board | undefined
       return board ? currentBoards.add(board) : currentBoards
     }, new Set())
 
     return [...currentBoards] as Board[]
-  }, [allBoards, premises?.boardIds])
+  }, [allBoards, premises?.boards])
 
   return {boards}
 }

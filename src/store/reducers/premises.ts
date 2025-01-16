@@ -21,12 +21,12 @@ const premisesReducer = (state: Premises | null, action: TRootActions): Premises
       return null
     case PremisesAction.ADD_BOARD:
       if (state) {
-        return {...state, boardIds: [...new Set(state.boardIds.concat(action.payload.boardId))]}
+        return {...state, boards: [...new Set(state.boards.concat(action.payload.boardId))]}
       }
       return state
     case PremisesAction.ADD_ZONE:
       if (state) {
-        return {...state, zoneIds: [...new Set(state.zoneIds.concat(action.payload.zoneId))]}
+        return {...state, zones: [...new Set(state.zones.concat(action.payload.zoneId))]}
       }
       return state
     case PremisesAction.TOGGLE_EDIT:

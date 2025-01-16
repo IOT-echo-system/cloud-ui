@@ -9,13 +9,13 @@ export const useZones = (): {zones: Zone[]} => {
     if (!premises) {
       return []
     }
-    const currentZones = premises.zoneIds.reduce<Set<Zone>>((currentZones, zoneId) => {
+    const currentZones = premises.zones.reduce<Set<Zone>>((currentZones, zoneId) => {
       const zone = allZones[zoneId] as Zone | undefined
       return zone ? currentZones.add(zone) : currentZones
     }, new Set())
 
     return [...currentZones] as Zone[]
-  }, [allZones, premises?.zoneIds])
+  }, [allZones, premises?.zones])
 
   return {zones}
 }
