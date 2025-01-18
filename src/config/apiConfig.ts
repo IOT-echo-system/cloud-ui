@@ -35,7 +35,8 @@ export const apiConfig = {
   },
   feed: {
     baseUrl: '/feeds',
-    feeds: ''
+    feeds: '',
+    updateName: '/{feedId}/name'
   },
   master: {
     baseUrl: '/masters',

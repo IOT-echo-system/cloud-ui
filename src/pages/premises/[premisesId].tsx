@@ -31,7 +31,7 @@ const PremisesPage: NextPage = () => {
           ZoneService.getZones(),
           BoardService.getBoards()
         ])
-        dispatch(setPremises(premises))
+        dispatch(setPremises({...premises, enableEdit: false}))
         dispatch(updateZones(zones))
         dispatch(updateBoards(boards))
       } catch (error) {

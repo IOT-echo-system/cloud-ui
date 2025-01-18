@@ -21,4 +21,6 @@ fileignoreconfig:
   checksum: 46b6f8811441e79ec1db12d39352284978df95f53bc84cfa43c0857d3216fd35
 - filename: src/pages/premises/[premisesId].tsx
   checksum: 30c8246f3711dedfceb1a7aa4005c28dc4da685a7aeef26b63a37fae7f921194
+- filename: src/components/templates/premises/components/FeedsView.tsx
+  checksum: f23e75dc6970223fefbb8180221561014be2172392d75be31d28a8568f9a3b38
 version: ""

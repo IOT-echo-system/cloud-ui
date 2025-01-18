@@ -5,12 +5,27 @@ import type {Feed} from '../typing/feed'
 class FeedService_ {
   feedConfig = apiConfig.feed
 
-  createFeed(premisesId: string, values: {name: string; type: string}): Promise<Feed> {
+  createFeed(values: {name: string; type: string}): Promise<Feed> {
     return WebClient.post<Feed>({
       baseUrl: this.feedConfig.baseUrl,
       path: this.feedConfig.feeds,
-      body: values,
-      uriVariables: {premisesId}
+      body: values
+    })
+  }
+
+  getFeeds(): Promise<Feed[]> {
+    return WebClient.get<Feed[]>({
+      baseUrl: this.feedConfig.baseUrl,
+      path: this.feedConfig.feeds
+    })
+  }
+
+  updateName(feedId: string, values: {name: string}): Promise<Feed> {
+    return WebClient.put<Feed>({
+      baseUrl: this.feedConfig.baseUrl,
+      path: this.feedConfig.updateName,
+      uriVariables: {feedId},
+      body: values
     })
   }
 }

@@ -45,7 +45,7 @@ export const BoardsView: React.FC = () => {
                 </PolicyAllowed>
               </Stack>
               <Typography variant={'body2'}>Board Id: {board.boardId}</Typography>
-              <Typography variant={'body2'}>Board type: {board.type}</Typography>
+              <Typography>Board type: {board.type}</Typography>
             </Box>
           )
         })}

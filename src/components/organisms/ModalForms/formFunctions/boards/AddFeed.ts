@@ -3,8 +3,10 @@ import {useForm, useSelector, useToast} from '../../../../../hooks'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
 import {FeedService} from '../../../../../services'
+import type {Feed} from '../../../../../typing/feed'
 
-export const AddFeed: GetFormPropsTypeFunction = handleClose => {
+type AddFeedPropsType = {updateFeed: (feed: Feed) => void}
+export const AddFeed: GetFormPropsTypeFunction<AddFeedPropsType> = (handleClose, {updateFeed}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
   const {premises, boards} = useSelector(state => state)
@@ -46,12 +48,11 @@ export const AddFeed: GetFormPropsTypeFunction = handleClose => {
 
   const onSubmit = () => {
     setLoading(true)
-    FeedService.createFeed(premises!.premisesId, values)
-      .then(() => {
+    FeedService.createFeed(values)
+      .then(feed => {
         onClear()
         handleClose()
-        // dispatch(addBoardInPremises(board.boardId))
-        // dispatch(updateBoard(board))
+        updateFeed(feed)
       })
       .catch(toast.error)
       .finally(() => {

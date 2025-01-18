@@ -32,6 +32,12 @@ export const PremisesDetails: React.FC = () => {
     setStorage(StorageKeys.PREMISES_VIEW, {view})
   }, [view])
 
+  useEffect(() => {
+    if (!premises.enableEdit && view === PremisesView.FEED) {
+      setView(PremisesView.ZONE)
+    }
+  }, [view, premises.enableEdit])
+
   const updateView = (_event: React.SyntheticEvent, view: PremisesView) => {
     setView(view)
   }
@@ -76,7 +82,7 @@ export const PremisesDetails: React.FC = () => {
         <Tabs value={view} onChange={updateView}>
           <Tab label={'Zone'}></Tab>
           <Tab label={'Board'}></Tab>
-          <Tab label={'Feed'}></Tab>
+          {premises.enableEdit && <Tab label={'Feed'}></Tab>}
         </Tabs>
         <Divider sx={{marginTop: '-1px'}} />
         {view === PremisesView.ZONE && <ZonesView />}
