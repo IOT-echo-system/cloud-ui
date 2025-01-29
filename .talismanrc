@@ -3,8 +3,6 @@ fileignoreconfig:
   checksum: ffc764ef61362a93d8128151b99b61ca64752f99ba0d990329aa1710b5fd1c0f
 - filename: src/services/typing/auth.d.ts
   checksum: a6bc2b33f25946de8e9f3d8472b3a268752df390b38d9193dcf4e57e4d258ecb
-- filename: package-lock.json
-  checksum: ab0861d69add7ea0c6165484ef5d2fc868ab8461f6d6c3f3aab5c706faaae3b2
 - filename: src/components/molecules/Menubar/MobileMenu.tsx
   checksum: 1cdf77ef567f9af117fcfab41661a3e1e41a0413ecacb104997fa02743cd5e32
 - filename: src/pages/_app.tsx
@@ -21,6 +19,12 @@ fileignoreconfig:
   checksum: 46b6f8811441e79ec1db12d39352284978df95f53bc84cfa43c0857d3216fd35
 - filename: src/pages/premises/[premisesId].tsx
   checksum: 30c8246f3711dedfceb1a7aa4005c28dc4da685a7aeef26b63a37fae7f921194
+- filename: package-lock.json
+  checksum: dc9ad2d7350b88222971f06eec6f4b846bd00bc692ff4a3c0d8761ee7e311959
+- filename: src/components/atoms/FormInput.tsx
+  checksum: 251f724f8432f341c3d306ce8c497aeb5721291feaf63b52bc9c9cb784301642
+- filename: src/components/templates/premises/components/Widgets.tsx
+  checksum: 75a11d3f8f83f049e5582de884cd0b953e7ece13ae35d8126a95de368ae17435
 - filename: src/components/templates/premises/components/FeedsView.tsx
-  checksum: f23e75dc6970223fefbb8180221561014be2172392d75be31d28a8568f9a3b38
+  checksum: 7c094a8fb569752e06cb2cd98c5c59ee8792f6fac12caf22b341c30ac5ce23f2
 version: ""

@@ -9,16 +9,12 @@ export type ModalFormsPropsType<T extends Record<string, unknown>> = {getFormDet
 export const ModalForms = <T extends Record<string, unknown>>(
   props: PropsWithChildren<ModalFormsPropsType<T>>
 ): React.JSX.Element => {
-  const {children, getFormDetails} = props
+  const {children} = props
 
   const [open, setOpen] = useState(false)
   const handleClose = () => {
     setOpen(false)
   }
-  const {loading, formInputs, handleSubmit, formTitle, submitLabel, submitBtnDisabled} = getFormDetails(
-    handleClose,
-    props
-  )
 
   return (
     <Stack>
@@ -29,16 +25,7 @@ export const ModalForms = <T extends Record<string, unknown>>(
       >
         {children}
       </Stack>
-      <ModalForm
-        open={open}
-        handleClose={handleClose}
-        formInputs={formInputs}
-        formTitle={formTitle}
-        loading={loading}
-        handleSubmit={handleSubmit}
-        submitLabel={submitLabel}
-        submitBtnDisabled={submitBtnDisabled}
-      />
+      <ModalForm open={open} handleClose={handleClose} {...props} />
     </Stack>
   )
 }

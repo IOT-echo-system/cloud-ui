@@ -1,13 +1,11 @@
 import React, {type SyntheticEvent} from 'react'
 import type {TextFieldProps} from '@mui/material'
-import {Autocomplete} from '@mui/material'
-import {TextField} from '@mui/material'
+import {Autocomplete, TextField} from '@mui/material'
 
 export type FormSelectOption = {label: string; value: string}
 export type FormSelectInputType = TextFieldProps & {
   inputType: 'selectField'
   options: FormSelectOption[]
-  defaultValue?: FormSelectOption
   handleChange: <T>(value: T) => void
 }
 
@@ -21,19 +19,25 @@ export type FormInputType<P extends keyof FormInputTypeMap = keyof FormInputType
 export const FormInput: React.FC<FormInputType> = props => {
   const {inputType, ...formInput} = props
   if (inputType === 'selectField') {
-    const {options, handleChange, defaultValue, ...selectInput} = formInput as FormSelectInputType
+    const {options, handleChange, ...selectInput} = formInput as FormSelectInputType
     const onChange = (_event: SyntheticEvent, option: FormSelectOption | null) => {
       if (option !== null) {
         handleChange(option.value)
       }
     }
 
+    const allOptions = options.find(option => option.value === '')
+      ? options
+      : [{label: 'Select an option', value: ''}, ...options]
+
     return (
       <Autocomplete
-        options={options}
+        options={allOptions}
         onChange={onChange}
-        defaultValue={defaultValue}
+        value={allOptions.find(option => option.value === selectInput.value)}
+        getOptionKey={option => option.value}
         getOptionLabel={option => option.label}
+        getOptionDisabled={option => !option.value}
         isOptionEqualToValue={(option, value) => option.value === value.value}
         renderInput={params => <TextField {...selectInput} {...params} />}
         selectOnFocus

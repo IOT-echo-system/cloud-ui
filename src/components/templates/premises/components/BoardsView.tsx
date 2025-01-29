@@ -3,11 +3,13 @@ import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {Button, PolicyAllowed} from '../../../atoms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../../organisms'
-import {AddBoard, UpdateBoardName} from '../../../organisms/ModalForms/formFunctions/boards'
-import {useBoards, useSelector} from '../../../../hooks'
+import {AddBoard, UpdateBoardName} from '../../../organisms/ModalForms/formFunctions/premises'
+import {useBoards, useSelector, useWidgets} from '../../../../hooks'
 import {Edit} from '@mui/icons-material'
+import {Widgets} from './Widgets'
 
 export const BoardsView: React.FC = () => {
+  const {widgets} = useWidgets()
   const {boards} = useBoards()
   const premises = useSelector(state => state.premises!)
 
@@ -46,6 +48,9 @@ export const BoardsView: React.FC = () => {
               </Stack>
               <Typography variant={'body2'}>Board Id: {board.boardId}</Typography>
               <Typography>Board type: {board.type}</Typography>
+              <Widgets
+                widgetIds={widgets.filter(widget => widget.boardId === board.boardId).map(widget => widget.widgetId)}
+              />
             </Box>
           )
         })}

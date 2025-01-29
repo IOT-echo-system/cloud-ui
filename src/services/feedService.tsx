@@ -28,6 +28,15 @@ class FeedService_ {
       body: values
     })
   }
+
+  updateValue(feedId: string, value: number): Promise<Feed> {
+    return WebClient.put<Feed>({
+      baseUrl: this.feedConfig.baseUrl,
+      path: this.feedConfig.updateValue,
+      uriVariables: {feedId},
+      body: {value}
+    })
+  }
 }
 
 export const FeedService = new FeedService_()

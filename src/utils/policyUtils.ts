@@ -4,7 +4,6 @@ export const PolicyUtils = {
   PREMISES_CREATE: 'PREMISES:CREATE',
   PREMISES_READ: 'PREMISES:READ',
   PREMISES_UPDATE: 'PREMISES:UPDATE',
-  WIDGET_UPDATE: 'WIDGET:UPDATE',
   BOARD_CREATE: 'BOARD:CREATE',
   BOARD_READ: 'BOARD:READ',
   BOARD_UPDATE: 'BOARD:UPDATE',
@@ -16,6 +15,8 @@ export const PolicyUtils = {
   ROUTINE_UPDATE: 'ROUTINE:UPDATE',
   ZONE_CREATE: 'ZONE:CREATE',
   ZONE_UPDATE: 'ZONE:UPDATE',
+  WIDGET_CREATE: 'WIDGET:CREATE',
+  WIDGET_UPDATE: 'WIDGET:UPDATE',
 
   isValid(polices: Policy[], policyName: string): boolean {
     return polices.some(policy => policy.name === policyName)

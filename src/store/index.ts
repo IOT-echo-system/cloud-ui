@@ -4,6 +4,8 @@ import * as premisesActions from './actions/premises'
 import * as zonesActions from './actions/zones'
 import * as boardsActions from './actions/boards'
 import * as routinesActions from './actions/routines'
+import * as feedsActions from './actions/feeds'
+import * as widgetsActions from './actions/widgets'
 
 import siteReducer, {initSiteState} from './reducers/site'
 import userReducer, {initUserState} from './reducers/user'
@@ -12,6 +14,8 @@ import boardsReducer, {initBoardsState} from './reducers/boards'
 import routinesReducer, {initRoutinesState} from './reducers/routines'
 import premisesReducer, {initPremisesState} from './reducers/premises'
 import zonesReducer, {initZonesState} from './reducers/zones'
+import feedsReducer, {initFeedsState} from './reducers/feeds'
+import widgetsReducer, {initWidgetsState} from './reducers/widgets'
 
 const combineReducers = <S = TRootState>(reducers: {[K in keyof S]: TRootReducer<S[K]>}): TRootReducer<S> => {
   return (state: S, action: TRootActions): S => {
@@ -28,6 +32,8 @@ export const rootState = {
   premises: initPremisesState,
   zones: initZonesState,
   boards: initBoardsState,
+  feeds: initFeedsState,
+  widgets: initWidgetsState,
   routines: initRoutinesState
 }
 
@@ -37,6 +43,8 @@ export const rootActions = {
   premises: premisesActions,
   zones: zonesActions,
   boards: boardsActions,
+  feeds: feedsActions,
+  widgets: widgetsActions,
   routines: routinesActions
 }
 
@@ -46,5 +54,7 @@ export const rootReducer = combineReducers({
   premises: premisesReducer,
   zones: zonesReducer,
   boards: boardsReducer,
+  feeds: feedsReducer,
+  widgets: widgetsReducer,
   routines: routinesReducer
 })

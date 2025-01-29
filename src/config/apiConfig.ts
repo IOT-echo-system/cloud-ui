@@ -36,7 +36,8 @@ export const apiConfig = {
   feed: {
     baseUrl: '/feeds',
     feeds: '',
-    updateName: '/{feedId}/name'
+    updateName: '/{feedId}/name',
+    updateValue: '/{feedId}/value'
   },
   master: {
     baseUrl: '/masters',

@@ -15,6 +15,9 @@ const ModalContainer = styled(Box)(({theme}) => ({
   boxShadow: theme.spacing(24),
   padding: theme.spacing(2),
   width: `calc(90% - ${theme.spacing(4)})`,
+  maxHeight: '70%',
+  overflowY: 'scroll',
+
   [theme.breakpoints.up('sm')]: {
     padding: theme.spacing(4),
     width: `calc(80% - ${theme.spacing(8)})`

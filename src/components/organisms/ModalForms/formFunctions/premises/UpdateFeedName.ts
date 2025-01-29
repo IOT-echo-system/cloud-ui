@@ -1,14 +1,16 @@
 import {useState} from 'react'
-import {useForm, useToast} from '../../../../../hooks'
+import {useDispatch, useForm, useToast} from '../../../../../hooks'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
 import {FeedService} from '../../../../../services'
 import type {Feed} from '../../../../../typing/feed'
+import {updateFeed} from '../../../../../store/actions/feeds'
 
-type UpdateFeedNamePropsType = {feed: Feed; updateFeed: (feed: Feed) => void}
-export const UpdateFeedName: GetFormPropsTypeFunction<UpdateFeedNamePropsType> = (handleClose, {feed, updateFeed}) => {
+type UpdateFeedNamePropsType = {feed: Feed}
+export const UpdateFeedName: GetFormPropsTypeFunction<UpdateFeedNamePropsType> = (handleClose, {feed}) => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
+  const dispatch = useDispatch()
   const {values, handleSubmit, onChange} = useForm({name: feed.name})
 
   const formInputs: FormInputType[] = [
@@ -28,7 +30,7 @@ export const UpdateFeedName: GetFormPropsTypeFunction<UpdateFeedNamePropsType> =
     FeedService.updateName(feed.feedId, values)
       .then(feed => {
         handleClose()
-        updateFeed(feed)
+        dispatch(updateFeed(feed))
       })
       .catch(toast.error)
       .finally(() => {

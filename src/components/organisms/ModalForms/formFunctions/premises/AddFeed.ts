@@ -1,14 +1,14 @@
 import {useState} from 'react'
-import {useForm, useSelector, useToast} from '../../../../../hooks'
+import {useDispatch, useForm, useSelector, useToast} from '../../../../../hooks'
 import type {FormInputType} from '../../../../atoms'
 import type {GetFormPropsTypeFunction} from '../../model'
 import {FeedService} from '../../../../../services'
-import type {Feed} from '../../../../../typing/feed'
+import {updateFeed} from '../../../../../store/actions/feeds'
 
-type AddFeedPropsType = {updateFeed: (feed: Feed) => void}
-export const AddFeed: GetFormPropsTypeFunction<AddFeedPropsType> = (handleClose, {updateFeed}) => {
+export const AddFeed: GetFormPropsTypeFunction = handleClose => {
   const [loading, setLoading] = useState(false)
   const toast = useToast()
+  const dispatch = useDispatch()
   const {premises, boards} = useSelector(state => state)
   const boardIds = premises!.boards.map(boardId => ({label: `${boards[boardId].name} (${boardId})`, value: boardId}))
   const {onClear, values, handleSubmit, onChange} = useForm({name: '', boardId: '', type: ''})
@@ -52,7 +52,7 @@ export const AddFeed: GetFormPropsTypeFunction<AddFeedPropsType> = (handleClose,
       .then(feed => {
         onClear()
         handleClose()
-        updateFeed(feed)
+        dispatch(updateFeed(feed))
       })
       .catch(toast.error)
       .finally(() => {

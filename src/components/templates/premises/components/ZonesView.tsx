@@ -4,8 +4,9 @@ import {useSelector, useZones} from '../../../../hooks'
 import {Button, PolicyAllowed} from '../../../atoms'
 import {ModalForms} from '../../../organisms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
-import {AddZone, UpdateZoneName} from '../../../organisms/ModalForms/formFunctions/premises'
+import {AddWidget, AddZone, UpdateZoneName} from '../../../organisms/ModalForms/formFunctions/premises'
 import {Edit} from '@mui/icons-material'
+import {Widgets} from './Widgets'
 
 export const ZonesView: React.FC = () => {
   const {zones} = useZones()
@@ -45,6 +46,16 @@ export const ZonesView: React.FC = () => {
                 </PolicyAllowed>
               </Stack>
               <Typography variant={'body2'}>Zone Id: {zone.zoneId} </Typography>
+              <Widgets widgetIds={zone.widgets} />
+              <PolicyAllowed policyId={PolicyUtils.WIDGET_CREATE} otherConditions={[premises.enableEdit]}>
+                <ModalForms getFormDetails={AddWidget} zoneId={zone.zoneId}>
+                  <Stack direction={'row'} mt={1}>
+                    <Button variant={'contained'} color={'secondary'}>
+                      Add widget
+                    </Button>
+                  </Stack>
+                </ModalForms>
+              </PolicyAllowed>
             </Box>
           )
         })}
