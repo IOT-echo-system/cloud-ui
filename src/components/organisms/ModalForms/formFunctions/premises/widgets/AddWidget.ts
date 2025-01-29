@@ -1,5 +1,5 @@
 import type {GetFormPropsTypeFunction} from '../../../model'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {AddWidgetConfig} from './AddWidgetConfig'
 import type {WidgetDetailsType} from './AddWidgetDetails'
 import {AddWidgetDetails} from './AddWidgetDetails'
@@ -13,9 +13,9 @@ export type FormStepProps = {
   prevStep: () => void
   onSubmit: (values: Record<string, unknown>) => void
 }
-const MinStep = 0,
-  MaxStep = 2,
-  Step = 1
+const MinStep = 0
+const MaxStep = 2
+const Step = 1
 
 export const AddWidget: GetFormPropsTypeFunction<{zoneId: string}> = (handleClose, {zoneId}) => {
   const [currentStep, setCurrentStep] = useState(MinStep)
@@ -47,18 +47,24 @@ export const AddWidget: GetFormPropsTypeFunction<{zoneId: string}> = (handleClos
     onSubmit: setConfig
   })
 
-  if (currentStep === MaxStep) {
-    setLoading(true)
-    WidgetService.addWidget({...widgetDetails, zoneId, config})
-      .then(widget => {
-        dispatch(updateWidget(widget))
-        dispatch(addWidgetInZone(widget))
-      })
-      .catch(toast.error)
-      .finally(() => {
-        setLoading(false)
-      })
-  }
+  useEffect(() => {
+    if (currentStep === MaxStep) {
+      setLoading(true)
+      WidgetService.addWidget({...widgetDetails, zoneId, config})
+        .then(widget => {
+          dispatch(updateWidget(widget))
+          dispatch(addWidgetInZone(widget))
+          setWidgetDetails({...initialState})
+          setConfig({})
+          setCurrentStep(MinStep)
+          handleClose()
+        })
+        .catch(toast.error)
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }, [currentStep])
 
   switch (currentStep) {
     case 0:

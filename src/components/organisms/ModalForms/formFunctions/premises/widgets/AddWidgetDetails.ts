@@ -27,14 +27,14 @@ export const AddWidgetDetails: GetFormPropsTypeFunction<FormStepProps> = (_handl
   const widgets: FormSelectOption[] = widgetTypes.map(type => ({label: type, value: type}))
 
   const initialValues: WidgetDetailsType = {name: '', boardId: '', type: 'TOGGLE', feedId: ''}
-  const {values, handleSubmit, onChange} = useForm(initialValues)
+  const {values, handleSubmit, onChange, onClear} = useForm(initialValues)
 
   const formInputs: FormInputType[] = [
     {
       inputType: 'textField',
       label: 'Widget name',
       value: values.name,
-      required: false,
+      required: true,
       onChange: event => {
         onChange('name', event.target.value)
       }
@@ -44,7 +44,7 @@ export const AddWidgetDetails: GetFormPropsTypeFunction<FormStepProps> = (_handl
       label: 'Board',
       options: boardIds,
       value: values.boardId,
-      required: false,
+      required: true,
       handleChange: value => {
         onChange('boardId', value as string)
       }
@@ -54,7 +54,7 @@ export const AddWidgetDetails: GetFormPropsTypeFunction<FormStepProps> = (_handl
       label: 'Feed',
       options: feedIds,
       value: values.feedId,
-      required: false,
+      required: true,
       handleChange: value => {
         onChange('feedId', value as string)
       }
@@ -74,6 +74,7 @@ export const AddWidgetDetails: GetFormPropsTypeFunction<FormStepProps> = (_handl
   const onFormSubmit = () => {
     onSubmit(values)
     nextStep()
+    onClear()
   }
 
   return {

@@ -5,7 +5,7 @@ import type {WidgetConfigType} from './AddWidgetConfig'
 export type SliderConfigType = {min: number; max: number; step: number; label: string}
 
 export const AddSlider: WidgetConfigType = onSubmit => {
-  const {values, onChange} = useForm<SliderConfigType>({min: 0, max: 100, step: 10, label: ''})
+  const {values, onChange, onClear} = useForm<SliderConfigType>({min: 0, max: 100, step: 10, label: ''})
 
   const formInputs: FormInputType[] = [
     {
@@ -38,7 +38,6 @@ export const AddSlider: WidgetConfigType = onSubmit => {
       inputType: 'textField',
       label: 'Label',
       value: values.label,
-      required: true,
       onChange: event => {
         onChange('label', event.target.value)
       }
@@ -47,6 +46,7 @@ export const AddSlider: WidgetConfigType = onSubmit => {
 
   const handleFormSubmit = () => {
     onSubmit(values)
+    onClear()
   }
 
   return {
