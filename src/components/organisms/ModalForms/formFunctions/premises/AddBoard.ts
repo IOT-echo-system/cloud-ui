@@ -36,6 +36,7 @@ export const AddBoard: GetFormPropsTypeFunction = handleClose => {
       inputType: 'selectField',
       label: 'Board type',
       options: boards,
+      value: values.type,
       required: true,
       handleChange: value => {
         onChange('type', value as string)

@@ -1,11 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {Button, PolicyAllowed} from '../../../atoms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../../organisms'
 import {AddFeed, UpdateFeedName} from '../../../organisms/ModalForms/formFunctions/premises'
-import {useSelector} from '../../../../hooks'
+import {useDispatch, useSelector, useToast} from '../../../../hooks'
 import {Edit} from '@mui/icons-material'
+import {BoardService, FeedService} from '../../../../services'
+import {updateFeeds} from '../../../../store/actions/feeds'
+import {updateBoards} from '../../../../store/actions/boards'
+import type {ServerError} from '../../../../typing/error'
 
 export const FeedsView: React.FC = () => {
   const premises = useSelector(state => state.premises!)
@@ -13,6 +17,22 @@ export const FeedsView: React.FC = () => {
   const allFeeds = Object.keys(feeds)
     .map(feedId => feeds[feedId])
     .filter(feed => feed.premisesId === premises.premisesId)
+
+  const dispatch = useDispatch()
+  const toast = useToast()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [feeds, boards] = await Promise.all([FeedService.getFeeds(), BoardService.getBoards()])
+        dispatch(updateFeeds(feeds))
+        dispatch(updateBoards(boards))
+      } catch (error) {
+        toast.error(error as ServerError)
+      }
+    }
+    fetchData()
+  }, [])
 
   return (
     <Stack mt={2} gap={2}>

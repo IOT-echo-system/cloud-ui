@@ -1,17 +1,37 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box, IconButton, Stack, Typography} from '@mui/material'
-import {Button, PolicyAllowed} from '../../../atoms'
+import {Button, Loader, PolicyAllowed} from '../../../atoms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {ModalForms} from '../../../organisms'
 import {AddBoard, UpdateBoardName} from '../../../organisms/ModalForms/formFunctions/premises'
-import {useBoards, useSelector, useWidgets} from '../../../../hooks'
+import {useBoards, useDispatch, useSelector, useToast} from '../../../../hooks'
 import {Edit} from '@mui/icons-material'
-import {Widgets} from './Widgets'
+import {BoardService} from '../../../../services'
+import {updateBoards} from '../../../../store/actions/boards'
 
 export const BoardsView: React.FC = () => {
-  const {widgets} = useWidgets()
   const {boards} = useBoards()
   const premises = useSelector(state => state.premises!)
+  const [loading, setLoading] = useState(true)
+
+  const dispatch = useDispatch()
+  const toast = useToast()
+
+  useEffect(() => {
+    setLoading(true)
+    BoardService.getBoards()
+      .then(boards => {
+        dispatch(updateBoards(boards))
+      })
+      .catch(toast.error)
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading && boards.isEmpty()) {
+    return <Loader loadingText={'Loading'} mt={4} />
+  }
 
   return (
     <Stack mt={2} gap={2}>
@@ -48,9 +68,6 @@ export const BoardsView: React.FC = () => {
               </Stack>
               <Typography variant={'body2'}>Board Id: {board.boardId}</Typography>
               <Typography>Board type: {board.type}</Typography>
-              <Widgets
-                widgetIds={widgets.filter(widget => widget.boardId === board.boardId).map(widget => widget.widgetId)}
-              />
             </Box>
           )
         })}

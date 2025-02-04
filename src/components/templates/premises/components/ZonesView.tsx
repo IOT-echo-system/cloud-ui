@@ -1,16 +1,51 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box, IconButton, Stack, Typography} from '@mui/material'
-import {useSelector, useZones} from '../../../../hooks'
-import {Button, PolicyAllowed} from '../../../atoms'
+import {useDispatch, useSelector, useToast, useZones} from '../../../../hooks'
+import {Button, Loader, PolicyAllowed} from '../../../atoms'
 import {ModalForms} from '../../../organisms'
 import {PolicyUtils} from '../../../../utils/policyUtils'
 import {AddWidget, AddZone, UpdateZoneName} from '../../../organisms/ModalForms/formFunctions/premises'
 import {Edit} from '@mui/icons-material'
 import {Widgets} from './Widgets'
+import {FeedService, WidgetService, ZoneService} from '../../../../services'
+import {updateWidgets} from '../../../../store/actions/widgets'
+import {updateFeeds} from '../../../../store/actions/feeds'
+import type {ServerError} from '../../../../typing/error'
+import '../../../../utils/extenstions'
+import {updateZones} from '../../../../store/actions/zones'
 
 export const ZonesView: React.FC = () => {
   const {zones} = useZones()
   const premises = useSelector(state => state.premises!)
+  const [loading, setLoading] = useState(true)
+
+  const dispatch = useDispatch()
+  const toast = useToast()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const [zones, widgets, feeds] = await Promise.all([
+          ZoneService.getZones(),
+          WidgetService.getWidgets(),
+          FeedService.getFeeds()
+        ])
+        dispatch(updateZones(zones))
+        dispatch(updateWidgets(widgets))
+        dispatch(updateFeeds(feeds))
+      } catch (error) {
+        toast.error(error as ServerError)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  if (loading && zones.isEmpty()) {
+    return <Loader loadingText={'Loading'} mt={4} />
+  }
 
   return (
     <Stack mt={2} gap={2}>

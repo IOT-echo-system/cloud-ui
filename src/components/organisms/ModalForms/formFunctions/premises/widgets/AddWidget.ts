@@ -3,8 +3,8 @@ import {useEffect, useState} from 'react'
 import {AddWidgetConfig} from './AddWidgetConfig'
 import type {WidgetDetailsType} from './AddWidgetDetails'
 import {AddWidgetDetails} from './AddWidgetDetails'
-import {WidgetService} from '../../../../../../services'
 import {useDispatch, useToast} from '../../../../../../hooks'
+import {WidgetService} from '../../../../../../services'
 import {updateWidget} from '../../../../../../store/actions/widgets'
 import {addWidgetInZone} from '../../../../../../store/actions/zones'
 
@@ -20,7 +20,7 @@ const Step = 1
 export const AddWidget: GetFormPropsTypeFunction<{zoneId: string}> = (handleClose, {zoneId}) => {
   const [currentStep, setCurrentStep] = useState(MinStep)
   const [loading, setLoading] = useState(false)
-  const initialState: WidgetDetailsType = {boardId: '', type: 'TOGGLE', feedId: '', name: ''}
+  const initialState: WidgetDetailsType = {type: 'TOGGLE', feedId: '', name: ''}
   const [widgetDetails, setWidgetDetails] = useState(initialState)
   const [config, setConfig] = useState({})
   const toast = useToast()
@@ -54,14 +54,14 @@ export const AddWidget: GetFormPropsTypeFunction<{zoneId: string}> = (handleClos
         .then(widget => {
           dispatch(updateWidget(widget))
           dispatch(addWidgetInZone(widget))
-          setWidgetDetails({...initialState})
-          setConfig({})
-          setCurrentStep(MinStep)
           handleClose()
         })
         .catch(toast.error)
         .finally(() => {
           setLoading(false)
+          setWidgetDetails({...initialState})
+          setConfig({})
+          setCurrentStep(MinStep)
         })
     }
   }, [currentStep])

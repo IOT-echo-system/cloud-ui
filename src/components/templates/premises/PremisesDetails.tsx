@@ -1,46 +1,25 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Breadcrumbs, Button, PageContainer, PolicyAllowed} from '../../atoms'
-import {Box, Divider, IconButton, Stack, Tab, Tabs, Typography} from '@mui/material'
+import {Box, IconButton, Stack, Typography} from '@mui/material'
 import {Config} from '../../../config'
 import {ModalForms} from '../../organisms'
 import {PolicyUtils} from '../../../utils/policyUtils'
 import {Done, Edit} from '@mui/icons-material'
 import {EditPremises} from '../../organisms/ModalForms/formFunctions/premises'
 import {useDispatch, useSelector} from '../../../hooks'
-import {getStorage, setStorage, StorageKeys} from '../../../utils/storage'
-import {ZonesView} from './components/ZonesView'
-import {BoardsView} from './components/BoardsView'
-import {FeedsView} from './components/FeedsView'
 import {usePremisesUserRole} from './hooks/usePremisesUserRole'
 import {toggleEdit} from '../../../store/actions/premises'
-
-enum PremisesView {
-  ZONE = 0,
-  BOARD = 1,
-  FEED = 2
-}
+import {PremisesView} from './PremisesView'
+import type {ViewType} from '../../molecules'
+import {MenuItems} from '../../molecules'
+import {useRouter} from 'next/router'
 
 export const PremisesDetails: React.FC = () => {
   const premises = useSelector(state => state.premises)!
   const address = premises.address
-  const defaultView = getStorage<{view: PremisesView}>(StorageKeys.PREMISES_VIEW)?.view ?? PremisesView.ZONE
-  const [view, setView] = useState<PremisesView>(defaultView)
   const {isOwner} = usePremisesUserRole()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    setStorage(StorageKeys.PREMISES_VIEW, {view})
-  }, [view])
-
-  useEffect(() => {
-    if (!premises.enableEdit && view === PremisesView.FEED) {
-      setView(PremisesView.ZONE)
-    }
-  }, [view, premises.enableEdit])
-
-  const updateView = (_event: React.SyntheticEvent, view: PremisesView) => {
-    setView(view)
-  }
+  const router = useRouter()
 
   const handleToggleEdit = () => {
     dispatch(toggleEdit())
@@ -49,7 +28,13 @@ export const PremisesDetails: React.FC = () => {
   return (
     <PageContainer pt={2}>
       <Stack mb={2} direction={'row'} justifyContent={'space-between'}>
-        <Breadcrumbs links={[{link: Config.PREMISES_PAGE_PATH, name: 'Premises'}]} text={premises.name} />
+        <Breadcrumbs
+          links={[
+            {link: Config.PREMISES_PAGE_PATH, name: 'Premises'},
+            {link: Config.PREMISES_PAGE_PATH + `/${premises.premisesId}/zones`, name: premises.name}
+          ]}
+          text={MenuItems[router.query.views as ViewType]}
+        />
         <PolicyAllowed policyId={PolicyUtils.PREMISES_CREATE} otherConditions={[isOwner]}>
           <Button
             variant={'contained'}
@@ -79,15 +64,7 @@ export const PremisesDetails: React.FC = () => {
             Location: {address.address1}, {address.address2}, {address.district}, {address.state} - {address.pincode}
           </Typography>
         </Stack>
-        <Tabs value={view} onChange={updateView}>
-          <Tab label={'Zone'}></Tab>
-          <Tab label={'Board'}></Tab>
-          {premises.enableEdit && <Tab label={'Feed'}></Tab>}
-        </Tabs>
-        <Divider sx={{marginTop: '-1px'}} />
-        {view === PremisesView.ZONE && <ZonesView />}
-        {view === PremisesView.BOARD && <BoardsView />}
-        {view === PremisesView.FEED && <FeedsView />}
+        <PremisesView />
       </Box>
     </PageContainer>
   )

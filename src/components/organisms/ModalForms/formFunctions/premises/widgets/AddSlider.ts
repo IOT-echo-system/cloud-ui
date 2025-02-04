@@ -45,7 +45,7 @@ export const AddSlider: WidgetConfigType = onSubmit => {
   ]
 
   const handleFormSubmit = () => {
-    onSubmit(values)
+    onSubmit({...values})
     onClear()
   }
 

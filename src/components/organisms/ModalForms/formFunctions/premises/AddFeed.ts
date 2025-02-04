@@ -27,6 +27,7 @@ export const AddFeed: GetFormPropsTypeFunction = handleClose => {
       inputType: 'selectField',
       label: 'Board',
       options: boardIds,
+      value: values.boardId,
       required: true,
       handleChange: value => {
         onChange('boardId', value as string)
@@ -39,6 +40,7 @@ export const AddFeed: GetFormPropsTypeFunction = handleClose => {
         {label: 'INPUT', value: 'INPUT'},
         {label: 'OUTPUT', value: 'OUTPUT'}
       ],
+      value: values.type,
       required: true,
       handleChange: value => {
         onChange('type', value as string)

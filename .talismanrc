@@ -17,8 +17,8 @@ fileignoreconfig:
   checksum: 3ab958287ef302d6eed259031a9df202fc018e7b99705743b6dfdd4c69b973f4
 - filename: src/components/templates/premises/components/ZonesView.tsx
   checksum: 46b6f8811441e79ec1db12d39352284978df95f53bc84cfa43c0857d3216fd35
-- filename: src/pages/premises/[premisesId].tsx
-  checksum: 30c8246f3711dedfceb1a7aa4005c28dc4da685a7aeef26b63a37fae7f921194
+- filename: src/pages/premises/[premisesId]/[views].tsx
+  checksum: 53a0333d037737b309acac617ca85ef57b580c92316ac9ccf3a58a02208c9184
 - filename: package-lock.json
   checksum: dc9ad2d7350b88222971f06eec6f4b846bd00bc692ff4a3c0d8761ee7e311959
 - filename: src/components/atoms/FormInput.tsx

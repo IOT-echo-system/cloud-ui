@@ -18,7 +18,7 @@ export const PremisesOverview: React.FC<{premises: Premises}> = ({premises}) => 
       }}
       underline={'false'}
       component={Link}
-      href={`${Config.PREMISES_PAGE_PATH}/${premises.premisesId}`}
+      href={`${Config.PREMISES_PAGE_PATH}/${premises.premisesId}/zones`}
     >
       <Typography>Name: {premises.name}</Typography>
       <Typography variant={'body2'}>Premises Id: {premises.premisesId}</Typography>

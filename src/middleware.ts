@@ -8,7 +8,7 @@ export const middleware = (request: Request): NextResponse => {
 
   const url = new URL(request.url)
   if (url.pathname.startsWith('/api')) {
-    return NextResponse.rewrite('http://localhost:3001' + url.pathname)
+    return NextResponse.rewrite('http://192.168.1.102:9000' + url.pathname)
   }
 
   return NextResponse.next()
